@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>시황 · 섹터순환 · 추천주 · 실전차트 · 수급주의단서 · 분할대응 올인원 대시보드</title>
+  <title>실시간 시황 · 섹터순환 · 추천주 · 실전차트 · 보조지표 · 분할대응</title>
   <style>
     :root {
       --bg: #f8fafc;
@@ -273,7 +273,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     @media (max-width: 820px) { .opinion-pair { grid-template-columns: 1fr; } }
@@ -294,16 +294,6 @@
       padding: 11px 14px;
       font-size: 0.83rem;
       color: #78350f;
-    }
-
-    .event-alert-box {
-      background: var(--pink-soft);
-      border: 1.5px solid #f9a8d4;
-      border-radius: 12px;
-      padding: 12px 14px;
-      font-size: 0.82rem;
-      color: #831843;
-      margin-bottom: 12px;
     }
 
     .sector-news-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
@@ -344,10 +334,7 @@
       border: 1px solid var(--border);
       font-size: 0.79rem;
       color: #1e293b;
-      display: none;
     }
-
-    .summary-box.open { display: block; }
 
     .flow-arrow-line {
       background: var(--surface-soft);
@@ -589,8 +576,8 @@
       <div class="brand">
         <div class="mascot">🐱📊</div>
         <div>
-          <h1>📈 시황 · 🔄 섹터순환 · ⭐ 추천주 · 📊 실전차트 · 🚨 수급주의단서 · 🧩 분할대응</h1>
-          <div style="font-size:0.74rem; color:var(--muted);">흐름: <u>시황 → 섹터 순환 → 추천주 → 실전차트/지표 → 수급주의단서 → 분할대응</u></div>
+          <h1>📈 실시간 시황 · 🔄 섹터순환 · ⭐ 추천주 · 📊 실전차트 · 🚨 수급단서 · 🧩 분할대응</h1>
+          <div style="font-size:0.74rem; color:var(--muted);">흐름: <u>실시간 시황/뉴스 → 실시간 섹터 순환 → 실시간 추천주 → 실전차트/지표 → 수급단서 → 분할대응</u></div>
         </div>
       </div>
 
@@ -598,106 +585,97 @@
         <input type="text" id="symbolInput" value="메지온" placeholder="종목명/코드/티커 (메지온, 저스템, NVDA)" />
         <button class="primary" id="searchBtn">🔍 종목 분석 (차트로 이동)</button>
         <button id="usToggleBtn" class="us-off">🇺🇸 미국장: OFF</button>
-        <button id="refreshLiveBtn">🔄 실시간 시황 갱신</button>
+        <button id="refreshLiveBtn">🔄 전체 실시간 갱신</button>
       </div>
     </div>
   </header>
 
-  <div class="top-stance-banner" id="topStanceBanner">
-    🧭 <strong>오늘의 대응 한 줄 멘트:</strong> 코스피 4,711.21(+0.29%)·코스닥 반발 흐름과 美 추수감사절 휴장(26일)·조기폐장(27일)을 감안할 때, <u>오늘은 추격 매수보다 관망 및 지지 확인 후 분할 접근을 권장합니다.</u>
-  </div>
+  <div class="top-stance-banner" id="topStanceBanner">실시간 시장 스탠스를 불러오는 중...</div>
 
   <div class="shell">
     <aside class="toc-nav">
       <div class="toc-title">
         <span>📑 분석 흐름 목차</span>
-        <span class="badge" id="liveClock">KST 조회</span>
+        <span class="badge" id="liveClock">실시간 동기화</span>
       </div>
       <div class="toc-list">
-        <a class="toc-link active" href="#sec-market"><span>1. 🌍 시황(세계·주간·이벤트·뉴스)</span><span>→</span></a>
-        <a class="toc-link" href="#sec-sector"><span>2. 🔄 섹터 순환(주·월·3M·6M·1Y)</span><span>→</span></a>
-        <a class="toc-link" href="#sec-rec"><span>3. ⭐ 추천주 & 직접설정(1~5)</span><span>→</span></a>
-        <a class="toc-link" href="#sec-chart"><span>4. 📊 실전 차트·파동·예상흐름</span><span>→</span></a>
-        <a class="toc-link" href="#sec-ind10"><span>4-2. 📐 10개 지표 수치·분석</span><span>→</span></a>
-        <a class="toc-link" href="#sec-supply"><span>5. 🚨 수급 주의단서</span><span>→</span></a>
-        <a class="toc-link" href="#sec-split"><span>6. 🧩 분할대응 계산·전략</span><span>→</span></a>
+        <a class="toc-link active" href="#sec-market"><span>1. 🌍 실시간 시황·뉴스</span><span>→</span></a>
+        <a class="toc-link" href="#sec-sector"><span>2. 🔄 실시간 섹터 순환</span><span>→</span></a>
+        <a class="toc-link" href="#sec-rec"><span>3. ⭐ 실시간 추천주 & 설정</span><span>→</span></a>
+        <a class="toc-link" href="#sec-chart"><span>4. 📊 실전 차트·파동·예상</span><span>→</span></a>
+        <a class="toc-link" href="#sec-ind10"><span>4-2. 📐 10개 지표 실측</span><span>→</span></a>
+        <a class="toc-link" href="#sec-supply"><span>5. 🚨 수급·변동 주의단서</span><span>→</span></a>
+        <a class="toc-link" href="#sec-split"><span>6. 🧩 분할대응 계산기</span><span>→</span></a>
       </div>
     </aside>
 
     <main class="wrap">
-      <!-- 1. 시황 -->
+      <!-- 1. 실시간 시황 & 뉴스 -->
       <section class="card" id="sec-market">
         <div class="card-head">
-          <h2 class="card-title">🌍 1. 세계·이번 주 시황, 주요 변동 일정 & 섹터별 뉴스 <span class="badge mint">시황 브리핑</span></h2>
+          <h2 class="card-title">🌍 1. 실시간 지수 시황 & 최신 뉴스 <span class="badge mint" id="marketUpdatedBadge">실시간 조회 중</span></h2>
           <div class="seg" id="marketScopeGroup">
-            <button data-mscope="TODAY" class="active">오늘 시황</button>
-            <button data-mscope="WEEK">이번 주 세계시황</button>
+            <button data-mscope="TODAY" class="active">실시간 지수</button>
+            <button data-mscope="WEEK">미국·글로벌 포함 보기</button>
           </div>
         </div>
 
         <div class="market-grid" id="marketGrid"></div>
 
         <div class="opinion-pair">
-          <div class="brief-box" id="totalOpinionBox"></div>
-          <div class="analogy-box" id="analogyOpinionBox"></div>
-        </div>
-
-        <div class="event-alert-box">
-          📅 <strong>이번 주·이번 달 주의할 날짜 & 변동성 이유:</strong><br/>
-          • <u>11월 26일(목)</u>: <strong>美 추수감사절 정규장 휴장</strong> — 해외 증시 방향성 부재 속 국내 수급만으로 반등 폭이 제한될 수 있습니다.<br/>
-          • <u>11월 27일(금·미 동부시간 13시 / 한국 28일 03시)</u>: <strong>美 조기 폐장(블랙프라이데이)</strong> — 연말 소비 시즌 초반 분위기 확인 및 저거래량 변동성 주의일입니다.<br/>
-          • <u>11월 말~12월 초</u>: <strong>한은 기준금리 인상(3.25%) 및 美 주요 지표·연준 금리 경로 소화</strong> 구간으로 환율·금리 민감 대형주의 출렁임에 유의해야 합니다.
+          <div class="brief-box" id="totalOpinionBox">실시간 시황 요약을 불러오는 중...</div>
+          <div class="analogy-box" id="analogyOpinionBox">실시간 흐름 해석을 불러오는 중...</div>
         </div>
 
         <div class="sector-news-tabs" id="sectorNewsTabs"></div>
         <div class="market-news-grid" id="sectorNewsGrid"></div>
       </section>
 
-      <!-- 2. 섹터 순환 -->
+      <!-- 2. 실시간 섹터 순환 -->
       <section class="card" id="sec-sector">
         <div class="card-head">
-          <h2 class="card-title">🔄 2. 섹터 순환 흐름 & 차기 예상 <span class="badge pink">7단계 + 8번째 예측</span></h2>
+          <h2 class="card-title">🔄 2. 실시간 섹터 순환 흐름 & 차기 예상 <span class="badge pink" id="sectorUpdatedBadge">실시간 산출 중</span></h2>
           <div class="seg" id="horizonGroup">
-            <button data-hz="WEEK" class="active">이번 주(7+8예상)</button>
-            <button data-hz="1M">월간(7+1·2위)</button>
-            <button data-hz="3M">3개월(7+1·2위)</button>
-            <button data-hz="6M">6개월(7+1·2위)</button>
-            <button data-hz="1Y">1년간(7+1·2위)</button>
+            <button data-hz="WEEK" class="active">1주 수익률</button>
+            <button data-hz="1M">1개월</button>
+            <button data-hz="3M">3개월</button>
+            <button data-hz="6M">6개월</button>
+            <button data-hz="1Y">1년</button>
           </div>
         </div>
 
-        <div class="flow-arrow-line" id="horizonArrowSummary"></div>
+        <div class="flow-arrow-line" id="horizonArrowSummary">실시간 섹터 수익률 순위를 계산하는 중...</div>
         <div class="flow-strip" id="horizonFlowGrid"></div>
         <div class="predict-top2" id="horizonPredictBox"></div>
       </section>
 
-      <!-- 3. 추천주 -->
+      <!-- 3. 실시간 추천주 -->
       <section class="card" id="sec-rec">
         <div class="card-head">
-          <h2 class="card-title">⭐ 3. AI 섹터별 추천주(2개씩) & 직접 추천설정(1~5) <span class="badge purple">클릭 시 실전 차트로 이동</span></h2>
+          <h2 class="card-title">⭐ 3. 실시간 섹터별 모멘텀 추천주 & 직접 조건설정(1~5) <span class="badge purple">클릭 시 차트 이동</span></h2>
         </div>
 
         <div class="ai-rec-grid" id="aiSectorRecsGrid"></div>
 
         <div class="cond-box">
-          <div style="font-weight:800; font-size:0.86rem; margin-bottom:6px;">🎛️ 직접 추천설정 — 인기 프리셋 1~5번</div>
+          <div style="font-weight:800; font-size:0.86rem; margin-bottom:6px;">🎛️ 직접 추천설정 — 프리셋 1~5번 (실시간 시세 기준)</div>
           <div class="preset-row" id="presetButtons">
             <button class="preset-btn active" data-preset="1">1번 수급·추세 정석</button>
-            <button class="preset-btn" data-preset="2">2번 거래량 폭발·성장</button>
-            <button class="preset-btn" data-preset="3">3번 과매도·지지 반등</button>
-            <button class="preset-btn" data-preset="4">4번 주도섹터 대장 모멘텀</button>
-            <button class="preset-btn" data-preset="5">5번 저변동·실적방어 스윙</button>
+            <button class="preset-btn" data-preset="2">2번 단기 변동·성장</button>
+            <button class="preset-btn" data-preset="3">3번 저점 반등 후보</button>
+            <button class="preset-btn" data-preset="4">4번 주도섹터 모멘텀</button>
+            <button class="preset-btn" data-preset="5">5번 추세 지지 스윙</button>
           </div>
 
-          <div style="font-weight:700; font-size:0.78rem; color:var(--muted); margin-bottom:5px;">인기 조건 추가 / 제외:</div>
+          <div style="font-weight:700; font-size:0.78rem; color:var(--muted); margin-bottom:5px;">실시간 조건 선택:</div>
           <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:8px;" id="customCondChecks">
-            <label><input type="checkbox" value="sup" checked /> 외국인·기관 수급 유입</label>
-            <label><input type="checkbox" value="trend" checked /> 정배열·추세 지지</label>
-            <label><input type="checkbox" value="vol" /> 거래량 급증(평균 1.5배↑)</label>
-            <label><input type="checkbox" value="rsiLow" /> RSI 과매도 반등(≤45)</label>
-            <label><input type="checkbox" value="lead" /> 섹터 대장주/주도주</label>
+            <label><input type="checkbox" value="sup" checked /> 주간 플러스 모멘텀</label>
+            <label><input type="checkbox" value="trend" checked /> 월간 추세 유지</label>
+            <label><input type="checkbox" value="vol" /> 일간 변동성(2%↑)</label>
+            <label><input type="checkbox" value="rsiLow" /> 1년 레인지 하단(≤45%)</label>
+            <label><input type="checkbox" value="lead" /> 월간 강세 주도(3%↑)</label>
           </div>
-          <button class="primary" id="applyCustomFilterBtn">조건 적용해 추천주 보기</button>
+          <button class="primary" id="applyCustomFilterBtn">실시간 조건 적용</button>
           <div id="customFilterOutput" style="margin-top:8px;"></div>
         </div>
       </section>
@@ -719,7 +697,7 @@
             <h2 class="card-title" id="chartStockTitle">메지온 (140410)</h2>
             <span style="font-size:1.25rem; font-weight:900;" id="chartPrice">조회 중...</span>
             <span class="badge neutral" id="chartChg">대기 중</span>
-            <span class="badge mint" id="chartSourceBadge">Cloudflare 실데이터</span>
+            <span class="badge mint" id="chartSourceBadge">실시간 OHLCV</span>
           </div>
           <div class="seg" id="candleRangeGroup">
             <button data-cr="1D">1일(15봉)</button>
@@ -769,19 +747,19 @@
         <div class="issue-box" id="stockIssueBox"></div>
       </section>
 
-      <!-- 4-2. 전문가 10개 보조지표 -->
+      <!-- 4-2. 10개 보조지표 -->
       <section class="card" id="sec-ind10">
         <div class="card-head">
-          <h2 class="card-title">📐 전문가 10개 보조지표 실측 수치 · 매수/매도/중립 & 종목 분석 <span class="badge neutral" id="ind10BasisBadge">실측 시세 기준</span> <span class="badge purple" id="ind10VoteBadge">매수 · 매도 · 중립</span></h2>
+          <h2 class="card-title">📐 전문가 10개 보조지표 실측 수치 · 매수/매도/중립 <span class="badge neutral" id="ind10BasisBadge">실측 시세 기준</span> <span class="badge purple" id="ind10VoteBadge">매수 · 매도 · 중립</span></h2>
         </div>
         <div class="ind10-grid" id="ind10Grid"></div>
         <div class="ind10-guide" id="ind10DetailBox"></div>
       </section>
 
-      <!-- 5. 수급 주의단서 -->
+      <!-- 5. 수급·변동 주의단서 (실시간 시세 기반 동적 생성) -->
       <section class="card" id="sec-supply">
         <div class="card-head">
-          <h2 class="card-title">🚨 5. 수급 주의단서 체크리스트 <span class="badge amber">수급 리스크</span></h2>
+          <h2 class="card-title">🚨 5. 실시간 시세 기반 수급·변동 주의단서 <span class="badge amber">실시간 진단</span></h2>
         </div>
         <div class="clue-grid" id="supplyClueGrid"></div>
       </section>
@@ -820,239 +798,17 @@
   <div class="tooltip" id="tooltip"></div>
 
   <script>
-    const WORKER_ENDPOINT = "https://stock.ksy6pp.workers.dev/api/chart";
-
-    const LIVE_MARKET = {
-      TODAY: {
-        stance: "🧭 <strong>오늘의 대응 한 줄 멘트:</strong> 코스피 4,711.21(+0.29%)·코스닥 반발 흐름과 美 추수감사절 휴장(26일)·조기폐장(27일)을 감안할 때, <u>오늘은 추격 매수보다 관망 및 지지 확인 후 분할 접근을 권장합니다.</u>",
-        indices: [
-          { name: "코스피 (KOSPI)", val: "4,711.21", chg: "+13.70pt (+0.29%)", up: true, us: false },
-          { name: "코스닥 (KOSDAQ)", val: "671.84 (장중)", chg: "+21.20pt (+3.26%)", up: true, us: false },
-          { name: "한은 기준금리", val: "3.25%", chg: "3.00% → 인상", up: true, us: false },
-          { name: "나스닥 (NASDAQ)", val: "23,585.80", chg: "-0.62% (26일 휴장)", up: false, us: true },
-          { name: "S&P 500", val: "7,182.78", chg: "-0.25% (26일 휴장)", up: false, us: true },
-          { name: "다우 (DOW)", val: "50,182.95", chg: "+0.33% (26일 휴장)", up: true, us: true }
-        ],
-        totalOpinion: "📌 <strong>[종합 의견]</strong> 전일 급락 뒤 코스피가 장중 4,817선까지 반등한 뒤 <u>4,711.21(+0.29%)</u>로 마감했고, 코스닥은 반도체 장비·성장주 반발로 강세를 보였습니다. 다만 기준금리 인상(3.25%)과 美 추수감사절 휴장(26일)·조기폐장(27일)이 겹쳐 <u>당일 급등 추격보다 관망·분할 접근이 유리</u>합니다.",
-        analogyOpinion: "💡 <strong>[쉬운 비유]</strong> 큰 소나기가 지나간 뒤 <u>도로가 젖어 미끄러운 날</u>입니다. 급가속으로 치고 나가기보다 앞차 간격을 넓히고 미끄럼 구간을 조심스럽게 통과하는 리듬이 맞습니다."
-      },
-      WEEK: {
-        stance: "🧭 <strong>이번 주 세계시황 한 줄 멘트:</strong> 美 증시 변동성 완화와 亞 반발 매수가 교차하는 주간으로, <u>지수 추종보다는 단기 반등 후 차익 물량을 살피는 관망·분할 대응</u>이 적합합니다.",
-        indices: [
-          { name: "주간 코스피 흐름", val: "4,711.21", chg: "전일 급락 후 반등 마감", up: true, us: false },
-          { name: "주간 코스닥 흐름", val: "반발 탄력 우위", chg: "장비·성장주 순환", up: true, us: false },
-          { name: "국내 금리·정책", val: "3.25% / 증안펀드", chg: "시장 안정 논의 병행", up: true, us: false },
-          { name: "주간 나스닥", val: "23,585.80", chg: "장중 낙폭 축소 마감", up: false, us: true },
-          { name: "주간 S&P 500", val: "7,182.78", chg: "방어·대형주 혼조", up: false, us: true },
-          { name: "미 증시 일정", val: "11/26 휴장", chg: "11/27 조기 폐장", up: true, us: true }
-        ],
-        totalOpinion: "🌐 <strong>[이번 주 세계시황 종합]</strong> 미국 기술주의 변동성 소화 과정과 국내 증시의 급락 후 반등이 맞물린 한 주입니다. <u>수급이 한 섹터에 오래 머무르지 않고 순환</u>하므로 단기 급등주 추격은 자제하고 지지선 확인이 필요합니다.",
-        analogyOpinion: "💡 <strong>[쉬운 비유]</strong> 여러 갈래의 에스컬레이터가 번갈아 멈추고 움직이는 환승역입니다. 한 칸에 무리해 뛰어오르기보다 <u>안정적으로 멈춘 발판을 확인한 뒤 탑승</u>하는 편이 안전합니다."
-      }
-    };
-
-    const SECTOR_NEWS = {
-      "전체": [
-        {
-          sector: "전체 시황", isUS: false,
-          title: "[2026년 11월 26일 마감시황] 코스피 4,711.21pt(+0.29%)…코스닥 장비·성장주 강세",
-          source: "연합뉴스 / 증시 브리프",
-          url: "https://www.yna.co.kr/view/AKR20261126038151008",
-          summary: "전일 급락 뒤 장중 4,817선까지 올랐다가 차익실현 속 4,711.21로 마감했으며 코스닥 반등세가 돋보였습니다."
-        },
-        {
-          sector: "글로벌 증시", isUS: true,
-          title: "美 금융시장, 11월 26일 추수감사절 휴장…27일 조기 폐장 일정",
-          source: "연합인포맥스 / CBC뉴스",
-          url: "https://news.einfomax.co.kr/news/articleView.html?idxno=4446614",
-          summary: "뉴욕증시와 나스닥이 추수감사절로 휴장하며, 27일(금)은 미 동부시간 오후 1시(한국 28일 오전 3시) 조기 종료됩니다."
-        },
-        {
-          sector: "금리·정책", isUS: false,
-          title: "한은 기준금리 3.25% 인상…증시 변동성 완화 및 산업 경쟁력 논의",
-          source: "미디어인뉴스",
-          url: "https://www.mediainnews.com/news/articleView.html?idxno=49157",
-          summary: "기준금리 인상 여파와 증시 안정책, 반도체·모빌리티 정책 방향이 시장 참여자들의 핵심 변수로 다뤄집니다."
-        },
-        {
-          sector: "아시아·수급", isUS: true,
-          title: "亞 증시 반발 매수 유입 속 美 휴장 전후 관망 심리 공존",
-          source: "머니투데이 / 조선일보",
-          url: "https://www.mt.co.kr/world/2026/11/26/2026112616363453989",
-          summary: "저가 매수세가 유입됐으나 미국 추수감사절 연휴를 앞둔 거래량 축소 가능성을 함께 경계하는 분위기입니다."
-        }
-      ],
-      "반도체/AI": [
-        {
-          sector: "반도체/AI", isUS: false,
-          title: "삼성전자, 11월 26일 171,300원(+0.35%) 마감…장중 176,700원 터치 뒤 숨고르기",
-          source: "톱스타뉴스 / KRX",
-          url: "https://www.topstarnews.net/news/articleView.html?idxno=16287038",
-          summary: "장초반 강세로 176,700원까지 올랐다가 오후 차익 매물 출회로 171,300원에 장을 마쳤습니다."
-        },
-        {
-          sector: "반도체/AI", isUS: false,
-          title: "코스닥 반도체 장비주 반발 매수…대형주에서 장비·소부장 순환",
-          source: "연합뉴스",
-          url: "https://www.yna.co.kr/view/AKR20261126038151008",
-          summary: "전일 급락 이후 반도체 장비 관련 종목들이 탄력적인 반등을 보이며 코스닥 지수 상승에 기여했습니다."
-        }
-      ],
-      "전력/에너지": [
-        {
-          sector: "전력/에너지", isUS: false,
-          title: "전력망·ESS 및 에너지 전환 관련 테마 순환매 후보 점검",
-          source: "증시 테마 브리프",
-          url: "https://zzz3977.tistory.com/859",
-          summary: "전력설비·ESS·에너지 관련 종목군으로 순환매가 이어질지 수급 강도를 살피는 흐름입니다."
-        }
-      ],
-      "방산/우주": [
-        {
-          sector: "방산/우주", isUS: false,
-          title: "방산·우주항공 수주 모멘텀 및 포트폴리오 순환매 매력 부각",
-          source: "삼성액티브자산운용 인사이트",
-          url: "https://www.samsungfund.com/etf/insight/newsroom/view.do?seq=78914",
-          summary: "반도체·성장주 변동성이 커질 때 방산 및 우주항공 섹터의 수주 기반 모멘텀이 부각됩니다."
-        }
-      ],
-      "로봇/모빌리티": [
-        {
-          sector: "로봇/모빌리티", isUS: false,
-          title: "로봇 공급망 확대 및 자동차·모빌리티 세액공제 논의 주목",
-          source: "미디어인뉴스",
-          url: "https://www.mediainnews.com/news/articleView.html?idxno=49157",
-          summary: "로봇 밸류체인과 자동차 세제 지원·배터리리스 등 모빌리티 정책 논의가 함께 거론됩니다."
-        }
-      ]
-    };
-
-    const HORIZON_FLOW = {
-      WEEK: {
-        arrowText: "➡️ <strong>주간 순환 화살표:</strong> [1일차] 반도체/AI → [2일차] 전력/에너지 → [3일차] 방산/우주 → [4일차·오늘] 로봇/모빌리티·코스닥성장주 → [5일차] 이차전지/소재 → [6일차] 플랫폼/인터넷 → [7일차] 금융/배당주 → <u>[8번째 예상] 바이오/헬스케어</u>",
-        steps: [
-          { tag: "1일차(월)", name: "반도체/AI", strength: "강세 출발", note: "대형주 수급 출발 및 변동성 테스트" },
-          { tag: "2일차(화)", name: "전력/에너지", strength: "방어 강세", note: "실수요·전력설비 방어 순환" },
-          { tag: "3일차(수)", name: "방산/우주", strength: "테마 강세", note: "수주 기대감과 중기 테마 부각" },
-          { tag: "4일차(목·오늘)", name: "로봇/모빌리티", strength: "반발 강세", note: "코스닥·성장주 반발매수 동반" },
-          { tag: "5일차(금)", name: "이차전지/소재", strength: "반등 시도", note: "낙폭 과대 반발 매수 유입 시도" },
-          { tag: "6일차(주말전)", name: "플랫폼/인터넷", strength: "저가 매수", note: "금리·내수 환경 속 저가 매수" },
-          { tag: "7일차(주간마감)", name: "금융/배당주", strength: "안정 선호", note: "변동성 완화 속 배당·안정 선호" },
-          { tag: "8번째(다음 예측)", name: "바이오/헬스케어", strength: "차기 강세 예상", note: "순환매 막바지 저점 반등 예상 섹터", predict: true }
-        ],
-        top2Text: "🔮 <strong>8번째 예상 섹터: 바이오/헬스케어 (1순위) · 플랫폼/AI (2순위)</strong> — 단기 급락 후 반등이 대형주에서 순환매로 번질 때 <u>낙폭 과대 헬스케어와 플랫폼주로 자금이 옮겨갈 가능성</u>이 높습니다."
-      },
-      "1M": {
-        arrowText: "➡️ <strong>월간 순환 화살표:</strong> AI 반도체 → 전력기기 → 방산/우주 → 로봇/모빌리티 → 금융/증권 → 조선/해양 → 이차전지 → <u>[8번째 예상 1·2위] 1순위 바이오/헬스케어 · 2순위 연말 배당/내수주</u>",
-        steps: [
-          { tag: "1개월 흐름 1", name: "AI 반도체", strength: "최상위 강세", note: "실적·설비투자 모멘텀 중심" },
-          { tag: "1개월 흐름 2", name: "전력기기", strength: "상위 강세", note: "전력망·ESS 수주 기대" },
-          { tag: "1개월 흐름 3", name: "방산/우주", strength: "강세 지속", note: "글로벌 수주잔고 테마" },
-          { tag: "1개월 흐름 4", name: "로봇/모빌리티", strength: "성장 강세", note: "자동화·공급망 이슈" },
-          { tag: "1개월 흐름 5", name: "금융/증권", strength: "완만 강세", note: "주주환원·거래대금 변수" },
-          { tag: "1개월 흐름 6", name: "조선/해양", strength: "지지 강세", note: "선박 수주·해운 운임" },
-          { tag: "1개월 흐름 7", name: "이차전지", strength: "바닥 반등", note: "저점 매수 및 반등 탐색" },
-          { tag: "8번째(다음 예측)", name: "1순위 바이오 · 2순위 배당/내수", strength: "차기 1·2위 예상", note: "연말 수급 전환 대비", predict: true }
-        ],
-        top2Text: "🔮 <strong>월간 8번째 예상 1순위: 바이오/헬스케어 · 2순위: 연말 배당/내수주</strong> — <u>월간 주도 섹터가 한 바퀴 돌고 나면 연말 배당 매력과 낙폭 과대 바이오가 대안</u>으로 부각되기 때문입니다."
-      },
-      "3M": {
-        arrowText: "➡️ <strong>3개월 순환 화살표:</strong> AI 가속기/반도체 → 전력·ESS → 우주/방산 → 로봇/자율주행 → 디지털자산/핀테크 → 조선/중공업 → 플랫폼/SW → <u>[8번째 예상 1·2위] 1순위 헬스케어 · 2순위 에너지저장(ESS)</u>",
-        steps: [
-          { tag: "3개월 흐름 1", name: "AI 가속기/반도체", strength: "분기 주도 강세", note: "분기 실적 가이던스 주도" },
-          { tag: "3개월 흐름 2", name: "전력·ESS", strength: "인프라 강세", note: "데이터센터 전력 수요" },
-          { tag: "3개월 흐름 3", name: "우주/방산", strength: "수주 강세", note: "국방·발사체 모멘텀" },
-          { tag: "3개월 흐름 4", name: "로봇/자율주행", strength: "상용화 강세", note: "상용화·공급망 확장" },
-          { tag: "3개월 흐름 5", name: "디지털자산/핀테크", strength: "유동성 강세", note: "유동성 순환 테마" },
-          { tag: "3개월 흐름 6", name: "조선/중공업", strength: "안정 강세", note: "수주 모멘텀 지속" },
-          { tag: "3개월 흐름 7", name: "플랫폼/소프트웨어", strength: "재평가 탐색", note: "조정 후 밸류에이션 점검" },
-          { tag: "8번째(다음 예측)", name: "1순위 헬스케어 · 2순위 에너지저장", strength: "차기 1·2위 예상", note: "중기 순환매 2차 파동", predict: true }
-        ],
-        top2Text: "🔮 <strong>3개월 8번째 예상 1순위: 헬스케어 · 2순위: 에너지저장(ESS)</strong> — <u>3개월 사이클에서 선도 섹터 차익실현 이후 실수요 기반 저장·헬스케어 섹터로 재편</u>되는 흐름이 자주 나타납니다."
-      },
-      "6M": {
-        arrowText: "➡️ <strong>6개월 순환 화살표:</strong> 반도체/AI 인프라 → 전력망/원전 → 방산/우주 → 로봇/모빌리티 → 금융/밸류업 → 조선/해양 → 2차전지/소재 → <u>[8번째 예상 1·2위] 1순위 피지컬AI/로봇 · 2순위 바이오</u>",
-        steps: [
-          { tag: "6개월 흐름 1", name: "반도체/AI 인프라", strength: "핵심 강세", note: "상·하반기 투자 축" },
-          { tag: "6개월 흐름 2", name: "전력망/원전", strength: "병목해소 강세", note: "전력 병목 해소 수혜" },
-          { tag: "6개월 흐름 3", name: "방산/우주", strength: "중기 강세", note: "중장기 계약 확대" },
-          { tag: "6개월 흐름 4", name: "로봇/모빌리티", strength: "성장 강세", note: "신성장 모멘텀" },
-          { tag: "6개월 흐름 5", name: "금융/밸류업", strength: "정책 강세", note: "주주환원 정책 기대" },
-          { tag: "6개월 흐름 6", name: "조선/해양", strength: "실적 강세", note: "수주잔고 기반 실적" },
-          { tag: "6개월 흐름 7", name: "2차전지/소재", strength: "반등 모색", note: "업황 바닥 탐색" },
-          { tag: "8번째(다음 예측)", name: "1순위 피지컬AI/로봇 · 2순위 바이오", strength: "차기 1·2위 예상", note: "6개월 사이클 다음 축", predict: true }
-        ],
-        top2Text: "🔮 <strong>6개월 8번째 예상 1순위: 피지컬AI/로봇 · 2순위: 바이오</strong> — <u>자금이 성장과 방어를 오가며 AI 소프트웨어에서 물리적 로봇·바이오 모멘텀으로 확장</u>되는 경향이 있습니다."
-      },
-      "1Y": {
-        arrowText: "➡️ <strong>1년 순환 화살표:</strong> AI 반도체 → 전력/원전/ESS → 우주/방산 → 로봇/모빌리티 → 디지털자산/금융 → 조선/중공업 → 2차전지/소재 → <u>[8번째 예상 1·2위] 1순위 로봇/자동화 · 2순위 바이오/ESS</u>",
-        steps: [
-          { tag: "1년 흐름 1", name: "AI 반도체", strength: "연간 주도 강세", note: "연간 최대 주도 테마" },
-          { tag: "1년 흐름 2", name: "전력/원전/ESS", strength: "연간 핵심 강세", note: "전력 인프라 핵심 축" },
-          { tag: "1년 흐름 3", name: "우주/방산", strength: "연간 강세", note: "글로벌 안보·우주 확장" },
-          { tag: "1년 흐름 4", name: "로봇/모빌리티", strength: "차세대 강세", note: "차세대 성장 축" },
-          { tag: "1년 흐름 5", name: "디지털자산/금융", strength: "유동성 강세", note: "제도권·유동성 수혜" },
-          { tag: "1년 흐름 6", name: "조선/중공업", strength: "사이클 강세", note: "수주 호황 사이클" },
-          { tag: "1년 흐름 7", name: "2차전지/소재", strength: "재정비 구간", note: "조정 및 재정비" },
-          { tag: "8번째(다음 예측)", name: "1순위 로봇/자동화 · 2순위 바이오/ESS", strength: "차기 1·2위 예상", note: "차기 연간 강세 후보", predict: true }
-        ],
-        top2Text: "🔮 <strong>1년 8번째 예상 1순위: 로봇/자동화 · 2순위: 바이오/ESS</strong> — <u>연간 주도 섹터가 성숙기에 접어들수록 실용화·바이오·에너지 저장 섹터로 눈길이 이동</u>합니다."
-      }
-    };
-
-    const AI_SECTOR_RECS = [
-      {
-        sector: "반도체/AI",
-        picks: [
-          { name: "삼성전자", sym: "005930", us: false, supplyTrend: "수급: 급락 뒤 저가 매수세 유입 및 하단 지지 확인 구간", reason: "메모리 경쟁력과 배당·지지선 반등 타점 점검" },
-          { name: "엔비디아", sym: "NVDA", us: true, supplyTrend: "수급: 기관 단기 변동성 소화 및 저점 매수 대기", reason: "글로벌 AI 인프라 핵심 대장주" }
-        ]
-      },
-      {
-        sector: "전력/에너지",
-        picks: [
-          { name: "HD현대일렉트릭", sym: "267260", us: false, supplyTrend: "수급: 기관·외국인 순환매 유입 및 매물 소화 양호", reason: "전력망·변압기 수주 기반 실적 가시성" },
-          { name: "플루언스에너지", sym: "FLNC", us: true, supplyTrend: "수급: 과매도 구간 단기 반발 매수 유입 시도", reason: "ESS 저장장치 수요 회복 기대" }
-        ]
-      },
-      {
-        sector: "방산/우주",
-        picks: [
-          { name: "한화에어로스페이스", sym: "012450", us: false, supplyTrend: "수급: 방산·우주 수주 기대 수급 유입", reason: "중장기 수주잔고 성장세" },
-          { name: "로켓랩", sym: "RKLB", us: true, supplyTrend: "수급: 테마·성장 매수세 유입과 거래량 회복", reason: "상업 발사 및 우주 시스템 확장 모멘텀" }
-        ]
-      },
-      {
-        sector: "바이오/헬스케어",
-        picks: [
-          { name: "메지온", sym: "140410", us: false, supplyTrend: "수급: 저점 반등세 유입 및 단기 지지 확인 구간", reason: "임상 모멘텀 및 낙폭 과대 반발 탄력" },
-          { name: "저스템", sym: "417840", us: false, supplyTrend: "수급: 반도체 공정·장비 순환매 체크 구간", reason: "반도체 습도·환경제어 공정 수혜 기대" }
-        ]
-      }
-    ];
+    const WORKER_ORIGIN = "https://stock.ksy6pp.workers.dev";
 
     const PRESET_MAP = {
-      1: { label: "1번 수급·추세 정석", conds: ["sup", "trend"] },
-      2: { label: "2번 거래량 폭발·성장", conds: ["vol", "lead"] },
-      3: { label: "3번 과매도·지지 반등", conds: ["rsiLow", "trend"] },
-      4: { label: "4번 주도섹터 대장 모멘텀", conds: ["lead", "sup"] },
-      5: { label: "5번 저변동·실적방어 스윙", conds: ["trend"] }
+      1: { conds: ["sup", "trend"] },
+      2: { conds: ["vol", "lead"] },
+      3: { conds: ["rsiLow", "sup"] },
+      4: { conds: ["lead", "sup"] },
+      5: { conds: ["trend"] }
     };
 
-    const CANDIDATE_STOCKS = [
-      { name: "삼성전자", sym: "005930", us: false, sup: true, trend: true, vol: true, rsiLow: true, lead: true, why: "단기 급락 뒤 지지 확인과 반도체·배당 모멘텀이 결합된 대표 후보" },
-      { name: "SK하이닉스", sym: "000660", us: false, sup: true, trend: true, vol: true, rsiLow: false, lead: true, why: "AI 메모리 수급과 추세 지지력이 유지되는 반도체 주도주" },
-      { name: "현대차", sym: "005380", us: false, sup: true, trend: true, vol: false, rsiLow: true, lead: true, why: "모빌리티·로봇 확장 기대와 하단 지지선 방어" },
-      { name: "HD현대일렉트릭", sym: "267260", us: false, sup: true, trend: true, vol: true, rsiLow: false, lead: true, why: "전력망·변압기 수주 기반 실적 가시성과 추세 정배열" },
-      { name: "한화에어로스페이스", sym: "012450", us: false, sup: false, trend: true, vol: true, rsiLow: false, lead: true, why: "방산·우주 수주잔고 성장성과 거래량 회복" },
-      { name: "저스템", sym: "417840", us: false, sup: false, trend: false, vol: true, rsiLow: true, lead: false, why: "반도체 환경제어 공정 이슈와 단기 조정 뒤 과매도 반등 타점" },
-      { name: "메지온", sym: "140410", us: false, sup: true, trend: false, vol: true, rsiLow: true, lead: false, why: "임상 모멘텀과 최근 저점 반발 매수세가 부각되는 종목" },
-      { name: "엔비디아", sym: "NVDA", us: true, sup: true, trend: true, vol: true, rsiLow: true, lead: true, why: "글로벌 AI 인프라 핵심 대장주" },
-      { name: "로켓랩", sym: "RKLB", us: true, sup: false, trend: true, vol: true, rsiLow: true, lead: true, why: "우주 발사·위성 사업 성장 기대와 거래량 증가" }
-    ];
-
     const state = {
-      mscope: "TODAY",
       newsSector: "전체",
       horizon: "WEEK",
       activeStep: 0,
@@ -1074,6 +830,8 @@
         pred1M: false
       },
       selectedInd: 0,
+      marketData: null,
+      sectorData: null,
       series: [],
       viewStart: 0,
       viewEnd: null,
@@ -1091,15 +849,23 @@
         : "$" + Number(v).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     };
 
-    function updateClock() {
-      const now = new Date();
-      $("liveClock").textContent = now.toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+    function updateClock(isoStr = null) {
+      const d = isoStr ? new Date(isoStr) : new Date();
+      $("liveClock").textContent = d.toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
     }
 
     function renderMarketSection() {
-      const m = LIVE_MARKET[state.mscope];
+      const m = state.marketData;
+      if (!m || !m.ok) {
+        $("marketGrid").innerHTML = `<div class="idx-box" style="grid-column:1/-1;">실시간 지수 데이터를 불러오지 못했습니다. [전체 실시간 갱신]을 눌러주세요.</div>`;
+        return;
+      }
+
+      updateClock(m.updatedAt);
+      $("marketUpdatedBadge").textContent = `실시간 갱신: ${new Date(m.updatedAt).toLocaleTimeString("ko-KR")}`;
       $("topStanceBanner").innerHTML = m.stance;
-      const idxs = m.indices.filter(x => state.includeUS || !x.us);
+
+      const idxs = (m.indices || []).filter(x => state.includeUS || !x.us);
       $("marketGrid").innerHTML = idxs.map(i => `
         <div class="idx-box">
           <div class="idx-name">${i.name}</div>
@@ -1111,35 +877,43 @@
       $("totalOpinionBox").innerHTML = m.totalOpinion;
       $("analogyOpinionBox").innerHTML = m.analogyOpinion;
 
-      const secKeys = Object.keys(SECTOR_NEWS);
+      const newsMap = m.newsBySector || {};
+      const secKeys = Object.keys(newsMap);
+      if (!secKeys.includes(state.newsSector)) state.newsSector = secKeys[0] || "전체";
+
       $("sectorNewsTabs").innerHTML = secKeys.map(k => `
         <button class="snews-tab ${k === state.newsSector ? "active" : ""}" onclick="selectNewsSector('${k}')">${k}</button>
       `).join("");
 
-      const list = (SECTOR_NEWS[state.newsSector] || []).filter(n => state.includeUS || !n.isUS);
-      $("sectorNewsGrid").innerHTML = list.map((n, i) => `
-        <div class="m-news-card">
-          <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.73rem; color:var(--muted); margin-bottom:4px;">
-            <span><b>[${n.sector}]</b> ${n.source} ${n.isUS ? "· 🇺🇸 미국" : "· 🇰🇷 국내"}</span>
-            <button style="padding:2px 7px; font-size:0.72rem;" onclick="toggleNewsSum(${i})">요약 토글</button>
-          </div>
-          <div><a href="${n.url}" target="_blank" rel="noopener noreferrer">${n.title}</a></div>
-          <div class="summary-box open" id="snews_sum_${i}"><strong>요약:</strong> ${n.summary}</div>
-          <a href="${n.url}" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-top:5px; font-size:0.76rem; color:var(--primary);">원문 기사 보기 ↗</a>
-        </div>
-      `).join("");
+      const list = (newsMap[state.newsSector] || []).filter(n => state.includeUS || !n.isUS);
+      $("sectorNewsGrid").innerHTML = list.length
+        ? list.map(n => `
+            <div class="m-news-card">
+              <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.73rem; color:var(--muted); margin-bottom:4px;">
+                <span><b>[${n.sector}]</b> ${n.source} ${n.isUS ? "· 🇺🇸 미국" : "· 🇰🇷 국내"}</span>
+              </div>
+              <div><a href="${n.url}" target="_blank" rel="noopener noreferrer">${n.title}</a></div>
+              <div class="summary-box">${n.summary}</div>
+              <a href="${n.url}" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-top:6px; font-size:0.76rem; color:var(--primary);">실시간 기사 원문 보기 ↗</a>
+            </div>
+          `).join("")
+        : `<div class="m-news-card" style="grid-column:1/-1;">표시할 실시간 뉴스가 없습니다.</div>`;
     }
 
     window.selectNewsSector = k => { state.newsSector = k; renderMarketSection(); };
-    window.toggleNewsSum = i => {
-      const el = document.getElementById(`snews_sum_${i}`);
-      if (el) el.classList.toggle("open");
-    };
 
     function renderHorizonFlow() {
-      const h = HORIZON_FLOW[state.horizon];
+      const sd = state.sectorData;
+      if (!sd || !sd.ok || !sd.flowByHorizon) {
+        $("horizonArrowSummary").textContent = "실시간 섹터 순환 데이터를 불러오는 중...";
+        return;
+      }
+
+      $("sectorUpdatedBadge").textContent = `실시간 산출: ${new Date(sd.updatedAt).toLocaleTimeString("ko-KR")}`;
+      const h = sd.flowByHorizon[state.horizon] || sd.flowByHorizon.WEEK;
       $("horizonArrowSummary").innerHTML = h.arrowText;
-      $("horizonFlowGrid").innerHTML = h.steps.map((st, idx) => `
+
+      $("horizonFlowGrid").innerHTML = (h.steps || []).map((st, idx) => `
         <div class="flow-step ${st.predict ? "predict-step" : ""} ${idx === state.activeStep ? "active-step" : ""}" onclick="selectFlowStep(${idx})">
           <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.74rem; color:var(--muted); font-weight:700;">
             <span>${st.tag}</span>
@@ -1156,24 +930,40 @@
     window.selectFlowStep = idx => { state.activeStep = idx; renderHorizonFlow(); };
 
     function renderAiRecs() {
-      $("aiSectorRecsGrid").innerHTML = AI_SECTOR_RECS.map(sec => {
-        const filtered = sec.picks.filter(p => state.includeUS || !p.us);
+      const stocks = (state.sectorData?.stocks || []).filter(s => state.includeUS || !s.us);
+      if (!stocks.length) {
+        $("aiSectorRecsGrid").innerHTML = `<div class="rec-card" style="grid-column:1/-1;">실시간 섹터 종목 데이터를 불러오는 중...</div>`;
+        return;
+      }
+
+      const grouped = {};
+      for (const st of stocks) {
+        if (!grouped[st.sector]) grouped[st.sector] = [];
+        grouped[st.sector].push(st);
+      }
+
+      const sectors = Object.keys(grouped).slice(0, 4);
+      $("aiSectorRecsGrid").innerHTML = sectors.map(sec => {
+        const list = grouped[sec].sort((a, b) => b.r1W - a.r1W);
         return `
           <div class="rec-card">
-            <div style="font-weight:800; font-size:0.88rem; margin-bottom:6px;">🤖 ${sec.sector} AI 추천 2선</div>
-            ${filtered.map(p => `
-              <div style="padding:7px 0; border-top:1px dashed var(--border);">
-                <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; flex-wrap:wrap;">
-                  <span>
-                    <b>${p.name}</b>
-                    <span class="badge ${p.us ? "purple" : ""}">${p.us ? "🇺🇸 미국" : "🇰🇷 국내"}</span>
-                  </span>
-                  <button style="padding:3px 9px; font-size:0.73rem;" onclick="loadStock('${p.sym}', true)">차트 보기 ↗</button>
+            <div style="font-weight:800; font-size:0.88rem; margin-bottom:6px;">⚡ ${sec} 실시간 모멘텀 종목</div>
+            ${list.map(p => {
+              const s1W = `${p.r1W >= 0 ? "+" : ""}${p.r1W.toFixed(2)}%`;
+              const s1M = `${p.r1M >= 0 ? "+" : ""}${p.r1M.toFixed(2)}%`;
+              return `
+                <div style="padding:7px 0; border-top:1px dashed var(--border);">
+                  <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; flex-wrap:wrap;">
+                    <span>
+                      <b>${p.displayName}</b> (${p.code})
+                      <span class="badge ${p.us ? "purple" : ""}">${p.us ? "🇺🇸 미국" : "🇰🇷 국내"}</span>
+                    </span>
+                    <button style="padding:3px 9px; font-size:0.73rem;" onclick="loadStock('${p.code}', true)">차트 보기 ↗</button>
+                  </div>
+                  <div style="font-size:0.77rem; color:#1e3a8a; margin-top:3px;">📊 실시간 1주 ${s1W} · 1개월 ${s1M} · 1년 레인지 ${p.posInRange.toFixed(0)}% 위치</div>
                 </div>
-                <div style="font-size:0.77rem; color:#1e3a8a; margin-top:3px;">📊 ${p.supplyTrend}</div>
-                <div style="font-size:0.78rem; color:#334155; margin-top:2px;">💡 추천 이유: ${p.reason}</div>
-              </div>
-            `).join("")}
+              `;
+            }).join("")}
           </div>
         `;
       }).join("");
@@ -1182,7 +972,7 @@
     function applyPreset(pKey) {
       state.preset = pKey;
       document.querySelectorAll(".preset-btn").forEach(b => b.classList.toggle("active", b.dataset.preset === pKey));
-      const wanted = PRESET_MAP[pKey].conds;
+      const wanted = PRESET_MAP[pKey]?.conds || [];
       document.querySelectorAll("#customCondChecks input[type='checkbox']").forEach(cb => {
         cb.checked = wanted.includes(cb.value);
       });
@@ -1190,25 +980,29 @@
     }
 
     function runCustomFilter() {
+      const allStocks = (state.sectorData?.stocks || []).filter(s => state.includeUS || !s.us);
+      if (!allStocks.length) {
+        $("customFilterOutput").innerHTML = `<span style="color:var(--muted);">실시간 종목 데이터를 불러오는 중입니다.</span>`;
+        return;
+      }
+
       const checked = Array.from(document.querySelectorAll("#customCondChecks input[type='checkbox']:checked")).map(x => x.value);
-      const matches = CANDIDATE_STOCKS.filter(st => {
-        if (!state.includeUS && st.us) return false;
-        return checked.every(c => st[c]);
-      });
+      const matches = allStocks.filter(st => checked.every(c => Boolean(st[c])));
 
       $("customFilterOutput").innerHTML = matches.length
-        ? `<div style="font-weight:800; margin-bottom:4px;">적합 추천주 목록 (${matches.length}개 · 클릭 시 차트로 이동):</div>
+        ? `<div style="font-weight:800; margin-bottom:4px;">실시간 조건 충족 종목 (${matches.length}개 · 클릭 시 차트 이동):</div>
            <div class="fit-stock-list">` + matches.map(m => `
                <div class="fit-stock-card">
                  <div class="fit-stock-top">
-                   <button class="stock-pill" onclick="loadStock('${m.sym}', true)">${m.us ? "🇺🇸" : "🇰🇷"} ${m.name} (${m.sym})</button>
+                   <button class="stock-pill" onclick="loadStock('${m.code}', true)">${m.us ? "🇺🇸" : "🇰🇷"} ${m.displayName} (${m.code})</button>
+                   <span class="badge ${m.r1W >= 0 ? "mint" : "pink"}">1주 ${m.r1W >= 0 ? "+" : ""}${m.r1W.toFixed(2)}%</span>
                  </div>
                  <div style="font-size:0.77rem; color:#334155; margin-top:6px;">
-                   💡 <strong>추천 이유:</strong> ${m.why}
+                   섹터: <b>${m.sector}</b> · 1개월 ${m.r1M >= 0 ? "+" : ""}${m.r1M.toFixed(2)}%
                  </div>
                </div>
              `).join("") + `</div>`
-        : `<span style="color:var(--muted);">선택한 조건을 모두 만족하는 종목이 없습니다. 조건을 1~2개 해제해 보세요.</span>`;
+        : `<span style="color:var(--muted);">현재 실시간 조건을 모두 만족하는 종목이 없습니다. 조건을 1~2개 해제해 보세요.</span>`;
     }
 
     function calcMA(arr, idx, period) {
@@ -1249,11 +1043,7 @@
       const diffStr = state.currency === "KRW"
         ? `${diff >= 0 ? "+" : ""}${Math.round(diff).toLocaleString("ko-KR")}원`
         : `${diff >= 0 ? "+" : "-"}$${Math.abs(diff).toFixed(2)}`;
-      return {
-        pct,
-        diff,
-        text: `전일대비 ${sign}${pct.toFixed(2)}% (${diffStr})`
-      };
+      return { pct, diff, text: `전일대비 ${sign}${pct.toFixed(2)}% (${diffStr})` };
     }
 
     function getSlice() {
@@ -1498,10 +1288,10 @@
       const lo = Math.min(...state.series.map(x => x.low));
 
       $("stockIssueBox").innerHTML = `
-        <div style="font-weight:800; font-size:0.86rem; margin-bottom:4px;">📰 [${state.stockName} · ${state.symbol}] 실제 시세 요약 (${state.range})</div>
+        <div style="font-weight:800; font-size:0.86rem; margin-bottom:4px;">📊 [${state.stockName} · ${state.symbol}] 실시간 시세 요약 (${state.range})</div>
         <ul style="margin:4px 0 6px 18px; padding:0;">
-          <li>최근 기준일(<strong>${last.date}</strong>): 시가 <strong>${fmtPrice(last.open)}</strong> · 고가 <strong>${fmtPrice(last.high)}</strong> · 저가 <strong>${fmtPrice(last.low)}</strong> · 종가 <strong>${fmtPrice(last.close)}</strong> (거래량 ${(last.volume || 0).toLocaleString()}주)</li>
-          <li>선택 구간 최고가 <strong>${fmtPrice(hi)}</strong> · 최저가 <strong>${fmtPrice(lo)}</strong> 기준으로 매수 추천선·손절선·보조지표가 자동 계산되었습니다.</li>
+          <li>최근 봉(<strong>${last.date}</strong>): 시가 <strong>${fmtPrice(last.open)}</strong> · 고가 <strong>${fmtPrice(last.high)}</strong> · 저가 <strong>${fmtPrice(last.low)}</strong> · 종가 <strong>${fmtPrice(last.close)}</strong> (거래량 ${(last.volume || 0).toLocaleString()}주)</li>
+          <li>선택 구간 최고가 <strong>${fmtPrice(hi)}</strong> · 최저가 <strong>${fmtPrice(lo)}</strong> 기준으로 매수 추천선·손절선·10개 지표가 자동 계산되었습니다.</li>
         </ul>
       `;
     }
@@ -1535,76 +1325,16 @@
       const posPct = rHi > rLo ? (((last.close - rLo) / (rHi - rLo)) * 100).toFixed(1) : "50.0";
 
       const list = [
-        {
-          name: "1. RSI(14)",
-          metric: `수치: ${rsi.toFixed(1)} · ${todayInfo.text}`,
-          view: rsi < 38 ? "매수" : rsi > 70 ? "매도" : "중립",
-          analysis: `[${basisLabel}] ${state.stockName} 실제 종가(${fmtPrice(last.close)}) 기준 RSI(14)는 <b>${rsi.toFixed(1)}</b>입니다.`,
-          detail: "30 이하 과매도 반등 후보, 70 이상 과열 경계로 해석합니다."
-        },
-        {
-          name: "2. MACD(5-20 이격)",
-          metric: `수치: ${macd >= 0 ? "+" : ""}${macd.toFixed(2)}%`,
-          view: macd > 0.15 ? "매수" : macd < -0.3 ? "매도" : "중립",
-          analysis: `[${basisLabel}] 5일선과 20일선 괴리율은 <b>${macd.toFixed(2)}%</b>입니다.`,
-          detail: "0선 상향 돌파를 단기 추세 전환 신호로 봅니다."
-        },
-        {
-          name: "3. 이동평균선(5·20·60)",
-          metric: `5일 ${fmtPrice(m5)} / 20일 ${fmtPrice(m20)}`,
-          view: last.close >= m5 && m5 >= m20 ? "매수" : last.close < m20 ? "매도" : "중립",
-          analysis: `[${basisLabel}] 현재가(${fmtPrice(last.close)})와 5일·20일·60일선(${fmtPrice(m60)}) 위치를 비교했습니다.`,
-          detail: "5일선 안착 여부와 20일선 지지력을 함께 확인합니다."
-        },
-        {
-          name: "4. 볼린저밴드 중심(20)",
-          metric: `중심선 ${fmtPrice(m20)}`,
-          view: last.close < m20 * 0.94 ? "매수" : last.close > m20 * 1.08 ? "매도" : "중립",
-          analysis: `[${basisLabel}] 20일 중심선(${fmtPrice(m20)}) 대비 현재가 위치를 점검했습니다.`,
-          detail: "중심선 이탈 후 재돌파 또는 하단 지지 반등을 체크합니다."
-        },
-        {
-          name: "5. 스토캐스틱(%K 14)",
-          metric: `수치: ${stochK.toFixed(1)}`,
-          view: stochK < 25 ? "매수" : stochK > 80 ? "매도" : "중립",
-          analysis: `[${basisLabel}] 최근 14봉 고저(${fmtPrice(rLo)}~${fmtPrice(rHi)}) 내 종가 위치 %K는 <b>${stochK.toFixed(1)}</b>입니다.`,
-          detail: "20 이하 침체권 탈출 시 단기 반등, 80 이상 과열권 주의로 봅니다."
-        },
-        {
-          name: "6. 추세 강도(ADX 근사)",
-          metric: `수치: ${adx}`,
-          view: Number(adx) >= 25 ? "매수" : "중립",
-          analysis: `[${basisLabel}] 가격 변동성 기반 추세 강도는 <b>${adx}</b>입니다.`,
-          detail: "25 이상이면 방향성 추세가 강하고 20 이하는 박스권입니다."
-        },
-        {
-          name: "7. 거래량 비율(20봉 평균)",
-          metric: `거래량비 ${volRatio.toFixed(2)}배 · 방향 ${obvDelta}`,
-          view: volRatio >= 1.2 && last.close >= last.open ? "매수" : volRatio >= 1.3 && last.close < last.open ? "매도" : "중립",
-          analysis: `[${basisLabel}] 평균 대비 거래량 <b>${volRatio.toFixed(2)}배</b> 흐름을 반영했습니다.`,
-          detail: "양봉 동반 거래량 증가는 매수 유입, 음봉 대량 거래는 매도 압력입니다."
-        },
-        {
-          name: "8. CCI(20)",
-          metric: `수치: ${cci}`,
-          view: Number(cci) < -100 ? "매수" : Number(cci) > 120 ? "매도" : "중립",
-          analysis: `[${basisLabel}] 평균 가격 편차 CCI는 <b>${cci}</b>입니다.`,
-          detail: "-100 하회 후 재진입 시 저점 반등, +100 상회 시 추세 탄력입니다."
-        },
-        {
-          name: "9. MFI 자금흐름",
-          metric: `수치: ${mfi}`,
-          view: Number(mfi) < 35 ? "매수" : Number(mfi) > 75 ? "매도" : "중립",
-          analysis: `[${basisLabel}] 거래량 가중 자금흐름 MFI는 <b>${mfi}</b>입니다.`,
-          detail: "가격과 거래량을 함께 결합해 자금 유입/이탈을 봅니다."
-        },
-        {
-          name: "10. 구간 가격 위치",
-          metric: `저점 대비 ${posPct}% 위치`,
-          view: Number(posPct) <= 30 ? "매수" : Number(posPct) >= 85 ? "매도" : "중립",
-          analysis: `[${basisLabel}] 최근 저점(${fmtPrice(rLo)})과 고점(${fmtPrice(rHi)}) 사이에서 <b>${posPct}%</b> 위치입니다.`,
-          detail: "하단 30% 이내는 분할 매수 검토 구간, 상단 85% 이상은 분할 익절 검토 구간입니다."
-        }
+        { name: "1. RSI(14)", metric: `수치: ${rsi.toFixed(1)} · ${todayInfo.text}`, view: rsi < 38 ? "매수" : rsi > 70 ? "매도" : "중립", analysis: `[${basisLabel}] ${state.stockName} 실제 종가(${fmtPrice(last.close)}) 기준 RSI(14)는 <b>${rsi.toFixed(1)}</b>입니다.`, detail: "30 이하 과매도 반등 후보, 70 이상 과열 경계로 해석합니다." },
+        { name: "2. MACD(5-20 이격)", metric: `수치: ${macd >= 0 ? "+" : ""}${macd.toFixed(2)}%`, view: macd > 0.15 ? "매수" : macd < -0.3 ? "매도" : "중립", analysis: `[${basisLabel}] 5일선과 20일선 괴리율은 <b>${macd.toFixed(2)}%</b>입니다.`, detail: "0선 상향 돌파를 단기 추세 전환 신호로 봅니다." },
+        { name: "3. 이동평균선(5·20·60)", metric: `5일 ${fmtPrice(m5)} / 20일 ${fmtPrice(m20)}`, view: last.close >= m5 && m5 >= m20 ? "매수" : last.close < m20 ? "매도" : "중립", analysis: `[${basisLabel}] 현재가(${fmtPrice(last.close)})와 5일·20일·60일선(${fmtPrice(m60)}) 위치를 비교했습니다.`, detail: "5일선 안착 여부와 20일선 지지력을 함께 확인합니다." },
+        { name: "4. 볼린저밴드 중심(20)", metric: `중심선 ${fmtPrice(m20)}`, view: last.close < m20 * 0.94 ? "매수" : last.close > m20 * 1.08 ? "매도" : "중립", analysis: `[${basisLabel}] 20일 중심선(${fmtPrice(m20)}) 대비 현재가 위치를 점검했습니다.`, detail: "중심선 이탈 후 재돌파 또는 하단 지지 반등을 체크합니다." },
+        { name: "5. 스토캐스틱(%K 14)", metric: `수치: ${stochK.toFixed(1)}`, view: stochK < 25 ? "매수" : stochK > 80 ? "매도" : "중립", analysis: `[${basisLabel}] 최근 14봉 고저(${fmtPrice(rLo)}~${fmtPrice(rHi)}) 내 종가 위치 %K는 <b>${stochK.toFixed(1)}</b>입니다.`, detail: "20 이하 침체권 탈출 시 단기 반등, 80 이상 과열권 주의로 봅니다." },
+        { name: "6. 추세 강도(ADX 근사)", metric: `수치: ${adx}`, view: Number(adx) >= 25 ? "매수" : "중립", analysis: `[${basisLabel}] 가격 변동성 기반 추세 강도는 <b>${adx}</b>입니다.`, detail: "25 이상이면 방향성 추세가 강하고 20 이하는 박스권입니다." },
+        { name: "7. 거래량 비율(20봉 평균)", metric: `거래량비 ${volRatio.toFixed(2)}배 · 방향 ${obvDelta}`, view: volRatio >= 1.2 && last.close >= last.open ? "매수" : volRatio >= 1.3 && last.close < last.open ? "매도" : "중립", analysis: `[${basisLabel}] 평균 대비 거래량 <b>${volRatio.toFixed(2)}배</b> 흐름을 반영했습니다.`, detail: "양봉 동반 거래량 증가는 매수 유입, 음봉 대량 거래는 매도 압력입니다." },
+        { name: "8. CCI(20)", metric: `수치: ${cci}`, view: Number(cci) < -100 ? "매수" : Number(cci) > 120 ? "매도" : "중립", analysis: `[${basisLabel}] 평균 가격 편차 CCI는 <b>${cci}</b>입니다.`, detail: "-100 하회 후 재진입 시 저점 반등, +100 상회 시 추세 탄력입니다." },
+        { name: "9. MFI 자금흐름", metric: `수치: ${mfi}`, view: Number(mfi) < 35 ? "매수" : Number(mfi) > 75 ? "매도" : "중립", analysis: `[${basisLabel}] 거래량 가중 자금흐름 MFI는 <b>${mfi}</b>입니다.`, detail: "가격과 거래량을 함께 결합해 자금 유입/이탈을 봅니다." },
+        { name: "10. 구간 가격 위치", metric: `저점 대비 ${posPct}% 위치`, view: Number(posPct) <= 30 ? "매수" : Number(posPct) >= 85 ? "매도" : "중립", analysis: `[${basisLabel}] 최근 저점(${fmtPrice(rLo)})과 고점(${fmtPrice(rHi)}) 사이에서 <b>${posPct}%</b> 위치입니다.`, detail: "하단 30% 이내는 분할 매수 검토 구간, 상단 85% 이상은 분할 익절 검토 구간입니다." }
       ];
 
       const bCnt = list.filter(x => x.view === "매수").length;
@@ -1636,12 +1366,23 @@
 
     window.selectInd = idx => { state.selectedInd = idx; renderInd10(); };
 
-    function renderSupplyClues() {
+    function renderDynamicSupplyClues() {
+      if (!state.series.length) return;
+      const idxLast = state.series.length - 1;
+      const last = state.series[idxLast];
+      const prev = state.series[Math.max(0, idxLast - 1)];
+      const lookback = Math.min(20, state.series.length);
+      const avgVol = state.series.slice(-lookback).reduce((a, b) => a + (b.volume || 0), 0) / Math.max(1, lookback);
+      const volRatio = avgVol ? (last.volume || 0) / avgVol : 1;
+      const upperWickPct = last.high > last.low ? ((last.high - Math.max(last.open, last.close)) / (last.high - last.low)) * 100 : 0;
+      const m20 = calcMA(state.series, idxLast, 20) ?? last.close;
+      const pos20Pct = m20 ? ((last.close - m20) / m20) * 100 : 0;
+
       $("supplyClueGrid").innerHTML = `
-        <div class="clue-card"><b>⚠️ 단기 반등 속 거래량 둔화:</b> 반등일 거래량이 직전 급락일 거래량에 못 미치면 되돌림 폭이 제한될 수 있습니다.</div>
-        <div class="clue-card"><b>⚠️ 수급 주체 엇갈림:</b> 외국인·기관 수급이 한쪽 방향으로 연속 유입되는지 장 마감 수급까지 확인해야 합니다.</div>
-        <div class="clue-card"><b>⚠️ 휴장·금리 이벤트 변수:</b> 금리 인상(3.25%) 기조와 美 추수감사절 휴장(26일)·조기폐장(27일) 전후에는 관망 심리가 커질 수 있습니다.</div>
-        <div class="clue-card"><b>⚠️ 고점 부근 윗꼬리 저항:</b> 장중 고점 부근에서 윗꼬리가 달리면 단기 차익실현 물량 출회를 경계해야 합니다.</div>
+        <div class="clue-card"><b>⚠️ 거래량 강도(${volRatio.toFixed(2)}배):</b> 20봉 평균 거래량 대비 <b>${volRatio.toFixed(2)}배</b> 수준입니다. ${volRatio < 0.8 ? "거래량 감소 속 반등은 추격 매수 주의가 필요합니다." : "실거래량이 동반되어 가격 움직임의 신뢰도를 높입니다."}</div>
+        <div class="clue-card"><b>⚠️ 윗꼬리 매물 압력(${upperWickPct.toFixed(0)}%):</b> 최근 봉 윗꼬리 비율은 <b>${upperWickPct.toFixed(0)}%</b>입니다. ${upperWickPct >= 35 ? "고점 부근 차익 매물이 출회되었으므로 돌파 안착 확인이 필요합니다." : "윗꼬리 부담이 크지 않은 편입니다."}</div>
+        <div class="clue-card"><b>⚠️ 20일선 이격(${pos20Pct >= 0 ? "+" : ""}${pos20Pct.toFixed(2)}%):</b> 20일 이동평균선 대비 <b>${pos20Pct >= 0 ? "+" : ""}${pos20Pct.toFixed(2)}%</b> 위치입니다. 이격이 과도하게 벌어진 구간에서는 되돌림 변동을 염두에 두세요.</div>
+        <div class="clue-card"><b>⚠️ 직전 봉 대비 변화(${last.close >= prev.close ? "상승" : "하락"}):</b> 직전 종가(${fmtPrice(prev.close)}) 대비 현재 종가(${fmtPrice(last.close)}) 흐름을 기준으로 지지선·손절선 이탈 여부를 함께 점검하세요.</div>
       `;
     }
 
@@ -1665,7 +1406,35 @@
       });
     }
 
-    window.loadStock = async (queryInput, shouldScroll = false, forceRange = null) => {
+    async function fetchMarketLive(noCache = false) {
+      try {
+        const res = await fetch(`${WORKER_ORIGIN}/api/market${noCache ? "?nocache=1" : ""}`);
+        const data = await res.json();
+        if (res.ok && data.ok) {
+          state.marketData = data;
+          renderMarketSection();
+        }
+      } catch (e) {
+        console.error("실시간 시황 로드 오류:", e);
+      }
+    }
+
+    async function fetchSectorsLive(noCache = false) {
+      try {
+        const res = await fetch(`${WORKER_ORIGIN}/api/sectors${noCache ? "?nocache=1" : ""}`);
+        const data = await res.json();
+        if (res.ok && data.ok) {
+          state.sectorData = data;
+          renderHorizonFlow();
+          renderAiRecs();
+          runCustomFilter();
+        }
+      } catch (e) {
+        console.error("실시간 섹터 로드 오류:", e);
+      }
+    }
+
+    window.loadStock = async (queryInput, shouldScroll = false, forceRange = null, noCache = false) => {
       const q = String(queryInput || "").trim() || state.symbol;
       if (forceRange) state.range = forceRange;
       syncRangeButtons();
@@ -1682,8 +1451,8 @@
       }
 
       try {
-        const reqUrl = `${WORKER_ENDPOINT}?symbol=${encodeURIComponent(q)}&range=${encodeURIComponent(state.range)}`;
-        const res = await fetch(reqUrl);
+        const qs = `symbol=${encodeURIComponent(q)}&range=${encodeURIComponent(state.range)}${noCache ? "&nocache=1" : ""}`;
+        const res = await fetch(`${WORKER_ORIGIN}/api/chart?${qs}`);
         const data = await res.json();
 
         if (!res.ok || !data.ok || !Array.isArray(data.candles) || data.candles.length < 2) {
@@ -1706,7 +1475,7 @@
         $("chartPrice").textContent = fmtPrice(last.close, state.currency);
         $("chartChg").textContent = todayInfo.text;
         $("chartChg").className = `badge ${todayInfo.pct >= 0 ? "mint" : "pink"}`;
-        $("chartSourceBadge").textContent = `실데이터 (${state.currency})`;
+        $("chartSourceBadge").textContent = `실시간 (${state.currency})`;
 
         $("spAddPrice").value = state.currency === "KRW" ? Math.round(last.close) : last.close.toFixed(2);
 
@@ -1714,28 +1483,20 @@
         drawSubChart();
         renderStockIssue();
         renderInd10();
+        renderDynamicSupplyClues();
         renderSplitCalc();
       } catch (err) {
         $("chartPrice").textContent = "조회 실패";
         $("chartChg").textContent = "오류";
         $("chartChg").className = "badge pink";
         $("chartErrorAlert").style.display = "block";
-        $("chartErrorAlert").innerHTML = `⚠️ <strong>실제 시세 조회 실패:</strong> ${err.message} — Cloudflare Worker(<code>${WORKER_ENDPOINT}</code>) 배포 상태를 확인해 주세요.`;
+        $("chartErrorAlert").innerHTML = `⚠️ <strong>실시간 시세 조회 실패:</strong> ${err.message} — Cloudflare Worker(<code>${WORKER_ORIGIN}</code>)가 최신 코드로 Deploy되었는지 확인해 주세요.`;
       }
     };
 
     function initDashboard() {
-      try {
-        updateClock();
-        renderMarketSection();
-        renderHorizonFlow();
-        renderAiRecs();
-        applyPreset("1");
-        renderSupplyClues();
-        renderSplitCalc();
-      } catch (e) {
-        console.error("초기 섹션 렌더링 오류:", e);
-      }
+      applyPreset("1");
+      renderSplitCalc();
 
       $("searchBtn").addEventListener("click", () => loadStock($("symbolInput").value, true));
       $("symbolInput").addEventListener("keydown", e => { if (e.key === "Enter") loadStock($("symbolInput").value, true); });
@@ -1752,17 +1513,25 @@
         runCustomFilter();
       });
 
-      $("refreshLiveBtn").addEventListener("click", () => {
-        updateClock();
-        renderMarketSection();
-        loadStock(state.symbol, false, state.range);
+      $("refreshLiveBtn").addEventListener("click", async () => {
+        await Promise.all([
+          fetchMarketLive(true),
+          fetchSectorsLive(true),
+          loadStock(state.symbol, false, state.range, true)
+        ]);
       });
 
       $("marketScopeGroup").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
         $("marketScopeGroup").querySelectorAll("button").forEach(x => x.classList.remove("active"));
         b.classList.add("active");
-        state.mscope = b.dataset.mscope;
+        if (b.dataset.mscope === "WEEK") {
+          state.includeUS = true;
+          $("usToggleBtn").textContent = "🇺🇸 미국장: ON";
+          $("usToggleBtn").className = "us-on";
+        }
         renderMarketSection();
+        renderAiRecs();
+        runCustomFilter();
       }));
 
       $("horizonGroup").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
@@ -1858,7 +1627,9 @@
 
       window.addEventListener("resize", () => { drawMainChart(); drawSubChart(); });
 
-      loadStock("메지온", false, "1M");
+      fetchMarketLive(false);
+      fetchSectorsLive(false);
+      loadStock("메지온", false, "1M", false);
     }
 
     if (document.readyState === "loading") {
