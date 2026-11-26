@@ -595,7 +595,7 @@
       </div>
 
       <div class="controls">
-        <input type="text" id="symbolInput" value="삼성전자" placeholder="종목명/코드/티커 (메지온, 저스템, NVDA)" />
+        <input type="text" id="symbolInput" value="메지온" placeholder="종목명/코드/티커 (메지온, 저스템, NVDA)" />
         <button class="primary" id="searchBtn">🔍 종목 분석 (차트로 이동)</button>
         <button id="usToggleBtn" class="us-off">🇺🇸 미국장: OFF</button>
         <button id="refreshLiveBtn">🔄 실시간 시황 갱신</button>
@@ -628,7 +628,7 @@
       <!-- 1. 시황 -->
       <section class="card" id="sec-market">
         <div class="card-head">
-          <h2 class="card-title">🌍 1. 세계·이번 주 시황, 주요 변동 일정 & 섹터별 뉴스 <span class="badge mint" id="liveStatusBadge">실시간 시황 연동</span></h2>
+          <h2 class="card-title">🌍 1. 세계·이번 주 시황, 주요 변동 일정 & 섹터별 뉴스 <span class="badge mint">시황 브리핑</span></h2>
           <div class="seg" id="marketScopeGroup">
             <button data-mscope="TODAY" class="active">오늘 시황</button>
             <button data-mscope="WEEK">이번 주 세계시황</button>
@@ -642,11 +642,11 @@
           <div class="analogy-box" id="analogyOpinionBox"></div>
         </div>
 
-        <div class="event-alert-box" id="eventAlertBox">
+        <div class="event-alert-box">
           📅 <strong>이번 주·이번 달 주의할 날짜 & 변동성 이유:</strong><br/>
           • <u>11월 26일(목)</u>: <strong>美 추수감사절 정규장 휴장</strong> — 해외 증시 방향성 부재 속 국내 수급만으로 반등 폭이 제한될 수 있습니다.<br/>
           • <u>11월 27일(금·미 동부시간 13시 / 한국 28일 03시)</u>: <strong>美 조기 폐장(블랙프라이데이)</strong> — 연말 소비 시즌 초반 분위기 확인 및 저거래량 변동성 주의일입니다.<br/>
-          • <u>11월 말~12월 초(FOMC·고용·물가 후속 소화 구간)</u>: <strong>한은 기준금리 인상(3.25%) 및 美 주요 지표·연준 금리 경로 소화</strong> 구간으로 환율·금리 민감 대형주의 출렁임에 유의해야 합니다.
+          • <u>11월 말~12월 초</u>: <strong>한은 기준금리 인상(3.25%) 및 美 주요 지표·연준 금리 경로 소화</strong> 구간으로 환율·금리 민감 대형주의 출렁임에 유의해야 합니다.
         </div>
 
         <div class="sector-news-tabs" id="sectorNewsTabs"></div>
@@ -706,7 +706,7 @@
       <section class="card" id="sec-chart">
         <div class="chart-quick-search">
           <strong style="font-size:0.8rem; color:#1e3a8a;">⚡ 차트 바로 검색:</strong>
-          <input type="text" id="chartInlineInput" value="삼성전자" placeholder="메지온, 저스템, 140410, NVDA" style="min-width:210px;" />
+          <input type="text" id="chartInlineInput" value="메지온" placeholder="메지온, 저스템, 140410, NVDA" style="min-width:210px;" />
           <button class="primary" id="chartInlineSearchBtn">조회</button>
           <button type="button" style="font-size:0.75rem; padding:5px 9px;" onclick="loadStock('메지온', true)">메지온</button>
           <button type="button" style="font-size:0.75rem; padding:5px 9px;" onclick="loadStock('저스템', true)">저스템</button>
@@ -716,14 +716,14 @@
 
         <div class="card-head">
           <div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px;">
-            <h2 class="card-title" id="chartStockTitle">삼성전자 (005930)</h2>
+            <h2 class="card-title" id="chartStockTitle">메지온 (140410)</h2>
             <span style="font-size:1.25rem; font-weight:900;" id="chartPrice">조회 중...</span>
             <span class="badge neutral" id="chartChg">대기 중</span>
             <span class="badge mint" id="chartSourceBadge">Cloudflare 실데이터</span>
           </div>
           <div class="seg" id="candleRangeGroup">
-            <button data-cr="1D" class="active">1일(15봉)</button>
-            <button data-cr="1M">1달</button>
+            <button data-cr="1D">1일(15봉)</button>
+            <button data-cr="1M" class="active">1달</button>
             <button data-cr="3M">3달</button>
             <button data-cr="6M">6달</button>
             <button data-cr="1Y">1년</button>
@@ -1058,10 +1058,10 @@
       activeStep: 0,
       includeUS: false,
       preset: "1",
-      symbol: "005930",
-      stockName: "삼성전자",
+      symbol: "140410",
+      stockName: "메지온",
       currency: "KRW",
-      range: "1D",
+      range: "1M",
       maChecked: { 5: true, 20: false, 45: false, 60: false, 120: false, 240: false },
       feats: {
         buyLine: true,
@@ -1269,8 +1269,8 @@
       const canvas = $("mainChartCanvas");
       const rect = box.getBoundingClientRect();
       const dpr = window.devicePixelRatio || 1;
-      const W = Math.max(300, rect.width);
-      const H = Math.max(280, rect.height);
+      const W = Math.max(300, rect.width || 800);
+      const H = Math.max(280, rect.height || 440);
       canvas.width = Math.round(W * dpr);
       canvas.height = Math.round(H * dpr);
 
@@ -1465,8 +1465,8 @@
       const canvas = $("subChartCanvas");
       const rect = box.getBoundingClientRect();
       const dpr = window.devicePixelRatio || 1;
-      const W = Math.max(300, rect.width);
-      const H = Math.max(120, rect.height);
+      const W = Math.max(300, rect.width || 800);
+      const H = Math.max(120, rect.height || 150);
       canvas.width = Math.round(W * dpr);
       canvas.height = Math.round(H * dpr);
 
@@ -1720,138 +1720,152 @@
         $("chartChg").textContent = "오류";
         $("chartChg").className = "badge pink";
         $("chartErrorAlert").style.display = "block";
-        $("chartErrorAlert").innerHTML = `⚠️ <strong>실제 시세 조회 실패:</strong> ${err.message} — Cloudflare Worker(<code>${WORKER_ENDPOINT}</code>) 배포 상태나 종목명/코드를 확인해 주세요.`;
+        $("chartErrorAlert").innerHTML = `⚠️ <strong>실제 시세 조회 실패:</strong> ${err.message} — Cloudflare Worker(<code>${WORKER_ENDPOINT}</code>) 배포 상태를 확인해 주세요.`;
       }
     };
 
-    $("searchBtn").addEventListener("click", () => loadStock($("symbolInput").value, true));
-    $("symbolInput").addEventListener("keydown", e => { if (e.key === "Enter") loadStock($("symbolInput").value, true); });
-
-    $("chartInlineSearchBtn").addEventListener("click", () => loadStock($("chartInlineInput").value, false));
-    $("chartInlineInput").addEventListener("keydown", e => { if (e.key === "Enter") loadStock($("chartInlineInput").value, false); });
-
-    $("usToggleBtn").addEventListener("click", () => {
-      state.includeUS = !state.includeUS;
-      $("usToggleBtn").textContent = state.includeUS ? "🇺🇸 미국장: ON" : "🇺🇸 미국장: OFF";
-      $("usToggleBtn").className = state.includeUS ? "us-on" : "us-off";
-      renderMarketSection();
-      renderAiRecs();
-      runCustomFilter();
-    });
-
-    $("refreshLiveBtn").addEventListener("click", () => {
-      updateClock();
-      renderMarketSection();
-      loadStock(state.symbol, false, state.range);
-    });
-
-    $("marketScopeGroup").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
-      $("marketScopeGroup").querySelectorAll("button").forEach(x => x.classList.remove("active"));
-      b.classList.add("active");
-      state.mscope = b.dataset.mscope;
-      renderMarketSection();
-    }));
-
-    $("horizonGroup").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
-      $("horizonGroup").querySelectorAll("button").forEach(x => x.classList.remove("active"));
-      b.classList.add("active");
-      state.horizon = b.dataset.hz;
-      state.activeStep = 0;
-      renderHorizonFlow();
-    }));
-
-    document.querySelectorAll(".preset-btn").forEach(b => b.addEventListener("click", () => applyPreset(b.dataset.preset)));
-    $("applyCustomFilterBtn").addEventListener("click", runCustomFilter);
-
-    $("candleRangeGroup").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
-      loadStock(state.symbol, false, b.dataset.cr);
-    }));
-
-    $("maTogglePanel").querySelectorAll("input[type='checkbox']").forEach(cb => cb.addEventListener("change", () => {
-      state.maChecked[Number(cb.dataset.ma)] = cb.checked;
-      drawMainChart();
-    }));
-
-    $("chartFeatureToggles").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
-      const f = b.dataset.feat;
-      state.feats[f] = !state.feats[f];
-      b.classList.toggle("on", state.feats[f]);
-      drawMainChart();
-    }));
-
-    $("mainChartCanvas").addEventListener("wheel", e => {
-      e.preventDefault();
-      const total = state.series.length;
-      if (total < 6) return;
-      const win = (state.viewEnd ?? total) - state.viewStart;
-      const next = Math.max(6, Math.min(total, Math.round(win * (e.deltaY < 0 ? 0.8 : 1.25))));
-      const mid = Math.round((state.viewStart + (state.viewEnd ?? total)) / 2);
-      let ns = Math.max(0, mid - Math.floor(next / 2));
-      let ne = Math.min(total, ns + next);
-      if (ne === total) ns = Math.max(0, total - next);
-      state.viewStart = ns; state.viewEnd = ne;
-      drawMainChart(); drawSubChart();
-    }, { passive: false });
-
-    $("mainChartCanvas").addEventListener("mousedown", e => {
-      state.isDragging = true;
-      state.dragX = e.clientX - $("mainChartCanvas").getBoundingClientRect().left;
-      state.dragView = state.viewStart;
-    });
-    window.addEventListener("mouseup", () => { state.isDragging = false; });
-
-    $("mainChartCanvas").addEventListener("mousemove", e => {
-      const meta = $("mainChartCanvas")._meta;
-      if (!meta || !meta.slice.length) return;
-      const rect = $("mainChartCanvas").getBoundingClientRect();
-      const mx = e.clientX - rect.left;
-      if (state.isDragging) {
-        const total = state.series.length;
-        const win = (state.viewEnd ?? total) - state.viewStart;
-        const shift = -Math.round(((mx - state.dragX) / Math.max(1, meta.pW)) * win);
-        const ns = Math.max(0, Math.min(total - win, state.dragView + shift));
-        state.viewStart = ns; state.viewEnd = ns + win;
-        drawMainChart(); drawSubChart();
-        return;
-      }
-      if (mx < meta.padL || mx > meta.padL + meta.pW) { $("tooltip").style.display = "none"; return; }
-      const idx = Math.max(0, Math.min(meta.slice.length - 1, Math.round(((mx - meta.padL) / meta.pW) * (meta.slice.length - 1))));
-      const d = meta.slice[idx];
-      const prevD = idx > 0 ? meta.slice[idx - 1].close : d.open;
-      const dayPct = prevD ? ((d.close - prevD) / prevD) * 100 : 0;
-      $("chartHoverReadout").textContent = `${d.date} · 종가 ${fmtPrice(d.close)} (${dayPct >= 0 ? "+" : ""}${dayPct.toFixed(2)}%) · RSI ${(d.rsi ?? 50).toFixed(1)}`;
-      const tt = $("tooltip");
-      tt.style.display = "block";
-      tt.style.left = `${Math.min(window.innerWidth - 220, e.clientX + 12)}px`;
-      tt.style.top = `${Math.max(10, e.clientY - 10)}px`;
-      tt.innerHTML = `<b>${d.date}</b> (${dayPct >= 0 ? "+" : ""}${dayPct.toFixed(2)}%)<br/>시가 ${fmtPrice(d.open)} / 종가 <b>${fmtPrice(d.close)}</b><br/>고가 ${fmtPrice(d.high)} / 저가 ${fmtPrice(d.low)}`;
-    });
-
-    $("mainChartCanvas").addEventListener("mouseleave", () => { $("tooltip").style.display = "none"; });
-
-    ["spAvg", "spQty", "spAddPrice", "spAddQty"].forEach(id => $(id).addEventListener("input", renderSplitCalc));
-    $("syncSplitBtn").addEventListener("click", () => {
-      if (state.series.length) {
-        const c = state.series[state.series.length - 1].close;
-        $("spAddPrice").value = state.currency === "KRW" ? Math.round(c) : c.toFixed(2);
+    function initDashboard() {
+      try {
+        updateClock();
+        renderMarketSection();
+        renderHorizonFlow();
+        renderAiRecs();
+        applyPreset("1");
+        renderSupplyClues();
         renderSplitCalc();
+      } catch (e) {
+        console.error("초기 섹션 렌더링 오류:", e);
       }
-    });
 
-    document.querySelectorAll(".toc-link").forEach(a => a.addEventListener("click", () => {
-      document.querySelectorAll(".toc-link").forEach(x => x.classList.remove("active"));
-      a.classList.add("active");
-    }));
+      $("searchBtn").addEventListener("click", () => loadStock($("symbolInput").value, true));
+      $("symbolInput").addEventListener("keydown", e => { if (e.key === "Enter") loadStock($("symbolInput").value, true); });
 
-    window.addEventListener("resize", () => { drawMainChart(); drawSubChart(); });
+      $("chartInlineSearchBtn").addEventListener("click", () => loadStock($("chartInlineInput").value, false));
+      $("chartInlineInput").addEventListener("keydown", e => { if (e.key === "Enter") loadStock($("chartInlineInput").value, false); });
 
-    updateClock();
-    renderMarketSection();
-    renderHorizonFlow();
-    renderAiRecs();
-    applyPreset("1");
-    renderSupplyClues();
-    loadStock("메지온", false, "1M");
+      $("usToggleBtn").addEventListener("click", () => {
+        state.includeUS = !state.includeUS;
+        $("usToggleBtn").textContent = state.includeUS ? "🇺🇸 미국장: ON" : "🇺🇸 미국장: OFF";
+        $("usToggleBtn").className = state.includeUS ? "us-on" : "us-off";
+        renderMarketSection();
+        renderAiRecs();
+        runCustomFilter();
+      });
+
+      $("refreshLiveBtn").addEventListener("click", () => {
+        updateClock();
+        renderMarketSection();
+        loadStock(state.symbol, false, state.range);
+      });
+
+      $("marketScopeGroup").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
+        $("marketScopeGroup").querySelectorAll("button").forEach(x => x.classList.remove("active"));
+        b.classList.add("active");
+        state.mscope = b.dataset.mscope;
+        renderMarketSection();
+      }));
+
+      $("horizonGroup").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
+        $("horizonGroup").querySelectorAll("button").forEach(x => x.classList.remove("active"));
+        b.classList.add("active");
+        state.horizon = b.dataset.hz;
+        state.activeStep = 0;
+        renderHorizonFlow();
+      }));
+
+      document.querySelectorAll(".preset-btn").forEach(b => b.addEventListener("click", () => applyPreset(b.dataset.preset)));
+      $("applyCustomFilterBtn").addEventListener("click", runCustomFilter);
+
+      $("candleRangeGroup").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
+        loadStock(state.symbol, false, b.dataset.cr);
+      }));
+
+      $("maTogglePanel").querySelectorAll("input[type='checkbox']").forEach(cb => cb.addEventListener("change", () => {
+        state.maChecked[Number(cb.dataset.ma)] = cb.checked;
+        drawMainChart();
+      }));
+
+      $("chartFeatureToggles").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
+        const f = b.dataset.feat;
+        state.feats[f] = !state.feats[f];
+        b.classList.toggle("on", state.feats[f]);
+        drawMainChart();
+      }));
+
+      $("mainChartCanvas").addEventListener("wheel", e => {
+        e.preventDefault();
+        const total = state.series.length;
+        if (total < 6) return;
+        const win = (state.viewEnd ?? total) - state.viewStart;
+        const next = Math.max(6, Math.min(total, Math.round(win * (e.deltaY < 0 ? 0.8 : 1.25))));
+        const mid = Math.round((state.viewStart + (state.viewEnd ?? total)) / 2);
+        let ns = Math.max(0, mid - Math.floor(next / 2));
+        let ne = Math.min(total, ns + next);
+        if (ne === total) ns = Math.max(0, total - next);
+        state.viewStart = ns; state.viewEnd = ne;
+        drawMainChart(); drawSubChart();
+      }, { passive: false });
+
+      $("mainChartCanvas").addEventListener("mousedown", e => {
+        state.isDragging = true;
+        state.dragX = e.clientX - $("mainChartCanvas").getBoundingClientRect().left;
+        state.dragView = state.viewStart;
+      });
+      window.addEventListener("mouseup", () => { state.isDragging = false; });
+
+      $("mainChartCanvas").addEventListener("mousemove", e => {
+        const meta = $("mainChartCanvas")._meta;
+        if (!meta || !meta.slice.length) return;
+        const rect = $("mainChartCanvas").getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        if (state.isDragging) {
+          const total = state.series.length;
+          const win = (state.viewEnd ?? total) - state.viewStart;
+          const shift = -Math.round(((mx - state.dragX) / Math.max(1, meta.pW)) * win);
+          const ns = Math.max(0, Math.min(total - win, state.dragView + shift));
+          state.viewStart = ns; state.viewEnd = ns + win;
+          drawMainChart(); drawSubChart();
+          return;
+        }
+        if (mx < meta.padL || mx > meta.padL + meta.pW) { $("tooltip").style.display = "none"; return; }
+        const idx = Math.max(0, Math.min(meta.slice.length - 1, Math.round(((mx - meta.padL) / meta.pW) * (meta.slice.length - 1))));
+        const d = meta.slice[idx];
+        const prevD = idx > 0 ? meta.slice[idx - 1].close : d.open;
+        const dayPct = prevD ? ((d.close - prevD) / prevD) * 100 : 0;
+        $("chartHoverReadout").textContent = `${d.date} · 종가 ${fmtPrice(d.close)} (${dayPct >= 0 ? "+" : ""}${dayPct.toFixed(2)}%) · RSI ${(d.rsi ?? 50).toFixed(1)}`;
+        const tt = $("tooltip");
+        tt.style.display = "block";
+        tt.style.left = `${Math.min(window.innerWidth - 220, e.clientX + 12)}px`;
+        tt.style.top = `${Math.max(10, e.clientY - 10)}px`;
+        tt.innerHTML = `<b>${d.date}</b> (${dayPct >= 0 ? "+" : ""}${dayPct.toFixed(2)}%)<br/>시가 ${fmtPrice(d.open)} / 종가 <b>${fmtPrice(d.close)}</b><br/>고가 ${fmtPrice(d.high)} / 저가 ${fmtPrice(d.low)}`;
+      });
+
+      $("mainChartCanvas").addEventListener("mouseleave", () => { $("tooltip").style.display = "none"; });
+
+      ["spAvg", "spQty", "spAddPrice", "spAddQty"].forEach(id => $(id).addEventListener("input", renderSplitCalc));
+      $("syncSplitBtn").addEventListener("click", () => {
+        if (state.series.length) {
+          const c = state.series[state.series.length - 1].close;
+          $("spAddPrice").value = state.currency === "KRW" ? Math.round(c) : c.toFixed(2);
+          renderSplitCalc();
+        }
+      });
+
+      document.querySelectorAll(".toc-link").forEach(a => a.addEventListener("click", () => {
+        document.querySelectorAll(".toc-link").forEach(x => x.classList.remove("active"));
+        a.classList.add("active");
+      }));
+
+      window.addEventListener("resize", () => { drawMainChart(); drawSubChart(); });
+
+      loadStock("메지온", false, "1M");
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initDashboard);
+    } else {
+      initDashboard();
+    }
   </script>
 </body>
 </html>
