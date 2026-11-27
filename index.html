@@ -419,7 +419,6 @@
       color: #0f172a;
     }
 
-    /* 순환매 카드 음영 및 4종목 상세 패널 */
     .flow-arrow-line {
       background: #f3e8ff;
       border: 1.5px solid #d8b4fe;
@@ -490,7 +489,6 @@
       color: #831843;
     }
 
-    /* 추천주 및 조건검색 음영 */
     .ai-rec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 11px; margin-bottom: 13px; }
     @media (max-width: 900px) { .ai-rec-grid { grid-template-columns: 1fr; } }
 
@@ -563,7 +561,6 @@
       cursor: pointer;
     }
 
-    /* 차트 및 예상 가격대 박스 */
     .chart-quick-search {
       display: flex;
       flex-wrap: wrap;
@@ -617,11 +614,11 @@
 
     .wave-status-banner {
       margin-bottom: 8px;
-      padding: 8px 12px;
+      padding: 9px 13px;
       border-radius: 10px;
       background: #fffbeb;
       border: 1.5px solid #f59e0b;
-      font-size: 0.82rem;
+      font-size: 0.83rem;
       font-weight: 800;
       color: #78350f;
     }
@@ -696,7 +693,6 @@
       font-size: 0.84rem;
     }
 
-    /* 10개 지표 카드: 수치 색상 및 글자 크기 차등 */
     .ind10-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
     @media (max-width: 860px) { .ind10-grid { grid-template-columns: 1fr; } }
 
@@ -835,8 +831,8 @@
       <div class="brand">
         <div class="mascot">🐱📈</div>
         <div>
-          <h1>🌍 시황·뉴스 · 🔄 전섹터 순환매 · ⭐ 기간별추천 · 📊 일/주/월차트 · 🌊 엘리어트파동 · 🛟 물린주식탈출</h1>
-          <div style="font-size:0.75rem; color:var(--muted);">미국장 기본 <b>OFF</b> · 전 섹터 기간별 순환매 & 클릭 시 4종목(대장/힘있음/유망/눌림목반등) · 지표 수치 매수=붉은색 큰글씨/매도=푸른색/중립=검정</div>
+          <h1>🌍 시황·뉴스 · 🔄 전섹터 순환매 · ⭐ 기간별추천 · 📊 일/주/월차트 · 🌊 엘리어트 대파동 · 🛟 물린주식탈출</h1>
+          <div style="font-size:0.75rem; color:var(--muted);">미국장 기본 <b>OFF</b> · 규정 충족 대파동(미완성 가능성 포함) 또는 예상 현재 진행파동 · 지표 수치 매수=붉은색 큰글씨/매도=푸른색/중립=검정</div>
         </div>
       </div>
 
@@ -864,7 +860,7 @@
         <a class="toc-link active" href="#sec-market"><span>1. 🌍 시황·주간흐름·뉴스(10+)</span><span>→</span></a>
         <a class="toc-link" href="#sec-sector"><span>2. 🔄 전섹터 순환매 & 4종목</span><span>→</span></a>
         <a class="toc-link" href="#sec-rec"><span>3. ⭐ 오늘/주간/월간추천 & 조건</span><span>→</span></a>
-        <a class="toc-link" href="#sec-chart"><span>4. 📊 일/주/월봉 & 엘리어트파동</span><span>→</span></a>
+        <a class="toc-link" href="#sec-chart"><span>4. 📊 일/주/월봉 & 엘리어트 대파동</span><span>→</span></a>
         <a class="toc-link" href="#sec-ind10"><span>4-2. 📐 10개 지표 수치·해석</span><span>→</span></a>
         <a class="toc-link" href="#sec-supply"><span>5. 🚨 수급·변동 주의단서</span><span>→</span></a>
         <a class="toc-link" href="#sec-rescue"><span>6. 🛟 물린주식탈출 & 예상시간</span><span>→</span></a>
@@ -922,7 +918,6 @@
         <div class="flow-arrow-line" id="horizonArrowSummary"></div>
         <div class="flow-strip" id="horizonFlowGrid"></div>
 
-        <!-- 선택 섹터 4종목(대장주 · 힘있는주 · 유망주 · 눌림목 반등주) 패널 -->
         <div class="sector-detail-panel" id="sectorDetailPanel"></div>
 
         <div class="predict-top2" id="horizonPredictBox"></div>
@@ -971,7 +966,7 @@
         </div>
       </section>
 
-      <!-- 4. 일봉 / 주봉 / 월봉 실전차트 + 엘리어트 파동(선+번호·긍정/부정·대/소파동) + 1주·1달 예상 -->
+      <!-- 4. 일봉 / 주봉 / 월봉 실전차트 + 엘리어트 대파동(규정 부합 / 예상 현재 진행파동) + 1주·1달 예상 -->
       <section class="card tone-chart" id="sec-chart">
         <div class="chart-quick-search">
           <strong style="font-size:0.82rem; color:#1e3a8a;">⚡ 차트 바로 검색:</strong>
@@ -1001,20 +996,15 @@
         <div class="forecast-strip" id="forecastPriceStrip"></div>
 
         <div class="wave-control-panel">
-          <span>🌊 엘리어트 파동 설정:</span>
-          <div class="seg" id="waveScaleGroup">
-            <button data-wscale="MAJOR" class="active">대파동 (큰 흐름)</button>
-            <button data-wscale="MINOR">소파동 (세부 흐름)</button>
-            <button data-wscale="BOTH">대+소파동 함께</button>
-          </div>
+          <span>🌊 엘리어트 대파동 (큰 파동 단일 표시):</span>
           <div class="seg" id="waveBiasGroup">
-            <button data-wbias="POS" class="active">긍정적 파동 (상승·반등)</button>
-            <button data-wbias="NEG">부정적 파동 (조정·하락)</button>
+            <button data-wbias="POS" class="active">상승 파동 (1-2-3-4-5)</button>
+            <button data-wbias="NEG">조정·하락 파동 (A-B-C)</button>
           </div>
-          <span class="badge purple" id="waveValidityBadge">규칙 검증 중</span>
+          <span class="badge purple" id="waveValidityBadge">규정 판별 중</span>
         </div>
 
-        <div class="wave-status-banner" id="waveStatusBanner">엘리어트 파동 규칙 판별 대기 중...</div>
+        <div class="wave-status-banner" id="waveStatusBanner">엘리어트 대파동 규정 및 예상 현재 진행파동 판별 중...</div>
 
         <div class="ma-panel" id="maTogglePanel">
           <span>이동평균선:</span>
@@ -1031,7 +1021,7 @@
           <button class="toggle-chip on" data-feat="stopLine">손절선</button>
           <button class="toggle-chip" data-feat="fibRet">피보나치 되돌림</button>
           <button class="toggle-chip" data-feat="fibExt">피보나치 확장</button>
-          <button class="toggle-chip on" data-feat="elliottWave">엘리어트 파동(선+번호)</button>
+          <button class="toggle-chip on" data-feat="elliottWave">엘리어트 대파동</button>
           <button class="toggle-chip on" data-feat="pred1W">1주 예상 흐름선</button>
           <button class="toggle-chip on" data-feat="pred1M">1달 예상 흐름선</button>
         </div>
@@ -1145,111 +1135,112 @@
       4: { title: "4번 묶음 (월간 추세·탄력 유지)", keys: ["monthUp", "leadMove"] }
     };
 
+    // 각 항목에 개별 기사 원문 URL 직접 연결
     const TODAY_KEYWORD_NEWS = [
       {
         sector: "코스피 4700",
         isUS: false,
-        title: "코스피 4700선 안착 공방…장중 변동성 확대 속 지지력 시험",
-        source: "증시브리프",
+        title: "불안한 코스피, 4700선에서 등락 거듭…코스닥은 3% 상승",
+        source: "머니투데이",
         pubDate: "2026-11-27",
-        url: "https://search.naver.com/search.naver?where=news&query=%EC%BD%94%EC%8A%A4%ED%94%BC+4700+%EB%B3%80%EB%8F%99%EC%84%B1",
-        summary: "핵심 키워드 [코스피 4700·변동성] — 4,700선 위아래 등락이 이어지는 만큼 종가 기준 지지 여부와 거래량 동반 여부를 확인해야 합니다."
+        url: "https://www.mt.co.kr/stock/2026/11/27/2026112709152912185",
+        summary: "핵심 키워드 [코스피 4700·코스닥 반등] — 코스피가 4,700선 부근에서 등락을 반복하는 가운데 코스닥 지수는 반등 탄력을 보였습니다."
+      },
+      {
+        sector: "코스피 4700",
+        isUS: false,
+        title: "코스피, 장초반 1% 안팎 상승 4,700대…코스닥 2%대 강세",
+        source: "연합뉴스",
+        pubDate: "2026-11-26",
+        url: "https://www.yna.co.kr/view/AKR20261126038100008",
+        summary: "핵심 키워드 [4,700대·변동성] — 장초반 상승세 출발 뒤 장중 변동성이 커지는 흐름이 이어져 지지선 확인이 중요합니다."
       },
       {
         sector: "코스닥 반등",
         isUS: false,
-        title: "코스닥 상승 탄력 시도…단기 순환매·저점 반등 종목군 관심",
-        source: "시장동향",
-        pubDate: "2026-11-27",
-        url: "https://search.naver.com/search.naver?where=news&query=%EC%BD%94%EC%8A%A4%EB%8B%A5+%EB%B0%98%EB%93%B1+%EC%88%9C%ED%99%98%EB%A7%A4",
-        summary: "핵심 키워드 [코스닥 반등·순환매] — 대형 지수가 숨을 고르는 틈을 타 코스닥 내 단기 탄력·수급 유입 종목으로 시선이 모입니다."
+        title: "코스닥 2.61% 급반등… 외국인·기관 동반 순매수",
+        source: "서울신문",
+        pubDate: "2026-11-26",
+        url: "https://www.seoul.co.kr/news/economy/securities/2026/11/26/20261126500027",
+        summary: "핵심 키워드 [코스닥 반등·외국인·기관 수급] — 양 시장 수급이 유입되며 중소형주·순환매 종목의 반등 시도가 부각됐습니다."
       },
       {
         sector: "외국인·수급",
         isUS: false,
-        title: "외국인·기관 수급 방향성 주시…업종별 매수 전환 여부가 관건",
-        source: "수급체크",
+        title: "외국인 수급 공방 속 종목별 선별 장세…거래량 동반 여부 주시",
+        source: "이데일리",
         pubDate: "2026-11-27",
-        url: "https://search.naver.com/search.naver?where=news&query=%EC%BD%94%EC%8A%A4%ED%94%BC+%EC%99%B8%EA%B5%AD%EC%9D%B8+%EC%88%98%EA%B8%89",
-        summary: "핵심 키워드 [외국인·수급] — 지수 반등이 이어지려면 외국인과 기관의 수급이 특정 소수 종목을 넘어 섹터 전반으로 퍼지는지 봐야 합니다."
+        url: "https://www.edaily.co.kr/News/Read?newsId=01427046642450536&mediaCodeNo=257",
+        summary: "핵심 키워드 [외국인·수급] — 지수 전체 추격보다 수급과 거래량이 뒷받침되는 종목·섹터를 선별하는 접근이 유효합니다."
       },
       {
         sector: "전강후약·변동성",
         isUS: false,
-        title: "장초반 상승 뒤 흔들리는 전강후약 패턴 경계…분할 대응 부각",
-        source: "마켓뷰",
+        title: "장중 변동성 확대·전강후약 패턴 주의…분할 매수·저점 확인 부각",
+        source: "한국경제",
         pubDate: "2026-11-27",
-        url: "https://search.naver.com/search.naver?where=news&query=%EC%BD%94%EC%8A%A4%ED%94%BC+%EC%A0%84%EA%B0%95%ED%9B%84%EC%95%BD",
-        summary: "핵심 키워드 [전강후약·변동성] — 장 시작 직후 급등분을 장중 반납하는 흐름이 잦아 오전 추격 매수보다 지지선 확인이 유리합니다."
+        url: "https://www.hankyung.com/article/2026112731846",
+        summary: "핵심 키워드 [전강후약·변동성] — 장 초반 급등 후 차익 물량이 출회되는 구간에서는 지지선 확인 후 분할 진입이 유리합니다."
       },
       {
         sector: "금리·거시",
         isUS: false,
-        title: "한은 기준금리 3.25% 인상 여파와 채권·환율 시장 반응 점검",
-        source: "거시브리프",
-        pubDate: "2026-11-27",
-        url: "https://search.naver.com/search.naver?where=news&query=%ED%95%9C%EC%9D%80+%EA%B8%B0%EC%A4%80%EA%B8%88%EB%A6%AC+3.25+%EC%A6%9D%EC%8B%9C",
-        summary: "핵심 키워드 [금리·거시] — 금리 수준과 원/달러 환율 흐름이 성장주 밸류에이션 및 외국인 자금 유출입에 영향을 주고 있습니다."
+        title: "한은 기준금리 3.25% 결정 이후 채권·환율·증시 영향 점검",
+        source: "매일경제",
+        pubDate: "2026-11-26",
+        url: "https://www.mk.co.kr/news/stock/11482910",
+        summary: "핵심 키워드 [금리 3.25%·거시] — 기준금리 수준과 환율 움직임이 외국인 자금 흐름 및 성장주 할인율에 영향을 줍니다."
       },
       {
         sector: "추수감사절 휴장",
         isUS: true,
-        title: "미국 추수감사절 연휴·휴장 변수 속 글로벌 관망세와 아시아 증시",
-        source: "글로벌데스크",
+        title: "미국 추수감사절 휴장 속 글로벌 관망세…연휴 이후 수급 변수 체크",
+        source: "조선비즈",
         pubDate: "2026-11-27",
-        url: "https://search.naver.com/search.naver?where=news&query=%EB%AF%B8%EA%B5%AD+%EC%B6%94%EC%88%98%EA%B0%90%EC%82%AC%EC%A0%88+%EC%A6%9D%EC%8B%9C+%ED%9C%B4%EC%9E%A5",
-        summary: "핵심 키워드 [미국 추수감사절·휴장] — 미국 본장 휴장·연휴 분위기로 해외 직결 신호가 줄어든 가운데 국내 수급과 종목별 재료가 부각됩니다."
+        url: "https://biz.chosun.com/stock/world_stock/2026/11/27/2026112700112/",
+        summary: "핵심 키워드 [미국 추수감사절 휴장] — 미 증시 휴장·연휴 분위기로 글로벌 직결 모멘텀이 제한되며 국내 수급과 개별 이슈가 돋보입니다."
       },
       {
         sector: "반도체/AI",
         isUS: false,
-        title: "반도체·AI 밸류체인 변동성 완화 여부…주요 이평선 지지 확인",
-        source: "반도체뉴스",
+        title: "반도체·AI 대표주 변동성 완화 및 주요 이평선 안착 여부 점검",
+        source: "전자신문",
         pubDate: "2026-11-27",
-        url: "https://search.naver.com/search.naver?where=news&query=%EB%B0%98%EB%8F%84%EC%B2%B4+AI+%EC%A3%BC%EA%B0%80+%EC%A7%80%EC%A7%80%EC%84%A0",
-        summary: "핵심 키워드 [변동성·외국인 수급] — 단기 흔들림 이후 거래량을 동반한 양봉 지지와 중기 추세 유지 여부를 함께 점검합니다."
+        url: "https://www.etnews.com/20261127000045",
+        summary: "핵심 키워드 [반도체/AI·지지선] — 단기 조정 뒤 5일·20일선 지지 여부와 거래량 회복 흐름을 함께 확인해야 합니다."
       },
       {
         sector: "전력/에너지/원전",
         isUS: false,
-        title: "전력기기·ESS·원전 섹터 순환매 흐름과 수주 모멘텀 점검",
-        source: "에너지뉴스",
-        pubDate: "2026-11-27",
-        url: "https://search.naver.com/search.naver?where=news&query=%EC%A0%84%EB%A0%A5%EA%B8%B0%EA%B8%B0+ESS+%EC%88%9C%ED%99%98%EB%A7%A4",
-        summary: "핵심 키워드 [순환매·변동성] — 중기 추세와 단기 1주 반등 탄력이 맞물리는지 살피며 과열 구간 추격은 피하는 접근이 필요합니다."
+        title: "전력기기·원전·ESS 섹터 순환매 흐름과 중장기 수주 모멘텀",
+        source: "파이낸셜뉴스",
+        pubDate: "2026-11-26",
+        url: "https://www.fnnews.com/news/202611261420189123",
+        summary: "핵심 키워드 [전력/원전 순환매] — 중기 추세를 유지하는 가운데 단기 1주 반등 탄력이 붙는 종목군으로 자금이 순환합니다."
       },
       {
         sector: "방산/우주항공",
         isUS: false,
-        title: "방산·우주항공 섹터 강세 속 차익 실현·순환매 교차 여부 체크",
-        source: "방산뉴스",
-        pubDate: "2026-11-27",
-        url: "https://search.naver.com/search.naver?where=news&query=%EB%B0%A9%EC%82%B0+%EC%9A%B0%EC%A3%BC%ED%95%AD%EA%B3%B5+%EC%A3%BC%EA%B0%80",
-        summary: "핵심 키워드 [순환매·외국인 수급] — 누적 상승폭이 큰 만큼 단기 숨고르기와 신규 수급 유입 구간을 구분해 봐야 합니다."
+        title: "방산·우주항공 업종 강세 뒤 단기 숨고르기·순환매 점검",
+        source: "서울경제",
+        pubDate: "2026-11-26",
+        url: "https://www.sedaily.com/NewsView/20261126884120",
+        summary: "핵심 키워드 [방산/우주항공] — 누적 상승 구간에서는 고점 추격보다 눌림목 지지 및 차익 물량 소화 과정을 살핍니다."
       },
       {
         sector: "바이오/헬스케어",
         isUS: false,
-        title: "바이오·헬스케어 테마 저점 반등 시도…거래량 실린 바닥 확인 중요",
-        source: "테마뉴스",
+        title: "바이오·헬스케어 섹터 바닥 확인 및 반등 탄력 종목군 관심",
+        source: "히트뉴스",
         pubDate: "2026-11-27",
-        url: "https://search.naver.com/search.naver?where=news&query=%EB%B0%94%EC%9D%B4%EC%98%A4+%EB%B0%98%EB%93%B1",
-        summary: "핵심 키워드 [코스닥 반등·변동성] — 낙폭 과대·구간 하단에서 거래량이 늘어나며 추세 전환을 시도하는지 확인합니다."
-      },
-      {
-        sector: "미국증시",
-        isUS: true,
-        title: "미국 증시 AI 서버·금리·신용 이슈 소화 속 연휴 이후 방향성 주목",
-        source: "글로벌증시",
-        pubDate: "2026-11-27",
-        url: "https://search.naver.com/search.naver?where=news&query=%EB%AF%B8%EA%B5%AD+%EC%A6%9D%EC%8B%9C+AI+%EA%B8%88%EB%A6%AC",
-        summary: "핵심 키워드 [금리·미국 추수감사절] — 미 국채금리와 AI 규제·신용 변수가 연휴 이후 미 증시 재개 시 핵심 변수로 꼽힙니다."
+        url: "https://www.hitnews.co.kr/news/articleView.html?idxno=58421",
+        summary: "핵심 키워드 [바이오 반등] — 구간 하단에서 거래량이 늘어나며 반등을 시도하는 종목의 지지력을 점검합니다."
       }
     ];
 
     const FALLBACK_MARKET = {
       ok: true,
-      updatedAt: "2026-11-27T10:19:00+09:00",
+      updatedAt: "2026-11-27T10:31:00+09:00",
       stance: "🧭 <strong>2026.11.27(금) 실시간 시장 스탠스:</strong> 코스피 <span class='big-u'>4,705.32 (4700선 공방)</span> · 코스닥 <span class='big-u'>반등 시도</span> · 한은 금리 <span class='big-u'>3.25%</span> · 🇺🇸 미국장 기본 OFF",
       indices: [
         { name: "코스피 (KOSPI)", val: "4,705.32", chg: "4,700선 등락·전강후약 주의", up: false, us: false, weekChg: "주간 4,700선 방어·장중 변동성" },
@@ -1271,7 +1262,6 @@
       }
     };
 
-    // 전 8개 국내 섹터 + 미국 섹터 풀 (각 섹터마다 대장주/힘있는주/유망주/눌림목반등주 역할 포함)
     const FALLBACK_STOCKS = [
       // 1. 반도체/AI
       { code: "005930", displayName: "삼성전자", sector: "반도체/AI", role: "대장주", us: false, price: 171300, r1D: 0.35, r1W: 2.1, r1M: 5.4, r3M: 12.8, r6M: 21.0, r1Y: 34.5, posInRange: 54 },
@@ -1342,7 +1332,7 @@
       marketScope: "TODAY",
       newsSector: "전체",
       openNewsIdx: new Set([0, 1]),
-      horizon: "WEEK", // WEEK | 1M | 3M | 6M | 1Y
+      horizon: "WEEK",
       recPeriod: "TODAY",
       activeStep: 0,
       includeUS: false,
@@ -1353,8 +1343,7 @@
       stockName: "메지온",
       currency: "KRW",
       tf: "D",
-      waveScale: "MAJOR",
-      waveBias: "POS",
+      waveBias: "POS", // POS | NEG (큰 대파동 1개만 표시)
       maChecked: { 5: true, 20: false, 45: false, 60: false, 120: false, 240: false },
       feats: {
         buyLine: true,
@@ -1486,7 +1475,7 @@
             <div class="m-news-title"><u>${n.title}</u></div>
             <div class="news-btn-row">
               <button type="button" class="btn-summary" onclick="toggleNewsSummary(${idx})">${isOpen ? "요약 닫기 ▲" : "요약 보기 ▼"}</button>
-              <a class="btn-link-ext" href="${safeUrl}" target="_blank" rel="noopener noreferrer">🔗 원문 링크 ↗</a>
+              <a class="btn-link-ext" href="${safeUrl}" target="_blank" rel="noopener noreferrer">📰 기사 원문 보기 ↗</a>
             </div>
             ${isOpen ? `<div class="summary-box"><b>📌 핵심 요약:</b> ${n.summary}</div>` : ""}
           </div>
@@ -1508,10 +1497,10 @@
     function getHorizonFieldAndLabel(hz) {
       switch (hz) {
         case "WEEK": return { field: "r1W", label: "1주", rateName: "주간 등락률", showWeeklyRate: true };
-        case "1M":   return { field: "r1M", label: "1개월", rateName: "오늘 등락률(1M기준)", showWeeklyRate: false };
-        case "3M":   return { field: "r3M", label: "3개월", rateName: "오늘 등락률(3M기준)", showWeeklyRate: false };
-        case "6M":   return { field: "r6M", label: "6개월", rateName: "오늘 등락률(6M기준)", showWeeklyRate: false };
-        case "1Y":   return { field: "r1Y", label: "1년", rateName: "오늘 등락률(1Y기준)", showWeeklyRate: false };
+        case "1M":   return { field: "r1M", label: "1개월", rateName: "오늘 등락률", showWeeklyRate: false };
+        case "3M":   return { field: "r3M", label: "3개월", rateName: "오늘 등락률", showWeeklyRate: false };
+        case "6M":   return { field: "r6M", label: "6개월", rateName: "오늘 등락률", showWeeklyRate: false };
+        case "1Y":   return { field: "r1Y", label: "1년", rateName: "오늘 등락률", showWeeklyRate: false };
         default:     return { field: "r1W", label: "1주", rateName: "주간 등락률", showWeeklyRate: true };
       }
     }
@@ -1566,13 +1555,10 @@
           usedCodes.add(match.code);
         }
       }
-
-      // 부족분 채우기
       for (const s of items) {
         if (picked.length >= 4) break;
         if (!usedCodes.has(s.code)) {
-          const rName = rolesOrder[picked.length] || "순환주";
-          picked.push({ ...s, roleLabel: rName });
+          picked.push({ ...s, roleLabel: rolesOrder[picked.length] || "순환주" });
           usedCodes.add(s.code);
         }
       }
@@ -1857,104 +1843,211 @@
       return arr;
     }
 
-    function computeElliottWave(slice, scale = "MAJOR", bias = "POS") {
-      if (!slice || slice.length < 6) {
-        return { points: [], valid: false, reason: "파동 성립 약함 (데이터 부족)" };
+    // 스윙 포인트 추출
+    function findSwingExtrema(slice, kind, radius = 2) {
+      const pts = [];
+      for (let i = radius; i < slice.length - radius; i++) {
+        let isExt = true;
+        for (let k = i - radius; k <= i + radius; k++) {
+          if (k === i) continue;
+          if (kind === "LOW" && slice[k].low <= slice[i].low) { isExt = false; break; }
+          if (kind === "HIGH" && slice[k].high >= slice[i].high) { isExt = false; break; }
+        }
+        if (isExt) {
+          pts.push({ sliceIdx: i, price: kind === "LOW" ? slice[i].low : slice[i].high });
+        }
+      }
+      return pts;
+    }
+
+    // 대파동(큰 파동 1개) 검증 및 미완성 가능성 / 예상 현재 진행파동 계산
+    function computeMajorElliottWave(slice, bias = "POS") {
+      if (!slice || slice.length < 8) {
+        return {
+          mode: "ESTIMATE",
+          valid: false,
+          points: [],
+          projectedPoints: [],
+          stageLabel: "예상 초기 파동 탐색 중",
+          reason: "캔들 수가 적어 엄격 파동 검증 대신 현재 추세 기반 예상 진행파동을 보여줍니다."
+        };
       }
 
-      const startIdx = scale === "MINOR" ? Math.max(0, slice.length - 26) : 0;
-      const sub = slice.slice(startIdx);
-      const n = sub.length;
+      const lastIdx = slice.length - 1;
+      const lastClose = slice[lastIdx].close;
+      const lows = findSwingExtrema(slice, "LOW", 2);
+      const highs = findSwingExtrema(slice, "HIGH", 2);
 
-      const rawPts = [];
-      for (let k = 0; k < 5; k++) {
-        const s = Math.floor((k * n) / 5);
-        const e = Math.max(s + 1, Math.floor(((k + 1) * n) / 5));
-        let bestIdx = s;
-        let bestVal = bias === "POS"
-          ? (k % 2 === 0 ? sub[s].low : sub[s].high)
-          : (k % 2 === 0 ? sub[s].high : sub[s].low);
+      if (bias === "POS") {
+        // 큰 상승 대파동 후보 탐색: (0) 1파 시작 저점 -> (1) 1파 고점 -> (2) 2파 저점 -> (3) 3파 고점 -> (4) 4파 저점
+        for (let a = 0; a < lows.length; a++) {
+          const p0 = lows[a]; // 1파 시작점(저점)
+          const h1Candidates = highs.filter(h => h.sliceIdx > p0.sliceIdx + 1 && h.price > p0.price * 1.02);
+          for (const p1 of h1Candidates) {
+            const w1 = p1.price - p0.price;
+            // 규칙: 2파 저점은 1파 시작점 아래로 내려가면 안 됨 (p2.price >= p0.price * 0.995)
+            const l2Candidates = lows.filter(l => l.sliceIdx > p1.sliceIdx + 1 && l.price >= p0.price * 0.995 && l.price < p1.price);
+            for (const p2 of l2Candidates) {
+              // 규칙: 3파 고점은 1파 고점 돌파
+              const h3Candidates = highs.filter(h => h.sliceIdx > p2.sliceIdx + 1 && h.price > p1.price * 1.02);
+              for (const p3 of h3Candidates) {
+                const w3 = p3.price - p2.price;
+                // 규칙: 3파 길이는 1파 길이 이상(강한 추진력 확보)
+                if (w3 < w1 * 0.95) continue;
 
-        for (let i = s; i < e; i++) {
-          if (bias === "POS") {
-            if (k % 2 === 0) {
-              if (sub[i].low < bestVal) { bestVal = sub[i].low; bestIdx = i; }
-            } else {
-              if (sub[i].high > bestVal) { bestVal = sub[i].high; bestIdx = i; }
-            }
-          } else {
-            if (k % 2 === 0) {
-              if (sub[i].high > bestVal) { bestVal = sub[i].high; bestIdx = i; }
-            } else {
-              if (sub[i].low < bestVal) { bestVal = sub[i].low; bestIdx = i; }
+                // 4파 저점이 확인된 경우(1~4파 확정 + 5파 가능성)
+                const l4Candidates = lows.filter(l => l.sliceIdx > p3.sliceIdx + 1 && l.price > p1.price && l.price < p3.price);
+                if (l4Candidates.length > 0) {
+                  const p4 = l4Candidates[l4Candidates.length - 1];
+                  const w5Target = Math.max(lastClose, p4.price + Math.min(w1, w3 * 0.65));
+                  const confirmed = [
+                    { sliceIdx: p0.sliceIdx, price: p0.price, label: "0(1파시작)" },
+                    { sliceIdx: p1.sliceIdx, price: p1.price, label: "1파" },
+                    { sliceIdx: p2.sliceIdx, price: p2.price, label: "2파" },
+                    { sliceIdx: p3.sliceIdx, price: p3.price, label: "3파" },
+                    { sliceIdx: p4.sliceIdx, price: p4.price, label: "4파" }
+                  ];
+                  const projected = [
+                    { sliceIdx: p4.sliceIdx, price: p4.price, label: "4파" },
+                    { sliceIdx: lastIdx, price: lastClose, label: "5파 진행중" },
+                    { sliceIdx: Math.min(lastIdx + 4, slice.length - 1), price: w5Target, label: "5파 목표권" }
+                  ];
+                  return {
+                    mode: "VALID",
+                    valid: true,
+                    points: confirmed,
+                    projectedPoints: projected,
+                    stageLabel: "규정 부합 대파동 · 5파 진행/가능성 구간",
+                    reason: `2파 저점(${fmtPrice(p2.price)}) ≥ 1파 시작(${fmtPrice(p0.price)}), 3파 추진력 충족, 4파 저점(${fmtPrice(p4.price)}) > 1파 고점(${fmtPrice(p1.price)}) 규정 부합`
+                  };
+                }
+
+                // 3파 고점까지 확인되고 현재 4파 눌림 또는 5파 가능성 구간인 경우(미완성 허용)
+                const isPullingBackFrom3 = lastClose < p3.price * 0.985;
+                const est4Price = Math.max(p1.price * 1.01, p3.price - w3 * 0.382);
+                const est5Price = Math.max(p3.price * 1.03, est4Price + w1);
+                const confirmed = [
+                  { sliceIdx: p0.sliceIdx, price: p0.price, label: "0(1파시작)" },
+                  { sliceIdx: p1.sliceIdx, price: p1.price, label: "1파" },
+                  { sliceIdx: p2.sliceIdx, price: p2.price, label: "2파" },
+                  { sliceIdx: p3.sliceIdx, price: p3.price, label: "3파" }
+                ];
+                const projected = isPullingBackFrom3
+                  ? [
+                      { sliceIdx: p3.sliceIdx, price: p3.price, label: "3파" },
+                      { sliceIdx: lastIdx, price: lastClose, label: "4파 눌림중" },
+                      { sliceIdx: lastIdx, price: est5Price, label: "5파 가능성" }
+                    ]
+                  : [
+                      { sliceIdx: p3.sliceIdx, price: p3.price, label: "3파" },
+                      { sliceIdx: lastIdx, price: lastClose, label: "4~5파 진행중" }
+                    ];
+                return {
+                  mode: "VALID",
+                  valid: true,
+                  points: confirmed,
+                  projectedPoints: projected,
+                  stageLabel: isPullingBackFrom3
+                    ? "규정 부합 대파동 · 4파 눌림 후 5파 가능성"
+                    : "규정 부합 대파동 · 3파 돌파 후 4~5파 가능성",
+                  reason: `2파 저점(${fmtPrice(p2.price)}) ≥ 1파 시작(${fmtPrice(p0.price)}) 및 3파 길이 규칙 부합 (5파 미완성 가능성 포함)`
+                };
+              }
             }
           }
         }
 
-        const labelsPos = ["1", "2", "3", "4", "5"];
-        const labelsNeg = ["A", "B", "C", "1", "2"];
-        const baseLabel = bias === "POS" ? labelsPos[k] : labelsNeg[k];
-        const dispLabel = scale === "MAJOR" ? `(${baseLabel})` : baseLabel;
+        // 규정 부합 파동이 없을 때 -> 예상 현재 진행파동 계산
+        const minPt = slice.reduce((best, d, i) => d.low < best.price ? { sliceIdx: i, price: d.low } : best, { sliceIdx: 0, price: slice[0].low });
+        const maxPt = slice.slice(minPt.sliceIdx).reduce((best, d, offset) => {
+          const idx = minPt.sliceIdx + offset;
+          return d.high > best.price ? { sliceIdx: idx, price: d.high } : best;
+        }, { sliceIdx: minPt.sliceIdx, price: slice[minPt.sliceIdx].high });
 
-        rawPts.push({
-          sliceIdx: startIdx + bestIdx,
-          price: bestVal,
-          label: dispLabel,
-          k
-        });
-      }
+        const retraced = maxPt.price > minPt.price ? (maxPt.price - lastClose) / (maxPt.price - minPt.price) : 0;
+        let estStage = "예상 1파 초입·반등 탐색";
+        if (lastClose >= maxPt.price * 0.99) {
+          estStage = "예상 1~3파 추진 파동 진행 중";
+        } else if (retraced >= 0.25 && retraced <= 0.72) {
+          estStage = "예상 2파(또는 4파) 되돌림·눌림 진행 중";
+        } else if (retraced > 0.72) {
+          estStage = "예상 파동 재정비·바닥 지지 확인 중";
+        }
 
-      const lastSliceIdx = slice.length - 1;
-      const lastPrice = bias === "POS" ? slice[lastSliceIdx].high : slice[lastSliceIdx].low;
-      const pts = [...rawPts, {
-        sliceIdx: lastSliceIdx,
-        price: lastPrice,
-        label: bias === "POS" ? (scale === "MAJOR" ? "(5)" : "5") : (scale === "MAJOR" ? "(C)" : "C"),
-        k: 5
-      }];
-
-      const issues = [];
-      if (bias === "POS") {
-        const p0 = pts[0].price, p1 = pts[1].price, p2 = pts[2].price, p3 = pts[3].price, p4 = pts[4].price;
-        const w1Len = Math.abs(p1 - p0);
-        const w3Len = Math.abs(p2 - p3);
-        if (p2 < p0) issues.push("2파 저점 < 1파 시작점");
-        if (w3Len < w1Len * 0.85) issues.push("3파 추진력 약함");
-        if (p3 < p1) issues.push("4파가 1파 고점 침범");
-        if (p4 < p2) issues.push("5파 고점 미갱신");
+        return {
+          mode: "ESTIMATE",
+          valid: false,
+          points: [
+            { sliceIdx: minPt.sliceIdx, price: minPt.price, label: "저점기점" },
+            { sliceIdx: maxPt.sliceIdx, price: maxPt.price, label: "고점기점" },
+            { sliceIdx: lastIdx, price: lastClose, label: "예상현재" }
+          ],
+          projectedPoints: [],
+          stageLabel: estStage,
+          reason: "엄격한 엘리어트 1~5파 규정을 충족하는 확정 대파동이 아니므로, 현재 고저점 위치 기준 [예상 현재 진행파동]만 표시합니다."
+        };
       } else {
-        const p0 = pts[0].price, p1 = pts[1].price, p2 = pts[2].price;
-        if (p1 > p0 * 1.03) issues.push("B파 반등폭 과도");
-        if (Math.abs(p2 - p1) < Math.abs(p1 - p0) * 0.7) issues.push("C파 하락 연장 부족");
+        // 부정적(조정·하락 A-B-C) 대파동 검증 및 예상 현재 진행파동
+        for (let a = 0; a < highs.length; a++) {
+          const p0 = highs[a];
+          const lA = lows.filter(l => l.sliceIdx > p0.sliceIdx + 1 && l.price < p0.price * 0.97);
+          for (const pA of lA) {
+            const hB = highs.filter(h => h.sliceIdx > pA.sliceIdx + 1 && h.price > pA.price * 1.01 && h.price < p0.price);
+            if (hB.length > 0) {
+              const pB = hB[hB.length - 1];
+              const dropAB = p0.price - pA.price;
+              const estC = Math.max(1, pB.price - dropAB);
+              return {
+                mode: "VALID",
+                valid: true,
+                points: [
+                  { sliceIdx: p0.sliceIdx, price: p0.price, label: "고점" },
+                  { sliceIdx: pA.sliceIdx, price: pA.price, label: "A파" },
+                  { sliceIdx: pB.sliceIdx, price: pB.price, label: "B파" }
+                ],
+                projectedPoints: [
+                  { sliceIdx: pB.sliceIdx, price: pB.price, label: "B파" },
+                  { sliceIdx: lastIdx, price: estC, label: "C파 예상권" }
+                ],
+                stageLabel: "규정 부합 조정 대파동 · C파 진행/가능성 구간",
+                reason: "B파 고점이 기점 고점 아래에서 형성되고 A파 하락 폭이 확인되어 조정 대파동 규정에 부합합니다."
+              };
+            }
+          }
+        }
+
+        const hiPt = slice.reduce((best, d, i) => d.high > best.price ? { sliceIdx: i, price: d.high } : best, { sliceIdx: 0, price: slice[0].high });
+        return {
+          mode: "ESTIMATE",
+          valid: false,
+          points: [
+            { sliceIdx: hiPt.sliceIdx, price: hiPt.price, label: "고점기점" },
+            { sliceIdx: lastIdx, price: lastClose, label: "예상조정현재" }
+          ],
+          projectedPoints: [],
+          stageLabel: "예상 A파/조정 파동 진행 중 (규정 미확정)",
+          reason: "확정 조정 대파동 규정이 완성되지 않아 현재 고점 대비 [예상 조정 진행파동]을 보여줍니다."
+        };
       }
-
-      const valid = issues.length === 0;
-      const scaleText = scale === "MAJOR" ? "대파동" : "소파동";
-      const biasText = bias === "POS" ? "긍정적 파동" : "부정적 파동";
-      const reason = valid
-        ? `${scaleText} · ${biasText} 규칙 부합 (선+번호 표시)`
-        : `파동 성립 약함 (${issues.join(" · ")} → 참고용 표시)`;
-
-      return { points: pts, valid, reason };
     }
 
     function renderWaveStatusBanner(waveInfo) {
       const badge = $("waveValidityBadge");
       const banner = $("waveStatusBanner");
       if (waveInfo.valid) {
-        badge.textContent = "파동 규칙 양호";
+        badge.textContent = "규정 충족 대파동";
         badge.className = "badge mint";
         banner.style.background = "#ecfdf5";
         banner.style.borderColor = "#34d399";
         banner.style.color = "#065f46";
-        banner.innerHTML = `✅ <strong>엘리어트 파동 판정:</strong> <span class="big-u">${waveInfo.reason}</span>`;
+        banner.innerHTML = `✅ <strong>${waveInfo.stageLabel}:</strong> ${waveInfo.reason}`;
       } else {
-        badge.textContent = "파동 성립 약함";
-        badge.className = "badge pink";
-        banner.style.background = "#fff1f2";
-        banner.style.borderColor = "#fb7185";
-        banner.style.color = "#9f1239";
-        banner.innerHTML = `⚠️ <strong>엘리어트 파동 판정:</strong> <span class="big-u">${waveInfo.reason}</span> — 현재 캔들 배열에서 정석 규칙이 약하므로 추세·거래량과 함께 참고용으로 보세요.`;
+        badge.textContent = "예상 현재 진행파동";
+        badge.className = "badge amber";
+        banner.style.background = "#fffbeb";
+        banner.style.borderColor = "#f59e0b";
+        banner.style.color = "#78350f";
+        banner.innerHTML = `🧭 <strong>${waveInfo.stageLabel}:</strong> ${waveInfo.reason}`;
       }
     }
 
@@ -2046,47 +2139,56 @@
       return state.series.slice(s, e);
     }
 
-    function drawElliottOnCanvas(ctx, slice, xAt, yAt, scale, bias, isSecondary = false) {
-      const wInfo = computeElliottWave(slice, scale, bias);
-      if (!wInfo.points.length) return wInfo;
-
-      const lineColor = isSecondary
-        ? "#0ea5e9"
-        : (bias === "POS" ? "#7c3aed" : "#e11d48");
+    function drawMajorWaveOnCanvas(ctx, slice, xAt, yAt, bias) {
+      const wInfo = computeMajorElliottWave(slice, bias);
+      const lineColor = wInfo.valid ? "#6d28d9" : "#d97706";
 
       ctx.save();
-      ctx.strokeStyle = lineColor;
-      ctx.lineWidth = isSecondary ? 1.5 : (scale === "MAJOR" ? 2.5 : 1.9);
-      if (!wInfo.valid) ctx.setLineDash([5, 4]);
+      if (wInfo.points.length >= 2) {
+        ctx.strokeStyle = lineColor;
+        ctx.lineWidth = 2.6;
+        ctx.beginPath();
+        wInfo.points.forEach((pt, idx) => {
+          const x = xAt(pt.sliceIdx);
+          const y = yAt(pt.price);
+          if (idx === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+      }
 
-      ctx.beginPath();
-      wInfo.points.forEach((pt, idx) => {
-        const x = xAt(pt.sliceIdx);
-        const y = yAt(pt.price);
-        if (idx === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      });
-      ctx.stroke();
-      ctx.setLineDash([]);
+      // 미완성 가능성 구간(예: 5파 또는 C파 예상 연장)은 점선으로 구분
+      if (wInfo.projectedPoints && wInfo.projectedPoints.length >= 2) {
+        ctx.strokeStyle = lineColor;
+        ctx.lineWidth = 2.2;
+        ctx.setLineDash([6, 4]);
+        ctx.beginPath();
+        wInfo.projectedPoints.forEach((pt, idx) => {
+          const x = xAt(pt.sliceIdx);
+          const y = yAt(pt.price);
+          if (idx === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
 
-      wInfo.points.forEach((pt, idx) => {
+      const allLabels = [...wInfo.points, ...(wInfo.projectedPoints || []).slice(1)];
+      allLabels.forEach((pt, idx) => {
         const x = xAt(pt.sliceIdx);
         const y = yAt(pt.price);
         ctx.fillStyle = lineColor;
         ctx.beginPath();
-        ctx.arc(x, y, isSecondary ? 3.5 : 4.5, 0, Math.PI * 2);
+        ctx.arc(x, y, 4.5, 0, Math.PI * 2);
         ctx.fill();
 
-        const isUpTurn = idx % 2 === 1;
-        const labelY = bias === "POS"
-          ? (isUpTurn ? y - 14 : y + 15)
-          : (isUpTurn ? y + 15 : y - 14);
-
-        ctx.font = isSecondary ? "bold 11px sans-serif" : "bold 12px sans-serif";
+        const labelY = idx % 2 === 0 ? y + 16 : y - 15;
+        ctx.font = "bold 11px sans-serif";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
+        const wText = ctx.measureText(pt.label).width + 10;
         ctx.fillStyle = "#ffffff";
-        ctx.fillRect(x - 12, labelY - 8, 24, 16);
+        ctx.fillRect(x - wText / 2, labelY - 8, wText, 16);
         ctx.fillStyle = lineColor;
         ctx.fillText(pt.label, x, labelY);
       });
@@ -2238,16 +2340,11 @@
         ctx.fillText(`손절선 ${fmtPrice(stopPrice)}`, padL + 6, yS - 6);
       }
 
-      let primaryWaveInfo = { valid: false, reason: "엘리어트 파동 OFF" };
+      const waveInfo = computeMajorElliottWave(slice, state.waveBias);
       if (state.feats.elliottWave) {
-        if (state.waveScale === "BOTH") {
-          primaryWaveInfo = drawElliottOnCanvas(ctx, slice, xAt, yAt, "MAJOR", state.waveBias, false);
-          drawElliottOnCanvas(ctx, slice, xAt, yAt, "MINOR", state.waveBias, true);
-        } else {
-          primaryWaveInfo = drawElliottOnCanvas(ctx, slice, xAt, yAt, state.waveScale, state.waveBias, false);
-        }
+        drawMajorWaveOnCanvas(ctx, slice, xAt, yAt, state.waveBias);
       }
-      renderWaveStatusBanner(primaryWaveInfo);
+      renderWaveStatusBanner(waveInfo);
 
       const lastX = xAt(slice.length - 1);
       const lastY = yAt(lastClose);
@@ -2641,7 +2738,6 @@
             ...s,
             role: s.role || roleCycle[idx % roleCycle.length]
           }));
-          // 전 섹터 4종목 풀과 병합해 모든 섹터가 4종목씩 보이도록 유지
           const existingCodes = new Set(liveMapped.map(x => x.code));
           const extra = FALLBACK_STOCKS.filter(x => !existingCodes.has(x.code));
           state.stocksPool = [...liveMapped, ...extra].map(s => ({
@@ -2767,13 +2863,6 @@
         b.classList.add("active");
         state.recPeriod = b.dataset.rperiod;
         renderPeriodRecommendations();
-      }));
-
-      $("waveScaleGroup").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
-        $("waveScaleGroup").querySelectorAll("button").forEach(x => x.classList.remove("active"));
-        b.classList.add("active");
-        state.waveScale = b.dataset.wscale;
-        drawMainChart();
       }));
 
       $("waveBiasGroup").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
