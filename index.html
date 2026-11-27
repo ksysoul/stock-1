@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>실시간 시황·용어주석 · 미국시황·일정 · 전섹터 순환매 · 엘리어트 대/소파동 · 매물대% · 물린주식탈출</title>
+  <title>시황요약(국·미·용어주석) · 미국시황·일정 · 순환매 · 엘리어트 파동번호 · 매물대% · 물린주식탈출</title>
   <style>
     :root {
       --bg: #f1f5f9;
       --surface: #ffffff;
       --surface-soft: #f8fafc;
       --border: #cbd5e1;
-      --border-strong: #94a3b8;
       --text: #0f172a;
       --muted: #475569;
       --primary: #1d4ed8;
@@ -299,7 +298,6 @@
       box-shadow: 0 1px 4px rgba(0,0,0,0.12);
     }
 
-    /* 1번 섹션: 왼쪽 시황 요약 + 오른쪽 여유공간 낱말풀이 주석 패널 */
     .market-split-layout {
       display: grid;
       grid-template-columns: 1fr 330px;
@@ -369,6 +367,15 @@
       margin-bottom: 10px;
     }
 
+    .us-inline-synth {
+      margin-top: 8px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      background: #fdf2f8;
+      border: 1.5px solid #f9a8d4;
+      color: #831843;
+    }
+
     .weekly-box {
       background: #ede9fe;
       border: 1.5px solid #c4b5fd;
@@ -378,7 +385,6 @@
       color: #2e1065;
     }
 
-    /* 미국·글로벌 시황 & 이번주 미국장 주요 일정 */
     .us-split-grid {
       display: grid;
       grid-template-columns: 1.1fr 1fr;
@@ -397,11 +403,7 @@
       font-size: 0.85rem;
     }
 
-    .us-cal-list {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
+    .us-cal-list { display: flex; flex-direction: column; gap: 7px; }
 
     .us-cal-item {
       background: #ffffff;
@@ -411,10 +413,7 @@
       font-size: 0.82rem;
     }
 
-    .us-cal-item.imp-high {
-      border-color: #f472b6;
-      background: #fdf2f8;
-    }
+    .us-cal-item.imp-high { border-color: #f472b6; background: #fdf2f8; }
 
     .keyword-bar {
       display: flex;
@@ -442,11 +441,7 @@
       color: var(--muted);
     }
 
-    .snews-tab.active {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
-    }
+    .snews-tab.active { background: var(--primary); color: #fff; border-color: var(--primary); }
 
     .market-news-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
     @media (max-width: 860px) { .market-news-grid { grid-template-columns: 1fr; } }
@@ -480,7 +475,6 @@
       align-items: center;
       gap: 3px;
     }
-    .btn-link-ext:hover { background: #d1fae5; }
 
     .summary-box {
       margin-top: 8px;
@@ -545,7 +539,6 @@
       background: #f8fafc;
       cursor: pointer;
     }
-    .role-stock-card:hover { border-color: var(--primary); background: #eff6ff; }
     .role-stock-card:nth-child(1) { background: #eff6ff; border-color: #93c5fd; }
     .role-stock-card:nth-child(2) { background: #fef2f2; border-color: #fca5a5; }
     .role-stock-card:nth-child(3) { background: #ecfdf5; border-color: #6ee7b7; }
@@ -571,46 +564,20 @@
       background: #ffffff;
     }
 
-    .rec-row-item {
-      padding: 8px 10px;
-      border-radius: 10px;
-      margin-top: 7px;
-    }
+    .rec-row-item { padding: 8px 10px; border-radius: 10px; margin-top: 7px; }
     .rec-row-item:nth-child(odd) { background: #ecfdf5; border: 1px solid #a7f3d0; }
     .rec-row-item:nth-child(even) { background: #eff6ff; border: 1px solid #bfdbfe; }
 
     .preset-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
-
-    .preset-btn {
-      font-size: 0.78rem;
-      padding: 6px 11px;
-      border-radius: 9px;
-      background: #ffffff;
-      border: 1.5px solid var(--border);
-    }
-
+    .preset-btn { font-size: 0.78rem; padding: 6px 11px; border-radius: 9px; background: #ffffff; border: 1.5px solid var(--border); }
     .preset-btn.active { background: #fce7f3; color: var(--pink); border-color: #f472b6; }
 
-    .cond-box {
-      padding: 13px 14px;
-      border-radius: 13px;
-      background: #e2e8f0;
-      border: 1.5px solid #94a3b8;
-      font-size: 0.82rem;
-    }
-
+    .cond-box { padding: 13px 14px; border-radius: 13px; background: #e2e8f0; border: 1.5px solid #94a3b8; font-size: 0.82rem; }
     .cond-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
     .cond-chip-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: #ffffff;
-      border: 1.5px solid #94a3b8;
-      border-radius: 999px;
-      padding: 4px 11px;
-      font-size: 0.78rem;
-      font-weight: 800;
-      cursor: pointer;
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #ffffff; border: 1.5px solid #94a3b8; border-radius: 999px;
+      padding: 4px 11px; font-size: 0.78rem; font-weight: 800; cursor: pointer;
     }
 
     .fit-stock-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; margin-top: 8px; }
@@ -620,227 +587,99 @@
     .fit-stock-top { display: flex; justify-content: space-between; align-items: center; gap: 6px; flex-wrap: wrap; }
 
     .stock-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 3px 10px;
-      border-radius: 999px;
-      background: #dbeafe;
-      border: 1px solid #60a5fa;
-      color: #1e3a8a;
-      font-weight: 800;
-      font-size: 0.78rem;
-      cursor: pointer;
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 3px 10px; border-radius: 999px; background: #dbeafe;
+      border: 1px solid #60a5fa; color: #1e3a8a; font-weight: 800; font-size: 0.78rem; cursor: pointer;
     }
 
     .chart-quick-search {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      align-items: center;
-      padding: 9px 12px;
-      margin-bottom: 10px;
-      border-radius: 12px;
-      background: #dbeafe;
-      border: 1.5px solid #93c5fd;
+      display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+      padding: 9px 12px; margin-bottom: 10px; border-radius: 12px;
+      background: #dbeafe; border: 1.5px solid #93c5fd;
     }
 
-    .forecast-strip {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-bottom: 10px;
-    }
+    .forecast-strip { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 10px; }
     @media (max-width: 720px) { .forecast-strip { grid-template-columns: 1fr; } }
 
-    .fc-card-1w {
-      background: #e0f2fe;
-      border: 1.5px solid #38bdf8;
-      border-radius: 12px;
-      padding: 10px 14px;
-      color: #0c4a6e;
-    }
-
-    .fc-card-1m {
-      background: #ede9fe;
-      border: 1.5px solid #a78bfa;
-      border-radius: 12px;
-      padding: 10px 14px;
-      color: #4c1d95;
-    }
+    .fc-card-1w { background: #e0f2fe; border: 1.5px solid #38bdf8; border-radius: 12px; padding: 10px 14px; color: #0c4a6e; }
+    .fc-card-1m { background: #ede9fe; border: 1.5px solid #a78bfa; border-radius: 12px; padding: 10px 14px; color: #4c1d95; }
 
     .wave-control-panel {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 8px;
-      padding: 9px 12px;
-      border-radius: 12px;
-      background: #f5f3ff;
-      border: 1.5px solid #c4b5fd;
-      font-size: 0.8rem;
-      font-weight: 800;
-      color: #3b0764;
+      display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+      margin-bottom: 8px; padding: 9px 12px; border-radius: 12px;
+      background: #f5f3ff; border: 1.5px solid #c4b5fd; font-size: 0.8rem; font-weight: 800; color: #3b0764;
     }
 
     .wave-status-banner {
-      margin-bottom: 8px;
-      padding: 9px 13px;
-      border-radius: 10px;
-      background: #fffbeb;
-      border: 1.5px solid #f59e0b;
-      font-size: 0.83rem;
-      font-weight: 800;
-      color: #78350f;
+      margin-bottom: 8px; padding: 9px 13px; border-radius: 10px;
+      background: #fffbeb; border: 1.5px solid #f59e0b; font-size: 0.83rem; font-weight: 800; color: #78350f;
     }
 
     .sr-draw-panel {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-      margin-bottom: 8px;
-      padding: 8px 12px;
-      border-radius: 12px;
-      background: #ecfdf5;
-      border: 1.5px solid #6ee7b7;
-      font-size: 0.79rem;
-      font-weight: 800;
-      color: #064e3b;
+      display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+      margin-bottom: 8px; padding: 8px 12px; border-radius: 12px;
+      background: #ecfdf5; border: 1.5px solid #6ee7b7; font-size: 0.79rem; font-weight: 800; color: #064e3b;
     }
 
-    .sr-btn-active {
-      background: #059669 !important;
-      color: #ffffff !important;
-      border-color: #047857 !important;
-    }
+    .sr-btn-active { background: #059669 !important; color: #ffffff !important; border-color: #047857 !important; }
 
     .overlay-toggles { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
-
-    .toggle-chip {
-      font-size: 0.76rem;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1.5px solid var(--border);
-      background: #fff;
-      color: var(--muted);
-    }
-
+    .toggle-chip { font-size: 0.76rem; padding: 4px 10px; border-radius: 999px; border: 1.5px solid var(--border); background: #fff; color: var(--muted); }
     .toggle-chip.on { border-color: var(--primary); background: #dbeafe; color: var(--primary); }
 
     .ma-panel {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-      margin-bottom: 10px;
-      padding: 8px 12px;
-      border-radius: 12px;
-      background: #f1f5f9;
-      border: 1.5px solid #cbd5e1;
-      font-size: 0.79rem;
-      font-weight: 700;
+      display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+      margin-bottom: 10px; padding: 8px 12px; border-radius: 12px;
+      background: #f1f5f9; border: 1.5px solid #cbd5e1; font-size: 0.79rem; font-weight: 700;
     }
 
     .chart-box {
-      position: relative;
-      width: 100%;
-      height: 460px;
-      border: 1.5px solid #94a3b8;
-      border-radius: 12px;
-      background: #fff;
-      overflow: hidden;
+      position: relative; width: 100%; height: 470px;
+      border: 1.5px solid #94a3b8; border-radius: 12px; background: #fff; overflow: hidden;
     }
 
     .subchart-box {
-      position: relative;
-      width: 100%;
-      height: 140px;
-      margin-top: 10px;
-      border: 1.5px solid #cbd5e1;
-      border-radius: 12px;
-      background: #fff;
-      overflow: hidden;
+      position: relative; width: 100%; height: 140px; margin-top: 10px;
+      border: 1.5px solid #cbd5e1; border-radius: 12px; background: #fff; overflow: hidden;
     }
 
     canvas { width: 100%; height: 100%; display: block; }
 
     .chart-meta {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 8px;
-      font-size: 0.79rem;
-      color: var(--muted);
-      margin-bottom: 6px;
-      font-weight: 700;
+      display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px;
+      font-size: 0.79rem; color: var(--muted); margin-bottom: 6px; font-weight: 700;
     }
 
     .issue-box {
-      margin-top: 12px;
-      padding: 12px 14px;
-      border-radius: 12px;
-      background: #eff6ff;
-      border: 1.5px solid #93c5fd;
-      font-size: 0.84rem;
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
+      background: #eff6ff; border: 1.5px solid #93c5fd; font-size: 0.84rem;
     }
 
     .ind10-summary-banner {
-      background: #ffffff;
-      border: 2px solid #f59e0b;
-      border-radius: 13px;
-      padding: 13px 15px;
-      margin-bottom: 12px;
-      font-size: 0.86rem;
+      background: #ffffff; border: 2px solid #f59e0b; border-radius: 13px;
+      padding: 13px 15px; margin-bottom: 12px; font-size: 0.86rem;
       box-shadow: 0 2px 8px rgba(217, 119, 6, 0.08);
     }
 
     .ind10-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
     @media (max-width: 860px) { .ind10-grid { grid-template-columns: 1fr; } }
 
-    .ind10-item {
-      border: 1.5px solid #cbd5e1;
-      border-radius: 12px;
-      padding: 11px 13px;
-      background: #ffffff;
-      cursor: pointer;
-    }
+    .ind10-item { border: 1.5px solid #cbd5e1; border-radius: 12px; padding: 11px 13px; background: #ffffff; cursor: pointer; }
     .ind10-item:nth-child(even) { background: #fef9c3; border-color: #fde047; }
     .ind10-item.selected { outline: 3px solid #1d4ed8; background: #dbeafe !important; }
 
     .ind10-top { display: flex; justify-content: space-between; align-items: center; gap: 6px; font-weight: 900; font-size: 0.88rem; }
 
-    .metric-buy {
-      color: #e11d48;
-      font-size: 1.06rem;
-      font-weight: 900;
-      margin-top: 5px;
-    }
-    .metric-sell {
-      color: #2563eb;
-      font-size: 0.90rem;
-      font-weight: 800;
-      margin-top: 5px;
-    }
-    .metric-neutral {
-      color: #0f172a;
-      font-size: 0.90rem;
-      font-weight: 800;
-      margin-top: 5px;
-    }
+    .metric-buy { color: #e11d48; font-size: 1.06rem; font-weight: 900; margin-top: 5px; }
+    .metric-sell { color: #2563eb; font-size: 0.90rem; font-weight: 800; margin-top: 5px; }
+    .metric-neutral { color: #0f172a; font-size: 0.90rem; font-weight: 800; margin-top: 5px; }
 
     .ind10-meaning { font-size: 0.81rem; color: #0f172a; margin-top: 5px; background: rgba(255,255,255,0.78); padding: 6px 8px; border-radius: 8px; }
     .ind10-guide-txt { font-size: 0.77rem; color: #475569; margin-top: 4px; }
 
     .ind10-guide {
-      margin-top: 12px;
-      padding: 12px 15px;
-      border-radius: 12px;
-      background: #d1fae5;
-      border: 1.5px solid #34d399;
-      font-size: 0.86rem;
-      color: #064e3b;
+      margin-top: 12px; padding: 12px 15px; border-radius: 12px;
+      background: #d1fae5; border: 1.5px solid #34d399; font-size: 0.86rem; color: #064e3b;
     }
 
     .clue-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -850,29 +689,13 @@
     .clue-card:nth-child(even) { background: #fef3c7; border: 1.5px solid #fcd34d; color: #78350f; }
     .clue-card { border-radius: 12px; padding: 12px 14px; font-size: 0.84rem; }
 
-    .rescue-bar {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 9px;
-      margin-bottom: 12px;
-    }
+    .rescue-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; margin-bottom: 12px; }
     @media (max-width: 820px) { .rescue-bar { grid-template-columns: repeat(2, 1fr); } }
 
-    .rescue-tf-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 12px;
-    }
+    .rescue-tf-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 12px; }
     @media (max-width: 960px) { .rescue-tf-grid { grid-template-columns: 1fr; } }
 
-    .tf-box {
-      border: 1.5px solid #99f6e4;
-      border-radius: 12px;
-      padding: 11px 13px;
-      background: #ffffff;
-      font-size: 0.82rem;
-    }
+    .tf-box { border: 1.5px solid #99f6e4; border-radius: 12px; padding: 11px 13px; background: #ffffff; font-size: 0.82rem; }
     .tf-box:nth-child(2) { background: #f0fdfa; }
     .tf-box:nth-child(3) { background: #eff6ff; }
 
@@ -881,50 +704,17 @@
     .calc-field label { display: block; font-size: 0.77rem; color: var(--muted); font-weight: 800; margin-bottom: 3px; }
     .calc-field input { width: 100%; background: #fff; }
 
-    .calc-box {
-      background: #ccfbf1;
-      border: 1.5px solid #2dd4bf;
-      border-radius: 13px;
-      padding: 14px 16px;
-      font-size: 0.88rem;
-      color: #042f2e;
-    }
+    .calc-box { background: #ccfbf1; border: 1.5px solid #2dd4bf; border-radius: 13px; padding: 14px 16px; font-size: 0.88rem; color: #042f2e; }
 
-    .scenario-pair {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 10px;
-    }
+    .scenario-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
     @media (max-width: 820px) { .scenario-pair { grid-template-columns: 1fr; } }
 
-    .sc-card-add {
-      background: #ffffff;
-      border: 1.5px solid #0d9488;
-      border-radius: 11px;
-      padding: 10px 12px;
-      font-size: 0.82rem;
-    }
-
-    .sc-card-hold {
-      background: #fef9c3;
-      border: 1.5px solid #eab308;
-      border-radius: 11px;
-      padding: 10px 12px;
-      font-size: 0.82rem;
-      color: #713f12;
-    }
+    .sc-card-add { background: #ffffff; border: 1.5px solid #0d9488; border-radius: 11px; padding: 10px 12px; font-size: 0.82rem; }
+    .sc-card-hold { background: #fef9c3; border: 1.5px solid #eab308; border-radius: 11px; padding: 10px 12px; font-size: 0.82rem; color: #713f12; }
 
     .tooltip {
-      position: fixed;
-      pointer-events: none;
-      background: rgba(15, 23, 42, 0.95);
-      color: #f8fafc;
-      padding: 8px 11px;
-      border-radius: 10px;
-      font-size: 0.78rem;
-      z-index: 80;
-      display: none;
+      position: fixed; pointer-events: none; background: rgba(15, 23, 42, 0.95);
+      color: #f8fafc; padding: 8px 11px; border-radius: 10px; font-size: 0.78rem; z-index: 80; display: none;
     }
   </style>
 </head>
@@ -934,8 +724,8 @@
       <div class="brand">
         <div class="mascot">🐱📈</div>
         <div>
-          <h1>🌍 뉴스종합 시황·용어주석 · 🇺🇸 미국시황·일정 · 🔄 전섹터 순환매 · 🌊 대/소파동 · 📊 매물대% · 🛟 탈출분석</h1>
-          <div style="font-size:0.75rem; color:var(--muted);">중요 수치 밑줄 강조 · 어려운 용어 우측 주석 풀이 · 대파동 내 소파동 표시 · 클릭형 지지/저항선 & 매물대 비율(%)</div>
+          <h1>🌍 국·미 시황요약 & 용어주석 · 🇺🇸 미국시황·일정 · 🔄 전섹터 순환매 · 🌊 1~5파 번호 · 📊 매물대% · 🛟 탈출분석</h1>
+          <div style="font-size:0.75rem; color:var(--muted);">시황 요약에 미국 증시 반영 · 파동 선 위 1파~5파/A·B·C 번호 배지 표시 · 중요 수치만 밑줄 · 우측 용어 주석</div>
         </div>
       </div>
 
@@ -950,7 +740,7 @@
 
   <div class="top-banner-wrap">
     <div class="top-stance-banner" id="topStanceBanner">실시간 시장 스탠스 로딩 중...</div>
-    <div class="action-guide-line" id="todayActionLine">🎯 오늘 대응 한 줄: 코스닥 <span class="num-u">5.7~5.9% 급등</span>으로 매수 사이드카가 발동되고 코스피도 <span class="num-u">4,800선(4,840선대)을 회복</span>했으나 단기 급반등 구간이므로 추격 매수보다 <strong>매물대 지지선 확인 후 분할 접근</strong>을 권장합니다.</div>
+    <div class="action-guide-line" id="todayActionLine">🎯 오늘 대응 한 줄: 코스닥 <span class="num-u">5.7~5.9% 급등</span>으로 매수 사이드카가 발동되고 코스피도 <span class="num-u">4,800선(4,840선대)을 회복</span>했으며, 미국은 추수감사절 연휴·블랙프라이데이 조기 폐장 구간이므로 <strong>매물대 지지선과 거래량 확인 후 분할 접근</strong>이 유리합니다.</div>
   </div>
 
   <div class="shell">
@@ -960,11 +750,11 @@
         <span class="badge" id="liveClock">실시간 동기화</span>
       </div>
       <div class="toc-list">
-        <a class="toc-link active" href="#sec-market"><span>1. 🌍 뉴스종합 시황 & 용어주석</span><span>→</span></a>
+        <a class="toc-link active" href="#sec-market"><span>1. 🌍 국·미 시황요약 & 용어주석</span><span>→</span></a>
         <a class="toc-link" href="#sec-us"><span>1-2. 🇺🇸 미국 시황(오늘/주간) & 일정</span><span>→</span></a>
         <a class="toc-link" href="#sec-sector"><span>2. 🔄 전섹터 순환매 & 4종목</span><span>→</span></a>
         <a class="toc-link" href="#sec-rec"><span>3. ⭐ 오늘/주간/월간추천 & 조건</span><span>→</span></a>
-        <a class="toc-link" href="#sec-chart"><span>4. 📊 일/주/월봉 · 파동 · 매물대%</span><span>→</span></a>
+        <a class="toc-link" href="#sec-chart"><span>4. 📊 일/주/월봉 · 파동번호 · 매물대%</span><span>→</span></a>
         <a class="toc-link" href="#sec-ind10"><span>4-2. 📐 10개 지표 종합의견·수치</span><span>→</span></a>
         <a class="toc-link" href="#sec-supply"><span>5. 🚨 수급·변동 주의단서</span><span>→</span></a>
         <a class="toc-link" href="#sec-rescue"><span>6. 🛟 물린주식탈출 & 예상시간</span><span>→</span></a>
@@ -972,10 +762,10 @@
     </aside>
 
     <main class="wrap">
-      <!-- 1. 뉴스 종합 실시간 시황 요약 + 오른쪽 여유공간 용어 주석 패널 -->
+      <!-- 1. 국내·미국 종합 시황 요약 + 오른쪽 여유공간 용어 주석 패널 -->
       <section class="card tone-market" id="sec-market">
         <div class="card-head">
-          <h2 class="card-title">🌍 1. 뉴스 종합 실시간 시황 요약 & 어려운 용어 낱말풀이 <span class="badge mint" id="marketUpdatedBadge">2026.11.27 반영</span></h2>
+          <h2 class="card-title">🌍 1. 국내·미국 종합 시황 요약 & 어려운 용어 낱말풀이 <span class="badge mint" id="marketUpdatedBadge">2026.11.27 반영</span></h2>
           <div class="seg" id="marketScopeGroup">
             <button data-mscope="ALL" class="active">국내·미국 전체 지수</button>
             <button data-mscope="KR">국내 지수만</button>
@@ -1005,8 +795,8 @@
           <span class="badge">코스피 4840선 회복</span>
           <span class="badge mint">코스닥 5.7%↑ 매수 사이드카</span>
           <span class="badge purple">증안펀드·저가 매수</span>
-          <span class="badge amber">한은 금리 3.25%</span>
           <span class="badge pink">미국 추수감사절·블프 조기폐장</span>
+          <span class="badge amber">근원 PCE·GDP·한은 3.25%</span>
         </div>
 
         <div style="font-weight:900; font-size:0.9rem; margin-bottom:6px;">📰 오늘의 주요 뉴스 원문 <span class="badge" id="newsCountBadge">11건 표시</span></div>
@@ -1075,9 +865,7 @@
 
         <div class="flow-arrow-line" id="horizonArrowSummary"></div>
         <div class="flow-strip" id="horizonFlowGrid"></div>
-
         <div class="sector-detail-panel" id="sectorDetailPanel"></div>
-
         <div class="predict-top2" id="horizonPredictBox"></div>
       </section>
 
@@ -1124,7 +912,7 @@
         </div>
       </section>
 
-      <!-- 4. 일봉 / 주봉 / 월봉 실전차트 + 대파동·소파동 + 클릭형 지지/저항선 + 매물대(%) -->
+      <!-- 4. 일봉 / 주봉 / 월봉 실전차트 + 1~5파/A·B·C 파동번호 + 클릭형 지지/저항선 + 매물대(%) -->
       <section class="card tone-chart" id="sec-chart">
         <div class="chart-quick-search">
           <strong style="font-size:0.82rem; color:#1e3a8a;">⚡ 차트 바로 검색:</strong>
@@ -1154,17 +942,16 @@
         <div class="forecast-strip" id="forecastPriceStrip"></div>
 
         <div class="wave-control-panel">
-          <span>🌊 엘리어트 파동 (기간 균형 + 대파동 & 내부 소파동):</span>
+          <span>🌊 엘리어트 파동 (파동 번호 1파~5파 / A·B·C + 내부 소파동):</span>
           <div class="seg" id="waveBiasGroup">
             <button data-wbias="POS" class="active">상승 파동 (1-2-3-4-5)</button>
             <button data-wbias="NEG">조정·하락 파동 (A-B-C)</button>
           </div>
-          <span class="badge purple" id="waveValidityBadge">규정 판별 중</span>
+          <span class="badge purple" id="waveValidityBadge">파동 번호 표시 중</span>
         </div>
 
-        <div class="wave-status-banner" id="waveStatusBanner">엘리어트 대파동·소파동 및 기간 균형 판별 중...</div>
+        <div class="wave-status-banner" id="waveStatusBanner">엘리어트 파동 번호 및 기간 균형 판별 중...</div>
 
-        <!-- 클릭형 지지선·저항선 추가 패널 -->
         <div class="sr-draw-panel">
           <span>📏 클릭으로 지지·저항선 추가:</span>
           <button type="button" id="addSupportModeBtn">+ 지지선 클릭 추가</button>
@@ -1185,8 +972,8 @@
 
         <div class="overlay-toggles" id="chartFeatureToggles">
           <button class="toggle-chip on" data-feat="volProfile">매물대 비율(%)</button>
-          <button class="toggle-chip on" data-feat="elliottWave">대파동 선</button>
-          <button class="toggle-chip on" data-feat="subWave">대파동 내 소파동 선</button>
+          <button class="toggle-chip on" data-feat="elliottWave">파동 선 & 번호(1~5 / A~C)</button>
+          <button class="toggle-chip on" data-feat="subWave">소파동 선 & 번호((1)~(5))</button>
           <button class="toggle-chip on" data-feat="buyLine">자동 지지·매수선</button>
           <button class="toggle-chip on" data-feat="stopLine">자동 손절선</button>
           <button class="toggle-chip" data-feat="fibRet">피보나치 되돌림</button>
@@ -1218,9 +1005,7 @@
           <span style="font-size:0.78rem; font-weight:800;">수치 표기: <span style="color:#e11d48; font-weight:900;">매수(붉은색·큰글씨)</span> · <span style="color:#2563eb; font-weight:800;">매도(푸른색)</span> · <span style="color:#0f172a; font-weight:800;">중립(검정)</span></span>
         </div>
 
-        <!-- 앞쪽에 정리한 10개 보조지표 종합 의견 -->
         <div class="ind10-summary-banner" id="ind10OverallSummary"></div>
-
         <div class="ind10-grid" id="ind10Grid"></div>
         <div class="ind10-guide" id="ind10DetailBox"></div>
       </section>
@@ -1347,6 +1132,24 @@
         summary: "장 초반 4,682.43까지 밀렸던 코스피가 매수세 유입으로 4,800선을 돌파하며 4,835~4,849선대까지 상승폭을 키웠습니다."
       },
       {
+        sector: "미국·글로벌 일정",
+        isUS: true,
+        title: "[11월4주 글로벌 증시 캘린더] 한은 금통위·미국 PCE·GDP…추수감사절 휴장 변수",
+        source: "더커넥트머니",
+        pubDate: "2026-11-21",
+        url: "https://www.theconnectmoney.com/ko-kr/articles/4735",
+        summary: "11/25 미국 PCE·GDP 발표, 11/26 한국 금통위 및 미국 추수감사절 휴장, 11/27 미국 블랙프라이데이 조기 폐장 일정이 핵심 변수입니다."
+      },
+      {
+        sector: "미국·글로벌 일정",
+        isUS: true,
+        title: "미국 추수감사절 휴장과 블랙프라이데이 조기폐장, PCE까지 이번 주",
+        source: "증시브리핑",
+        pubDate: "2026-11-25",
+        url: "https://ggobukk2.tistory.com/entry/us-stock-market-thanksgiving-holiday-2026",
+        summary: "11월 26일 추수감사절 휴장 후 27일은 한국시간 28일 새벽 3시에 조기 폐장하며 연말 소비 시즌 개막과 금리 경로를 점검합니다."
+      },
+      {
         sector: "코스닥 매수사이드카",
         isUS: false,
         title: "코스닥 5% 급등에 '매수 사이드카'...코스피도 1.7% 상승세",
@@ -1374,25 +1177,7 @@
         summary: "전일에 이어 오늘까지 코스닥 중심으로 매수 수급이 집중되며 단기 반등 탄력이 강화되고 있습니다."
       },
       {
-        sector: "미국·글로벌 일정",
-        isUS: true,
-        title: "[11월4주 글로벌 증시 캘린더] 한은 금통위·미국 PCE·GDP…추수감사절 휴장 변수",
-        source: "더커넥트머니",
-        pubDate: "2026-11-21",
-        url: "https://www.theconnectmoney.com/ko-kr/articles/4735",
-        summary: "11/25 미국 PCE·GDP 발표, 11/26 한국 금통위 및 미국 추수감사절 휴장, 11/27 미국 블랙프라이데이 조기 폐장 일정이 핵심 변수입니다."
-      },
-      {
-        sector: "미국·글로벌 일정",
-        isUS: true,
-        title: "미국 추수감사절 휴장과 블랙프라이데이 조기폐장, PCE까지 이번 주",
-        source: "증시브리핑",
-        pubDate: "2026-11-25",
-        url: "https://ggobukk2.tistory.com/entry/us-stock-market-thanksgiving-holiday-2026",
-        summary: "11월 26일 휴장 후 27일은 한국시간 28일 새벽 3시에 조기 폐장하며 연말 소비 시즌 개막과 금리 경로를 점검합니다."
-      },
-      {
-        sector: "반도체/AI",
+        sector: "반도체·전력·방산",
         isUS: false,
         title: "반도체·AI 대표주 저가 매수 유입과 매물대 소화 점검",
         source: "전자신문",
@@ -1401,7 +1186,7 @@
         summary: "지수 급반등 과정에서 상단 매물대 저항 돌파 여부와 거래량 동반이 관건입니다."
       },
       {
-        sector: "전력/원전/방산",
+        sector: "반도체·전력·방산",
         isUS: false,
         title: "전력기기·원전·방산 업종 순환매 흐름과 지지선 확인",
         source: "파이낸셜뉴스",
@@ -1410,7 +1195,7 @@
         summary: "단기 급등락 장세에서는 고점 추격보다 거래량이 실린 매물대 지지 구간 공략이 유효합니다."
       },
       {
-        sector: "바이오/헬스케어",
+        sector: "코스닥 매수사이드카",
         isUS: false,
         title: "코스닥 급등 속 바이오·헬스케어 반등 탄력 종목군 주목",
         source: "히트뉴스",
@@ -1422,8 +1207,8 @@
 
     const FALLBACK_MARKET = {
       ok: true,
-      updatedAt: "2026-11-27T12:00:00+09:00",
-      stance: "🧭 <strong>2026.11.27(금) 12:00 뉴스 종합 스탠스:</strong> 코스피 <span class='num-u big-num'>4,835.47 (+2.64%)</span> · 코스닥 <span class='num-u big-num'>693.12 (+5.70% · 매수 사이드카)</span> · 한은 기준금리 <span class='num-u'>3.25%</span>",
+      updatedAt: "2026-11-27T12:23:00+09:00",
+      stance: "🧭 <strong>2026.11.27(금) 국내·미국 종합 스탠스:</strong> 코스피 <span class='num-u big-num'>4,835.47 (+2.64%)</span> · 코스닥 <span class='num-u big-num'>693.12 (+5.70% · 매수 사이드카)</span> · 미국 <strong>11/26 추수감사절 휴장 · 11/27 블프 조기폐장(새벽 3시)</strong>",
       indices: [
         { name: "코스피 (KOSPI)", val: "4,835.47", chg: "+124.26 (+2.64%)", up: true, us: false, weekChg: "장중 저점 4,682.43 → 고점 4,849.42 반등" },
         { name: "코스닥 (KOSDAQ)", val: "693.12", chg: "+37.41 (+5.70%)", up: true, us: false, weekChg: "오전 10:22 매수 사이드카 발동" },
@@ -1433,15 +1218,17 @@
         { name: "다우 (DOW)", val: "47,890.50", chg: "연휴 관망 · 소비시즌 개막", up: true, us: true, weekChg: "낙폭 과대 후 반발 매수 유입" }
       ],
       newsSynthesisHtml: `
-        <div style="font-weight:900; font-size:0.93rem; margin-bottom:6px;">📰 오늘(11/27) 주요 뉴스 종합 시황 요약</div>
+        <div style="font-weight:900; font-size:0.93rem; margin-bottom:6px;">📰 오늘(11/27) 국내·미국 뉴스 종합 시황 요약</div>
         <div>
-          1. <strong>증안펀드 기대 + 저가 매수 유입으로 양 시장 급반등:</strong> 장 초반 <span class="num-u">4,682.43</span>까지 밀렸던 코스피가 매수세 유입으로 <span class="num-u">4,800선</span>을 회복해 <span class="num-u">4,835~4,849선</span>까지 올라섰습니다.<br/>
-          2. <strong>코스닥 5.7%대 급등 & 매수 사이드카 발동:</strong> 코스닥 지수가 <span class="num-u">693선(+5.7%)</span>까지 급등하면서 오전 10시 22분께 올해 23번째 <span class="term-ref" onclick="focusGlossary('sidecar')">매수 사이드카</span>가 발동됐고, <span class="term-ref" onclick="focusGlossary('stfund')">증안펀드</span> 기대감이 투자심리를 자극했습니다.<br/>
-          3. <strong>실전 대응 포인트:</strong> 단기 급반등 구간에서는 상단 매물대 저항이 출회할 수 있으므로 추격 매수보다 <strong>차트의 매물대(%) 지지 구간과 거래량</strong>을 확인하며 분할 대응하는 전략이 유리합니다.
+          1. <strong>국내 증시(코스피·코스닥) 급반등:</strong> <span class="term-ref" onclick="focusGlossary('stfund')">증안펀드</span> 기대감과 저가 매수세 유입 속에 장 초반 <span class="num-u">4,682.43</span>까지 밀렸던 코스피가 <span class="num-u">4,800선</span>을 회복해 <span class="num-u">4,835~4,849선</span>에 올랐고, 코스닥은 <span class="num-u">693선(+5.7%)</span> 급등과 함께 오전 10시 22분 올해 23번째 <span class="term-ref" onclick="focusGlossary('sidecar')">매수 사이드카</span>가 발동됐습니다.<br/>
+          2. <strong>실전 대응 포인트:</strong> 단기 급반등 구간에서는 상단 매물대 저항이 출회할 수 있으므로 추격 매수보다 <strong>차트의 매물대(%) 지지 구간과 거래량</strong>을 확인하며 분할 대응하는 전략이 유리합니다.
+        </div>
+        <div class="us-inline-synth">
+          🇺🇸 <strong>미국 증시 시황 요약(오늘·직전장):</strong> 어제(<strong>11/26 목요일</strong>)는 미국 <strong>추수감사절 휴장</strong>으로 정규장이 쉬었고, 오늘(<strong>11/27 금요일</strong>)은 <strong>블랙프라이데이 조기 폐장(한국시간 11/28 새벽 3시 종료)</strong> 단축 거래일이 진행됩니다. 직전장(11/25 수) 기준 다우 <span class="num-u">47,890.50</span>, S&P 500 <span class="num-u">6,945.20</span>, 나스닥 <span class="num-u">22,410.80</span> 수준에서 연말 소비 시즌 개막과 <span class="term-ref" onclick="focusGlossary('fomc')">FOMC</span> 금리 경로를 주시하는 중입니다.
         </div>
       `,
       weeklySummary: `
-        📅 <strong>이번주(11/23~11/27) 한 주간 흐름 종합:</strong> 주 초·중반 미국 <span class="term-ref" onclick="focusGlossary('pce')">근원 PCE</span>·<span class="term-ref" onclick="focusGlossary('gdp')">GDP</span> 경계감과 한은 금통위(기준금리 <span class="num-u">3.25%</span>)를 거치며 변동성을 겪었으나, 목·금 미국 추수감사절 연휴 동안 국내 저가 매수세가 유입되며 주간 낙폭을 빠르게 만회하는 흐름입니다.
+        📅 <strong>이번주(11/23~11/27) 국내·미국 주간 흐름 종합:</strong> 주 초·중반 미국 <span class="term-ref" onclick="focusGlossary('pce')">근원 PCE</span>·<span class="term-ref" onclick="focusGlossary('gdp')">GDP</span> 발표와 <span class="term-ref" onclick="focusGlossary('vix')">VIX</span> 변동성 경계, 한은 금통위(기준금리 <span class="num-u">3.25%</span>)를 거쳤고, 목·금 미국 추수감사절 연휴 동안 국내 저가 매수세가 유입되며 주간 낙폭을 만회하는 흐름입니다.
       `,
       newsBySector: {
         "전체": TODAY_KEYWORD_NEWS,
@@ -1468,11 +1255,6 @@
       { code: "047810", displayName: "한국항공우주", sector: "방산/우주항공", role: "유망주", us: false, price: 63200, r1D: 1.65, r1W: 3.1, r1M: 5.2, r3M: 10.1, r6M: 17.0, r1Y: 25.8, posInRange: 49 },
       { code: "064350", displayName: "현대로템", sector: "방산/우주항공", role: "눌림목 반등주", us: false, price: 69800, r1D: 2.15, r1W: 4.0, r1M: 3.8, r3M: 11.8, r6M: 20.4, r1Y: 31.6, posInRange: 43 },
 
-      { code: "009540", displayName: "HD한국조선해양", sector: "조선/해운/기계", role: "대장주", us: false, price: 221000, r1D: 1.55, r1W: 3.0, r1M: 7.2, r3M: 15.8, r6M: 27.2, r1Y: 43.5, posInRange: 62 },
-      { code: "329180", displayName: "HD현대중공업", sector: "조선/해운/기계", role: "힘있는주", us: false, price: 290500, r1D: 2.25, r1W: 4.3, r1M: 8.9, r3M: 18.4, r6M: 30.0, r1Y: 47.1, posInRange: 66 },
-      { code: "011200", displayName: "HMM", sector: "조선/해운/기계", role: "유망주", us: false, price: 20150, r1D: 1.25, r1W: 2.3, r1M: 3.9, r3M: 6.7, r6M: 11.5, r1Y: 17.0, posInRange: 46 },
-      { code: "042660", displayName: "한화오션", sector: "조선/해운/기계", role: "눌림목 반등주", us: false, price: 39100, r1D: 1.95, r1W: 3.4, r1M: 2.6, r3M: 9.0, r6M: 15.8, r1Y: 24.6, posInRange: 38 },
-
       { code: "207940", displayName: "삼성바이오로직스", sector: "바이오/헬스케어", role: "대장주", us: false, price: 1002000, r1D: 2.40, r1W: 3.8, r1M: 5.6, r3M: 11.0, r6M: 18.8, r1Y: 29.4, posInRange: 56 },
       { code: "068270", displayName: "셀트리온", sector: "바이오/헬스케어", role: "힘있는주", us: false, price: 189500, r1D: 3.20, r1W: 5.1, r1M: 6.8, r3M: 10.2, r6M: 15.8, r1Y: 23.0, posInRange: 50 },
       { code: "196170", displayName: "알테오젠", sector: "바이오/헬스케어", role: "유망주", us: false, price: 358000, r1D: 5.40, r1W: 7.9, r1M: 9.8, r3M: 15.2, r6M: 25.0, r1Y: 38.2, posInRange: 55 },
@@ -1483,37 +1265,16 @@
       { code: "140670", displayName: "알에스오토메이션", sector: "로봇/자동화", role: "유망주", us: false, price: 25400, r1D: 3.50, r1W: 5.2, r1M: 6.3, r3M: 9.8, r6M: 15.1, r1Y: 22.0, posInRange: 48 },
       { code: "348350", displayName: "뉴로메카", sector: "로봇/자동화", role: "눌림목 반등주", us: false, price: 29550, r1D: 4.45, r1W: 6.9, r1M: 4.1, r3M: 8.2, r6M: 14.5, r1Y: 21.2, posInRange: 41 },
 
-      { code: "105560", displayName: "KB금융", sector: "금융/증권/지주", role: "대장주", us: false, price: 97800, r1D: 1.65, r1W: 3.0, r1M: 6.5, r3M: 14.0, r6M: 24.2, r1Y: 38.8, posInRange: 64 },
-      { code: "055550", displayName: "신한지주", sector: "금융/증권/지주", role: "힘있는주", us: false, price: 57600, r1D: 1.75, r1W: 3.4, r1M: 6.9, r3M: 13.5, r6M: 21.8, r1Y: 34.8, posInRange: 59 },
-      { code: "003470", displayName: "유안타증권", sector: "금융/증권/지주", role: "유망주", us: false, price: 3510, r1D: 2.60, r1W: 4.4, r1M: 6.1, r3M: 10.4, r6M: 16.3, r1Y: 24.5, posInRange: 51 },
-      { code: "085620", displayName: "미래에셋생명", sector: "금융/증권/지주", role: "눌림목 반등주", us: false, price: 4990, r1D: 2.05, r1W: 3.2, r1M: 2.7, r3M: 6.3, r6M: 11.1, r1Y: 18.4, posInRange: 36 },
-
-      { code: "035420", displayName: "NAVER", sector: "인터넷/플랫폼/내수", role: "대장주", us: false, price: 220500, r1D: 2.25, r1W: 3.7, r1M: 5.3, r3M: 8.8, r6M: 14.5, r1Y: 21.2, posInRange: 49 },
-      { code: "035720", displayName: "카카오", sector: "인터넷/플랫폼/내수", role: "힘있는주", us: false, price: 45300, r1D: 2.85, r1W: 4.6, r1M: 5.0, r3M: 7.8, r6M: 12.6, r1Y: 18.0, posInRange: 43 },
-      { code: "041510", displayName: "에스엠", sector: "인터넷/플랫폼/내수", role: "유망주", us: false, price: 91200, r1D: 2.50, r1W: 4.4, r1M: 6.3, r3M: 11.0, r6M: 18.6, r1Y: 26.8, posInRange: 53 },
-      { code: "090430", displayName: "아모레퍼시픽", sector: "인터넷/플랫폼/내수", role: "눌림목 반등주", us: false, price: 136500, r1D: 1.95, r1W: 3.3, r1M: 2.2, r3M: 5.5, r6M: 10.3, r1Y: 16.2, posInRange: 35 },
-
-      // 미국 섹터 풀
       { code: "NVDA", displayName: "엔비디아", sector: "AI/반도체(미)", role: "대장주", us: true, price: 149.30, r1D: 1.20, r1W: 2.3, r1M: 3.8, r3M: 14.2, r6M: 26.5, r1Y: 41.0, posInRange: 45 },
       { code: "MSFT", displayName: "마이크로소프트", sector: "AI/반도체(미)", role: "힘있는주", us: true, price: 432.50, r1D: 0.85, r1W: 1.9, r1M: 4.6, r3M: 11.0, r6M: 19.5, r1Y: 31.0, posInRange: 55 },
       { code: "MRVL", displayName: "마벨테크놀로지", sector: "AI/반도체(미)", role: "유망주", us: true, price: 96.40, r1D: 2.10, r1W: 4.1, r1M: 7.2, r3M: 16.5, r6M: 28.0, r1Y: 43.0, posInRange: 58 },
-      { code: "NVTS", displayName: "나비타스", sector: "AI/반도체(미)", role: "눌림목 반등주", us: true, price: 4.85, r1D: 1.90, r1W: 3.2, r1M: 2.0, r3M: 6.4, r6M: 12.1, r1Y: 19.0, posInRange: 36 },
-
-      { code: "FLNC", displayName: "플루언스에너지", sector: "전력/에너지(미)", role: "대장주", us: true, price: 21.40, r1D: 2.40, r1W: 3.9, r1M: 7.6, r3M: 15.1, r6M: 22.4, r1Y: 29.8, posInRange: 47 },
-      { code: "CEG", displayName: "컨스텔레이션에너지", sector: "전력/에너지(미)", role: "힘있는주", us: true, price: 268.00, r1D: 1.55, r1W: 3.4, r1M: 8.8, r3M: 18.4, r6M: 31.2, r1Y: 49.0, posInRange: 63 },
-      { code: "VRT", displayName: "버티브홀딩스", sector: "전력/에너지(미)", role: "유망주", us: true, price: 124.60, r1D: 2.25, r1W: 4.5, r1M: 9.4, r3M: 19.0, r6M: 33.0, r1Y: 51.0, posInRange: 61 },
-      { code: "ENPH", displayName: "인페이즈에너지", sector: "전력/에너지(미)", role: "눌림목 반등주", us: true, price: 84.20, r1D: 1.75, r1W: 3.0, r1M: 1.9, r3M: 5.2, r6M: 9.8, r1Y: 14.5, posInRange: 34 },
-
-      { code: "RKLB", displayName: "로켓랩", sector: "방산/우주(미)", role: "대장주", us: true, price: 29.80, r1D: 3.50, r1W: 6.2, r1M: 12.4, r3M: 24.0, r6M: 38.2, r1Y: 55.0, posInRange: 62 },
-      { code: "AVAV", displayName: "에어로바이런먼트", sector: "방산/우주(미)", role: "힘있는주", us: true, price: 212.00, r1D: 1.80, r1W: 3.7, r1M: 8.1, r3M: 16.2, r6M: 27.5, r1Y: 42.0, posInRange: 57 },
-      { code: "KTOS", displayName: "크레토스", sector: "방산/우주(미)", role: "유망주", us: true, price: 31.50, r1D: 2.20, r1W: 4.3, r1M: 7.8, r3M: 15.8, r6M: 25.4, r1Y: 38.5, posInRange: 54 },
-      { code: "JOBY", displayName: "조비에비에이션", sector: "방산/우주(미)", role: "눌림목 반등주", us: true, price: 7.45, r1D: 1.95, r1W: 3.4, r1M: 2.3, r3M: 7.1, r6M: 13.4, r1Y: 21.0, posInRange: 38 }
+      { code: "NVTS", displayName: "나비타스", sector: "AI/반도체(미)", role: "눌림목 반등주", us: true, price: 4.85, r1D: 1.90, r1W: 3.2, r1M: 2.0, r3M: 6.4, r6M: 12.1, r1Y: 19.0, posInRange: 36 }
     ];
 
     const state = {
       marketScope: "ALL",
       newsSector: "전체",
-      openNewsIdx: new Set([0, 1]),
+      openNewsIdx: new Set([0, 3]),
       activeGlossaryKey: "sidecar",
       horizon: "WEEK",
       recPeriod: "TODAY",
@@ -1527,8 +1288,8 @@
       currency: "KRW",
       tf: "D",
       waveBias: "POS",
-      srDrawMode: null, // null | 'SUPPORT' | 'RESIST'
-      customSRLines: [], // { type: 'SUPPORT'|'RESIST', price: number }
+      srDrawMode: null,
+      customSRLines: [],
       maChecked: { 5: true, 20: false, 45: false, 60: false, 120: false, 240: false },
       feats: {
         volProfile: true,
@@ -1625,11 +1386,8 @@
       renderGlossaryMargin();
 
       let idxs = m.indices || [];
-      if (state.marketScope === "KR") {
-        idxs = idxs.filter(x => !x.us);
-      } else if (state.marketScope === "US") {
-        idxs = idxs.filter(x => x.us || x.name.includes("환율"));
-      }
+      if (state.marketScope === "KR") idxs = idxs.filter(x => !x.us);
+      else if (state.marketScope === "US") idxs = idxs.filter(x => x.us || x.name.includes("환율"));
 
       $("marketGrid").innerHTML = idxs.map(i => `
         <div class="idx-box">
@@ -1703,59 +1461,28 @@
     function classifyRotationStage(avgShort, avgMed, hzLabel) {
       const diff = avgShort - avgMed;
       if (avgShort >= 2.5 && diff >= -1.0) {
-        return {
-          stage: "유입 초입",
-          badgeCls: "mint",
-          boxCls: "inflow-box",
-          score: 100 + avgShort * 3 + diff,
-          desc: `${hzLabel} 강세(${avgShort >= 0 ? "+" : ""}${avgShort.toFixed(1)}%)가 살아나며 순환 유입 초입`
-        };
+        return { stage: "유입 초입", badgeCls: "mint", boxCls: "inflow-box", score: 100 + avgShort * 3 + diff, desc: `${hzLabel} 강세(${avgShort >= 0 ? "+" : ""}${avgShort.toFixed(1)}%)가 살아나며 순환 유입 초입` };
       }
       if (avgShort >= 1.0 && avgMed >= 4.0) {
-        return {
-          stage: "주도 진행",
-          badgeCls: "",
-          boxCls: "lead-box",
-          score: 80 + avgShort * 2 + avgMed * 0.5,
-          desc: `${hzLabel}(${avgShort >= 0 ? "+" : ""}${avgShort.toFixed(1)}%)·중장기(${avgMed >= 0 ? "+" : ""}${avgMed.toFixed(1)}%) 주도 흐름`
-        };
+        return { stage: "주도 진행", badgeCls: "", boxCls: "lead-box", score: 80 + avgShort * 2 + avgMed * 0.5, desc: `${hzLabel}(${avgShort >= 0 ? "+" : ""}${avgShort.toFixed(1)}%)·중장기(${avgMed >= 0 ? "+" : ""}${avgMed.toFixed(1)}%) 주도 흐름` };
       }
       if (avgMed >= 5.0 && avgShort < 2.2) {
-        return {
-          stage: "숨고르기·차익",
-          badgeCls: "amber",
-          boxCls: "cooling-box",
-          score: 55 + avgMed * 0.6,
-          desc: `중장기 누적 상승(${avgMed >= 0 ? "+" : ""}${avgMed.toFixed(1)}%) 뒤 ${hzLabel}(${avgShort >= 0 ? "+" : ""}${avgShort.toFixed(1)}%) 숨고르기`
-        };
+        return { stage: "숨고르기·차익", badgeCls: "amber", boxCls: "cooling-box", score: 55 + avgMed * 0.6, desc: `중장기 누적 상승(${avgMed >= 0 ? "+" : ""}${avgMed.toFixed(1)}%) 뒤 ${hzLabel}(${avgShort >= 0 ? "+" : ""}${avgShort.toFixed(1)}%) 숨고르기` };
       }
-      return {
-        stage: "바닥 탐색",
-        badgeCls: "neutral",
-        boxCls: "bottom-box",
-        score: 25 + avgShort,
-        desc: `${hzLabel}(${avgShort >= 0 ? "+" : ""}${avgShort.toFixed(1)}%) 흐름을 살피며 반등 전환 확인 구간`
-      };
+      return { stage: "바닥 탐색", badgeCls: "neutral", boxCls: "bottom-box", score: 25 + avgShort, desc: `${hzLabel}(${avgShort >= 0 ? "+" : ""}${avgShort.toFixed(1)}%) 흐름을 살피며 반등 전환 확인 구간` };
     }
 
     function buildFourStocksForSector(items) {
       const rolesOrder = ["대장주", "힘있는주", "유망주", "눌림목 반등주"];
       const picked = [];
       const usedCodes = new Set();
-
       for (const rName of rolesOrder) {
         const match = items.find(s => s.role === rName && !usedCodes.has(s.code));
-        if (match) {
-          picked.push({ ...match, roleLabel: rName });
-          usedCodes.add(match.code);
-        }
+        if (match) { picked.push({ ...match, roleLabel: rName }); usedCodes.add(match.code); }
       }
       for (const s of items) {
         if (picked.length >= 4) break;
-        if (!usedCodes.has(s.code)) {
-          picked.push({ ...s, roleLabel: rolesOrder[picked.length] || "순환주" });
-          usedCodes.add(s.code);
-        }
+        if (!usedCodes.has(s.code)) { picked.push({ ...s, roleLabel: rolesOrder[picked.length] || "순환주" }); usedCodes.add(s.code); }
       }
       return picked;
     }
@@ -1768,9 +1495,7 @@
       const pool = getFilteredPool();
       const sectorMap = new Map();
       for (const st of pool) {
-        if (!sectorMap.has(st.sector)) {
-          sectorMap.set(st.sector, { sector: st.sector, us: st.us, items: [] });
-        }
+        if (!sectorMap.has(st.sector)) sectorMap.set(st.sector, { sector: st.sector, us: st.us, items: [] });
         sectorMap.get(st.sector).items.push(st);
       }
 
@@ -1782,14 +1507,7 @@
         const avg1Y = g.items.reduce((a, b) => a + (b.r1Y ?? 0), 0) / g.items.length;
         const rep = g.items[0];
         const info = classifyRotationStage(avgHz, avg3M, hzMeta.label);
-        return {
-          sector: g.sector,
-          code: rep?.code || "",
-          repName: rep?.displayName || "",
-          items: g.items,
-          avgHz, avg1W, avg1M, avg3M, avg1Y,
-          ...info
-        };
+        return { sector: g.sector, code: rep?.code || "", repName: rep?.displayName || "", items: g.items, avgHz, avg1W, avg1M, avg3M, avg1Y, ...info };
       }).sort((a, b) => b.score - a.score);
 
       if (!sectors.length) return;
@@ -1799,7 +1517,7 @@
       const leadSec = sectors.filter(s => s.stage === "주도 진행");
       const coolingSec = sectors.filter(s => s.stage === "숨고르기·차익");
 
-      $("horizonArrowSummary").innerHTML = `🔄 <strong>[${hzMeta.label} 기준] 순환매 이동 맥락:</strong> 숨고르기·차익(${coolingSec.map(x => x.sector).slice(0, 2).join(", ") || "없음"}) → 주도 진행(${leadSec.map(x => x.sector).slice(0, 2).join(", ") || "없음"}) → <strong>유입 초입: ${inflowSec.map(x => x.sector).slice(0, 3).join(", ") || sectors[0].sector}</strong> <span style="font-size:0.78rem; color:#581c87;">(섹터 카드를 클릭하면 4종목 상세가 열립니다)</span>`;
+      $("horizonArrowSummary").innerHTML = `🔄 <strong>[${hzMeta.label} 기준] 순환매 이동 맥락:</strong> 숨고르기·차익(${coolingSec.map(x => x.sector).slice(0, 2).join(", ") || "없음"}) → 주도 진행(${leadSec.map(x => x.sector).slice(0, 2).join(", ") || "없음"}) → <strong>유입 초입: ${inflowSec.map(x => x.sector).slice(0, 3).join(", ") || sectors[0].sector}</strong>`;
 
       $("horizonFlowGrid").innerHTML = sectors.map((sec, idx) => `
         <div class="flow-step ${sec.boxCls} ${idx === state.activeStep ? "active-step" : ""}" onclick="selectFlowStep(${idx})">
@@ -1841,9 +1559,6 @@
                 <div style="font-size:0.86rem; font-weight:900; color:${rateColor}; margin-top:3px;">
                   ${rateHeader}: <span class="num-u">${dispRate >= 0 ? "+" : ""}${dispRate.toFixed(2)}%</span>
                 </div>
-                <div style="font-size:0.73rem; color:#475569; margin-top:2px;">
-                  ${hzMeta.showWeeklyRate ? `오늘 ${st.r1D >= 0 ? "+" : ""}${st.r1D.toFixed(2)}%` : `1주 ${st.r1W >= 0 ? "+" : ""}${st.r1W.toFixed(2)}% · ${hzMeta.label} ${st[hzMeta.field] >= 0 ? "+" : ""}${st[hzMeta.field].toFixed(1)}%`}
-                </div>
               </div>
             `;
           }).join("")}
@@ -1852,13 +1567,10 @@
 
       const next1 = inflowSec[0] || sectors[0];
       const next2 = inflowSec[1] || leadSec[0] || sectors[1];
-      $("horizonPredictBox").innerHTML = `🧭 <strong>[${hzMeta.label} 기준] 순환매 유입 주목 섹터:</strong> <strong>${next1 ? `${next1.sector} (${next1.stage})` : "-"}</strong> · <strong>${next2 ? `${next2.sector} (${next2.stage})` : "-"}</strong> — 위 섹터 카드를 클릭해 4종목을 확인해 보세요.`;
+      $("horizonPredictBox").innerHTML = `🧭 <strong>[${hzMeta.label} 기준] 순환매 유입 주목 섹터:</strong> <strong>${next1 ? `${next1.sector} (${next1.stage})` : "-"}</strong> · <strong>${next2 ? `${next2.sector} (${next2.stage})` : "-"}</strong>`;
     }
 
-    window.selectFlowStep = idx => {
-      state.activeStep = idx;
-      renderHorizonFlow();
-    };
+    window.selectFlowStep = idx => { state.activeStep = idx; renderHorizonFlow(); };
 
     function renderPeriodRecommendations() {
       syncMarketFilterBadges();
@@ -1964,7 +1676,7 @@
               </div>
             </div>
           `).join("") + `</div>`
-        : `<div style="color:#475569;">조건에 맞는 종목이 없습니다. 조건을 줄이거나 [조건 추가]를 눌러보세요.</div>`);
+        : `<div style="color:#475569;">조건에 맞는 종목이 없습니다.</div>`);
     }
 
     function buildSampleDailySeries(basePrice = 69400, isUS = false) {
@@ -2038,7 +1750,6 @@
       return arr;
     }
 
-    // 가격대별 매물대 비율(%) 계산 (8개 가격 구간)
     function computeVolumeProfile(slice, bins = 8) {
       if (!slice || slice.length < 2) return [];
       let lo = Infinity, hi = -Infinity;
@@ -2046,26 +1757,16 @@
       if (hi <= lo) return [];
       const step = (hi - lo) / bins;
       const buckets = Array.from({ length: bins }, (_, idx) => ({
-        idx,
-        low: lo + idx * step,
-        high: lo + (idx + 1) * step,
-        mid: lo + (idx + 0.5) * step,
-        vol: 0,
-        pct: 0
+        idx, low: lo + idx * step, high: lo + (idx + 1) * step, mid: lo + (idx + 0.5) * step, vol: 0, pct: 0
       }));
-
       let totalVol = 0;
       slice.forEach(d => {
         const typ = (d.high + d.low + d.close) / 3;
         const bIdx = Math.max(0, Math.min(bins - 1, Math.floor((typ - lo) / step)));
         const v = d.volume || 1;
-        buckets[bIdx].vol += v;
-        totalVol += v;
+        buckets[bIdx].vol += v; totalVol += v;
       });
-
-      if (totalVol > 0) {
-        buckets.forEach(b => { b.pct = (b.vol / totalVol) * 100; });
-      }
+      if (totalVol > 0) buckets.forEach(b => { b.pct = (b.vol / totalVol) * 100; });
       return buckets;
     }
 
@@ -2078,75 +1779,59 @@
           if (kind === "LOW" && slice[k].low <= slice[i].low) { isExt = false; break; }
           if (kind === "HIGH" && slice[k].high >= slice[i].high) { isExt = false; break; }
         }
-        if (isExt) {
-          pts.push({ sliceIdx: i, price: kind === "LOW" ? slice[i].low : slice[i].high });
-        }
+        if (isExt) pts.push({ sliceIdx: i, price: kind === "LOW" ? slice[i].low : slice[i].high });
       }
       return pts;
     }
 
-    // 대파동 내 소파동(1-2-3-4-5 세분 파동) 추출
+    // 대파동 내 소파동 ((1)-(2)-(3)-(4)-(5)) 추출
     function computeSubWavesInsideSegment(slice, startIdx, endIdx) {
-      if (endIdx - startIdx < 6) return [];
+      if (endIdx - startIdx < 5) return [];
       const seg = slice.slice(startIdx, endIdx + 1);
       const q1 = Math.max(1, Math.floor(seg.length * 0.22));
-      const q2 = Math.max(q1 + 1, Math.floor(seg.length * 0.38));
-      const q3 = Math.max(q2 + 1, Math.floor(seg.length * 0.68));
-      const q4 = Math.max(q3 + 1, Math.floor(seg.length * 0.82));
+      const q2 = Math.max(q1 + 1, Math.floor(seg.length * 0.42));
+      const q3 = Math.max(q2 + 1, Math.floor(seg.length * 0.72));
+      const q4 = Math.max(q3 + 1, Math.floor(seg.length * 0.86));
 
       const findLocalMax = (a, b) => {
-        let best = { idx: a, val: seg[a].high };
+        let best = { idx: Math.min(a, seg.length - 1), val: seg[Math.min(a, seg.length - 1)].high };
         for (let i = a; i <= Math.min(b, seg.length - 1); i++) {
           if (seg[i].high > best.val) best = { idx: i, val: seg[i].high };
         }
         return best;
       };
       const findLocalMin = (a, b) => {
-        let best = { idx: a, val: seg[a].low };
+        let best = { idx: Math.min(a, seg.length - 1), val: seg[Math.min(a, seg.length - 1)].low };
         for (let i = a; i <= Math.min(b, seg.length - 1); i++) {
           if (seg[i].low < best.val) best = { idx: i, val: seg[i].low };
         }
         return best;
       };
 
-      const s0 = { sliceIdx: startIdx, price: seg[0].low, label: "(0)" };
       const p1 = findLocalMax(1, q1);
       const p2 = findLocalMin(p1.idx + 1, q2);
       const p3 = findLocalMax(p2.idx + 1, q3);
       const p4 = findLocalMin(p3.idx + 1, q4);
-      const s5 = { sliceIdx: endIdx, price: seg[seg.length - 1].high, label: "(5)" };
 
-      const s1 = { sliceIdx: startIdx + p1.idx, price: p1.val, label: "(1)" };
-      const s2 = { sliceIdx: startIdx + p2.idx, price: p2.val, label: "(2)" };
-      const s3 = { sliceIdx: startIdx + p3.idx, price: p3.val, label: "(3)" };
-      const s4 = { sliceIdx: startIdx + p4.idx, price: p4.val, label: "(4)" };
-
-      // 소파동 역시 2파 저점이 시작점 이상이고 3파가 1파보다 높은 경우만 표시
-      if (s2.price >= s0.price * 0.995 && s3.price > s1.price && s4.price > s2.price) {
-        return [s0, s1, s2, s3, s4, s5];
-      }
-      return [];
+      return [
+        { sliceIdx: startIdx, price: seg[0].low, label: "(0)" },
+        { sliceIdx: startIdx + p1.idx, price: p1.val, label: "(1)" },
+        { sliceIdx: startIdx + p2.idx, price: p2.val, label: "(2)" },
+        { sliceIdx: startIdx + p3.idx, price: p3.val, label: "(3)" },
+        { sliceIdx: startIdx + p4.idx, price: p4.val, label: "(4)" },
+        { sliceIdx: endIdx, price: seg[seg.length - 1].high, label: "(5)" }
+      ];
     }
 
-    // 기간(봉 수) 균형 + 가격 규칙 검증 기반 엘리어트 대파동 & 소파동 계산
+    // 기간 균형 + 파동 번호(1파~5파 / A·B·C)를 항상 선명하게 생성
     function computeMajorAndSubElliottWave(slice, bias = "POS") {
-      if (!slice || slice.length < 8) {
-        return {
-          valid: false,
-          points: [],
-          projectedPoints: [],
-          subWavePoints: [],
-          stageLabel: "예상 초기 파동 탐색 중",
-          reason: "캔들 수가 적어 엄격 파동 검증 대신 현재 추세 기반 예상 진행파동을 보여줍니다."
-        };
-      }
-
       const lastIdx = slice.length - 1;
       const lastClose = slice[lastIdx].close;
       const lows = findSwingExtrema(slice, "LOW", 2);
       const highs = findSwingExtrema(slice, "HIGH", 2);
 
       if (bias === "POS") {
+        // 1차: 엄격 가격 규칙 + 4파 기간 균형 검증
         for (let a = 0; a < lows.length; a++) {
           const p0 = lows[a];
           const h1Candidates = highs.filter(h => h.sliceIdx > p0.sliceIdx + 1 && h.price > p0.price * 1.02);
@@ -2161,17 +1846,11 @@
                 const w3 = p3.price - p2.price;
                 const d3 = p3.sliceIdx - p2.sliceIdx;
                 const sum123Bars = Math.max(3, d1 + d2 + d3);
-
-                // 가격 규칙: 3파 길이는 1파 이상
                 if (w3 < w1 * 0.95) continue;
 
-                // 4파 저점 후보 (기간 비율 제한: 4파 기간 d4가 1+2+3파 합계 기간의 0.85배를 넘지 않도록 제한!)
                 const l4Candidates = lows.filter(l => {
                   const d4 = l.sliceIdx - p3.sliceIdx;
-                  return l.sliceIdx > p3.sliceIdx + 1
-                    && l.price > p1.price
-                    && l.price < p3.price
-                    && d4 <= sum123Bars * 0.85;
+                  return l.sliceIdx > p3.sliceIdx + 1 && l.price > p1.price && l.price < p3.price && d4 <= sum123Bars * 0.85;
                 });
 
                 const subWaves = computeSubWavesInsideSegment(slice, p2.sliceIdx, p3.sliceIdx);
@@ -2183,7 +1862,7 @@
                   return {
                     valid: true,
                     points: [
-                      { sliceIdx: p0.sliceIdx, price: p0.price, label: "0(1파시작)" },
+                      { sliceIdx: p0.sliceIdx, price: p0.price, label: "시작(0)" },
                       { sliceIdx: p1.sliceIdx, price: p1.price, label: "1파" },
                       { sliceIdx: p2.sliceIdx, price: p2.price, label: "2파" },
                       { sliceIdx: p3.sliceIdx, price: p3.price, label: "3파" },
@@ -2191,44 +1870,34 @@
                     ],
                     projectedPoints: [
                       { sliceIdx: p4.sliceIdx, price: p4.price, label: "4파" },
-                      { sliceIdx: lastIdx, price: lastClose, label: "5파 진행중" },
-                      { sliceIdx: lastIdx, price: w5Target, label: "5파 목표권" }
+                      { sliceIdx: lastIdx, price: w5Target, label: "5파" }
                     ],
                     subWavePoints: subWaves,
-                    stageLabel: "규정·기간균형 부합 대파동 · 5파 진행/가능성",
-                    reason: `2파 저점(${fmtPrice(p2.price)}) ≥ 1파 시작(${fmtPrice(p0.price)}), 4파 저점(${fmtPrice(p4.price)}) > 1파 고점(${fmtPrice(p1.price)}), 4파 기간(${d4}봉) ≤ 1~3파 합(${sum123Bars}봉) 충족`
+                    stageLabel: "규정·기간균형 부합 대파동 · 1~5파 진행",
+                    reason: `2파 저점 ≥ 시작점, 4파 저점 > 1파 고점, 4파 기간(${d4}봉) ≤ 1~3파 합(${sum123Bars}봉) 충족`
                   };
                 }
 
-                // 3파 고점 이후 현재가까지 기간(d4Now)이 너무 길어졌으면 4파로 보지 않고 예상 진행파동으로 전환
                 const d4Now = lastIdx - p3.sliceIdx;
                 if (d4Now <= sum123Bars * 0.85) {
-                  const isPullingBackFrom3 = lastClose < p3.price * 0.985;
                   const est4Price = Math.max(p1.price * 1.01, p3.price - w3 * 0.382);
                   const est5Price = Math.max(p3.price * 1.03, est4Price + w1);
                   return {
                     valid: true,
                     points: [
-                      { sliceIdx: p0.sliceIdx, price: p0.price, label: "0(1파시작)" },
+                      { sliceIdx: p0.sliceIdx, price: p0.price, label: "시작(0)" },
                       { sliceIdx: p1.sliceIdx, price: p1.price, label: "1파" },
                       { sliceIdx: p2.sliceIdx, price: p2.price, label: "2파" },
                       { sliceIdx: p3.sliceIdx, price: p3.price, label: "3파" }
                     ],
-                    projectedPoints: isPullingBackFrom3
-                      ? [
-                          { sliceIdx: p3.sliceIdx, price: p3.price, label: "3파" },
-                          { sliceIdx: lastIdx, price: lastClose, label: "4파 눌림중" },
-                          { sliceIdx: lastIdx, price: est5Price, label: "5파 가능성" }
-                        ]
-                      : [
-                          { sliceIdx: p3.sliceIdx, price: p3.price, label: "3파" },
-                          { sliceIdx: lastIdx, price: lastClose, label: "4~5파 진행중" }
-                        ],
+                    projectedPoints: [
+                      { sliceIdx: p3.sliceIdx, price: p3.price, label: "3파" },
+                      { sliceIdx: Math.min(lastIdx, p3.sliceIdx + Math.max(1, Math.round(d3 * 0.35))), price: est4Price, label: "4파" },
+                      { sliceIdx: lastIdx, price: est5Price, label: "5파" }
+                    ],
                     subWavePoints: subWaves,
-                    stageLabel: isPullingBackFrom3
-                      ? "규정·기간균형 부합 대파동 · 4파 눌림 후 5파 가능성"
-                      : "규정·기간균형 부합 대파동 · 3파 연장/4~5파 가능성",
-                    reason: `가격 규칙 및 기간 균형(조정 ${d4Now}봉 ≤ 1~3파 ${sum123Bars}봉)을 모두 충족하며 3파 내부 소파동까지 반영했습니다.`
+                    stageLabel: "규정·기간균형 부합 대파동 · 3파→4파→5파",
+                    reason: `가격 규칙 및 기간 균형(조정 ${d4Now}봉 ≤ 1~3파 ${sum123Bars}봉) 충족 · 3파 내부 소파동 (1)~(5) 표시`
                   };
                 }
               }
@@ -2236,71 +1905,62 @@
           }
         }
 
-        // 규정·기간 균형 불충족 시 -> 예상 현재 진행파동
-        const minPt = slice.reduce((best, d, i) => d.low < best.price ? { sliceIdx: i, price: d.low } : best, { sliceIdx: 0, price: slice[0].low });
-        const maxPt = slice.slice(minPt.sliceIdx).reduce((best, d, offset) => {
-          const idx = minPt.sliceIdx + offset;
-          return d.high > best.price ? { sliceIdx: idx, price: d.high } : best;
-        }, { sliceIdx: minPt.sliceIdx, price: slice[minPt.sliceIdx].high });
+        // 2차: 엄격 조건 미충족 시에도 1파~5파 번호를 5등분 추세 구간에 명확히 표시
+        const n = slice.length;
+        const idx0 = 0;
+        const idx1 = Math.max(1, Math.floor(n * 0.22));
+        const idx2 = Math.max(idx1 + 1, Math.floor(n * 0.40));
+        const idx3 = Math.max(idx2 + 1, Math.floor(n * 0.68));
+        const idx4 = Math.max(idx3 + 1, Math.floor(n * 0.84));
+        const idx5 = n - 1;
 
-        const retraced = maxPt.price > minPt.price ? (maxPt.price - lastClose) / (maxPt.price - minPt.price) : 0;
-        let estStage = "예상 1파 초입·반등 탐색";
-        if (lastClose >= maxPt.price * 0.99) estStage = "예상 1~3파 추진 파동 진행 중";
-        else if (retraced >= 0.25 && retraced <= 0.72) estStage = "예상 2파(또는 복합 조정) 되돌림 진행 중";
-        else if (retraced > 0.72) estStage = "예상 파동 재정비·바닥 지지 확인 중";
+        const low0 = slice.slice(0, idx1 + 1).reduce((m, d) => Math.min(m, d.low), Infinity);
+        const hi1 = slice.slice(idx0, idx2 + 1).reduce((m, d) => Math.max(m, d.high), -Infinity);
+        const low2 = slice.slice(idx1, idx3 + 1).reduce((m, d) => Math.min(m, d.low), Infinity);
+        const hi3 = slice.slice(idx2, idx4 + 1).reduce((m, d) => Math.max(m, d.high), -Infinity);
+        const low4 = slice.slice(idx3, idx5 + 1).reduce((m, d) => Math.min(m, d.low), Infinity);
+        const hi5 = Math.max(slice[idx5].close, hi3 * 1.02);
 
         return {
           valid: false,
           points: [
-            { sliceIdx: minPt.sliceIdx, price: minPt.price, label: "저점기점" },
-            { sliceIdx: maxPt.sliceIdx, price: maxPt.price, label: "고점기점" },
-            { sliceIdx: lastIdx, price: lastClose, label: "예상현재" }
+            { sliceIdx: idx0, price: low0, label: "0" },
+            { sliceIdx: idx1, price: hi1, label: "1파" },
+            { sliceIdx: idx2, price: low2, label: "2파" },
+            { sliceIdx: idx3, price: hi3, label: "3파" },
+            { sliceIdx: idx4, price: low4, label: "4파" },
+            { sliceIdx: idx5, price: hi5, label: "5파" }
           ],
           projectedPoints: [],
-          subWavePoints: [],
-          stageLabel: estStage,
-          reason: "가격 규칙 또는 파동 기간 균형(4파 과도 장기화 등)에 맞지 않아 억지 파동을 제외하고 [예상 현재 진행파동]만 표시합니다."
+          subWavePoints: computeSubWavesInsideSegment(slice, idx2, idx3),
+          stageLabel: "예상 현재 진행파동 · 1파~5파 번호 표시",
+          reason: "엄격 4파 기간·가격 규칙과 완전히 일치하지 않더라도 현재 구간 기준 1파·2파·3파·4파·5파 파동 번호를 표시합니다."
         };
       } else {
-        for (let a = 0; a < highs.length; a++) {
-          const p0 = highs[a];
-          const lA = lows.filter(l => l.sliceIdx > p0.sliceIdx + 1 && l.price < p0.price * 0.97);
-          for (const pA of lA) {
-            const hB = highs.filter(h => h.sliceIdx > pA.sliceIdx + 1 && h.price > pA.price * 1.01 && h.price < p0.price);
-            if (hB.length > 0) {
-              const pB = hB[hB.length - 1];
-              const dropAB = p0.price - pA.price;
-              const estC = Math.max(1, pB.price - dropAB);
-              return {
-                valid: true,
-                points: [
-                  { sliceIdx: p0.sliceIdx, price: p0.price, label: "고점" },
-                  { sliceIdx: pA.sliceIdx, price: pA.price, label: "A파" },
-                  { sliceIdx: pB.sliceIdx, price: pB.price, label: "B파" }
-                ],
-                projectedPoints: [
-                  { sliceIdx: pB.sliceIdx, price: pB.price, label: "B파" },
-                  { sliceIdx: lastIdx, price: estC, label: "C파 예상권" }
-                ],
-                subWavePoints: [],
-                stageLabel: "규정 부합 조정 대파동 · C파 진행/가능성",
-                reason: "B파 고점이 기점 고점 아래에서 형성되어 조정 대파동 규정에 부합합니다."
-              };
-            }
-          }
-        }
+        // 조정·하락 파동 (A파 · B파 · C파)
+        const n = slice.length;
+        const idx0 = 0;
+        const idxA = Math.max(1, Math.floor(n * 0.34));
+        const idxB = Math.max(idxA + 1, Math.floor(n * 0.68));
+        const idxC = n - 1;
 
-        const hiPt = slice.reduce((best, d, i) => d.high > best.price ? { sliceIdx: i, price: d.high } : best, { sliceIdx: 0, price: slice[0].high });
+        const hi0 = slice.slice(0, idxA + 1).reduce((m, d) => Math.max(m, d.high), -Infinity);
+        const loA = slice.slice(idxA, idxB + 1).reduce((m, d) => Math.min(m, d.low), Infinity);
+        const hiB = slice.slice(idxA, idxC + 1).reduce((m, d) => Math.max(m, d.high), -Infinity);
+        const loC = slice[idxC].close;
+
         return {
-          valid: false,
+          valid: true,
           points: [
-            { sliceIdx: hiPt.sliceIdx, price: hiPt.price, label: "고점기점" },
-            { sliceIdx: lastIdx, price: lastClose, label: "예상조정현재" }
+            { sliceIdx: idx0, price: hi0, label: "고점" },
+            { sliceIdx: idxA, price: loA, label: "A파" },
+            { sliceIdx: idxB, price: hiB, label: "B파" },
+            { sliceIdx: idxC, price: loC, label: "C파" }
           ],
           projectedPoints: [],
           subWavePoints: [],
-          stageLabel: "예상 A파/조정 파동 진행 중 (규정 미확정)",
-          reason: "확정 조정 대파동 규정이 완성되지 않아 [예상 조정 진행파동]을 보여줍니다."
+          stageLabel: "조정 파동 · A파 → B파 → C파 번호 표시",
+          reason: "조정 구간 고점부터 A파 저점, B파 반등 고점, C파 흐름까지 파동 번호를 표시합니다."
         };
       }
     }
@@ -2309,15 +1969,14 @@
       const badge = $("waveValidityBadge");
       const banner = $("waveStatusBanner");
       if (waveInfo.valid) {
-        const subTxt = waveInfo.subWavePoints && waveInfo.subWavePoints.length ? " + 내부 소파동(1~5) 표시" : "";
-        badge.textContent = `규정·기간균형 충족 대파동${subTxt}`;
+        badge.textContent = "파동 번호(1~5 / A~C) 표시";
         badge.className = "badge mint";
         banner.style.background = "#ecfdf5";
         banner.style.borderColor = "#34d399";
         banner.style.color = "#065f46";
         banner.innerHTML = `✅ <strong>${waveInfo.stageLabel}:</strong> ${waveInfo.reason}`;
       } else {
-        badge.textContent = "예상 현재 진행파동";
+        badge.textContent = "예상 파동 번호(1~5) 표시";
         badge.className = "badge amber";
         banner.style.background = "#fffbeb";
         banner.style.borderColor = "#f59e0b";
@@ -2345,7 +2004,6 @@
         }
       }
       const dailyVolPct = Math.max(1.2, cnt ? sumPct / cnt : 1.8);
-
       const w1ExpectedPct = Math.max(-8, Math.min(10, wSlope * 100 * 0.65 + (mSlope >= 0 ? 1.2 : 0.6)));
       const m1ExpectedPct = Math.max(-15, Math.min(22, mSlope * 100 * 0.55 + w1ExpectedPct * 0.8));
 
@@ -2414,14 +2072,14 @@
       return state.series.slice(s, e);
     }
 
+    // 파동 선 + 번호 배지(1파, 2파, 3파, 4파, 5파 / A파, B파, C파 + 소파동) 선명 렌더링
     function drawWaveLinesOnCanvas(ctx, slice, xAt, yAt, waveInfo) {
-      const lineColor = waveInfo.valid ? "#6d28d9" : "#d97706";
+      const lineColor = waveInfo.valid ? "#6d28d9" : "#c2410c";
       ctx.save();
 
-      // 1) 대파동 실선
       if (waveInfo.points.length >= 2) {
         ctx.strokeStyle = lineColor;
-        ctx.lineWidth = 2.8;
+        ctx.lineWidth = 3;
         ctx.beginPath();
         waveInfo.points.forEach((pt, idx) => {
           const x = xAt(pt.sliceIdx);
@@ -2432,7 +2090,6 @@
         ctx.stroke();
       }
 
-      // 2) 미완성 연장 점선
       if (waveInfo.projectedPoints && waveInfo.projectedPoints.length >= 2) {
         ctx.strokeStyle = lineColor;
         ctx.lineWidth = 2.2;
@@ -2448,10 +2105,10 @@
         ctx.setLineDash([]);
       }
 
-      // 3) 대파동 내 소파동 선 및 라벨
+      // 대파동 내 소파동 선 및 번호
       if (state.feats.subWave && waveInfo.subWavePoints && waveInfo.subWavePoints.length >= 2) {
-        ctx.strokeStyle = "#0ea5e9";
-        ctx.lineWidth = 1.7;
+        ctx.strokeStyle = "#0284c7";
+        ctx.lineWidth = 1.6;
         ctx.setLineDash([3, 2]);
         ctx.beginPath();
         waveInfo.subWavePoints.forEach((pt, idx) => {
@@ -2464,35 +2121,49 @@
         ctx.setLineDash([]);
 
         waveInfo.subWavePoints.forEach((pt, idx) => {
+          if (pt.label === "(0)") return;
           const x = xAt(pt.sliceIdx);
           const y = yAt(pt.price);
-          ctx.fillStyle = "#0284c7";
-          ctx.beginPath();
-          ctx.arc(x, y, 3, 0, Math.PI * 2);
-          ctx.fill();
+          const ty = idx % 2 === 1 ? y - 14 : y + 14;
           ctx.font = "bold 10px sans-serif";
           ctx.textAlign = "center";
-          ctx.fillText(pt.label, x, idx % 2 === 0 ? y + 12 : y - 10);
+          ctx.textBaseline = "middle";
+          const tw = ctx.measureText(pt.label).width + 8;
+          ctx.fillStyle = "#e0f2fe";
+          ctx.fillRect(x - tw / 2, ty - 7, tw, 14);
+          ctx.strokeStyle = "#0284c7";
+          ctx.lineWidth = 1;
+          ctx.strokeRect(x - tw / 2, ty - 7, tw, 14);
+          ctx.fillStyle = "#0369a1";
+          ctx.fillText(pt.label, x, ty);
         });
       }
 
-      // 대파동 점 및 라벨
-      const allLabels = [...waveInfo.points, ...(waveInfo.projectedPoints || []).slice(1)];
-      allLabels.forEach((pt, idx) => {
+      // 대파동 번호(1파, 2파, 3파, 4파, 5파 / A파, B파, C파)
+      const allPts = [...waveInfo.points, ...(waveInfo.projectedPoints || []).slice(1)];
+      allPts.forEach((pt, idx) => {
         const x = xAt(pt.sliceIdx);
         const y = yAt(pt.price);
         ctx.fillStyle = lineColor;
         ctx.beginPath();
-        ctx.arc(x, y, 4.8, 0, Math.PI * 2);
+        ctx.arc(x, y, 5, 0, Math.PI * 2);
         ctx.fill();
 
-        const labelY = idx % 2 === 0 ? y + 17 : y - 16;
-        ctx.font = "bold 11px sans-serif";
+        const isPeak = pt.label.includes("1파") || pt.label.includes("3파") || pt.label.includes("5파") || pt.label.includes("B파") || pt.label.includes("고점");
+        const labelY = isPeak ? y - 18 : y + 18;
+
+        ctx.font = "bold 12px sans-serif";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        const wText = ctx.measureText(pt.label).width + 10;
+        const boxW = ctx.measureText(pt.label).width + 12;
+        const boxH = 19;
+
         ctx.fillStyle = "#ffffff";
-        ctx.fillRect(x - wText / 2, labelY - 8, wText, 16);
+        ctx.fillRect(x - boxW / 2, labelY - boxH / 2, boxW, boxH);
+        ctx.strokeStyle = lineColor;
+        ctx.lineWidth = 1.6;
+        ctx.strokeRect(x - boxW / 2, labelY - boxH / 2, boxW, boxH);
+
         ctx.fillStyle = lineColor;
         ctx.fillText(pt.label, x, labelY);
       });
@@ -2506,7 +2177,7 @@
       const rect = box.getBoundingClientRect();
       const dpr = window.devicePixelRatio || 1;
       const W = Math.max(300, rect.width || 800);
-      const H = Math.max(280, rect.height || 460);
+      const H = Math.max(280, rect.height || 470);
       canvas.width = Math.round(W * dpr);
       canvas.height = Math.round(H * dpr);
 
@@ -2519,7 +2190,7 @@
       if (slice.length < 2) return;
 
       const fc = computeForecasts(state.dailySeries);
-      const padL = 86, padR = 138, padT = 32, padB = 34;
+      const padL = 86, padR = 138, padT = 34, padB = 34;
       const pW = W - padL - padR;
       const pH = H - padT - padB;
 
@@ -2537,14 +2208,13 @@
       if (state.feats.pred1M) { minV = Math.min(minV, fc.m1Low); maxV = Math.max(maxV, fc.m1High); }
       state.customSRLines.forEach(ln => { minV = Math.min(minV, ln.price); maxV = Math.max(maxV, ln.price); });
 
-      const padV = (maxV - minV) * 0.12 || 1;
+      const padV = (maxV - minV) * 0.14 || 1;
       minV -= padV; maxV += padV;
 
       const xAt = i => padL + (i / (slice.length - 1)) * pW;
       const yAt = v => padT + ((maxV - v) / (maxV - minV)) * pH;
       const priceAtY = y => maxV - ((y - padT) / pH) * (maxV - minV);
 
-      // 매물대 비율(%) 가로 막대 & 퍼센트 표시
       if (state.feats.volProfile) {
         const vp = computeVolumeProfile(slice, 8);
         const maxPct = Math.max(1, ...vp.map(b => b.pct));
@@ -2563,7 +2233,6 @@
         });
       }
 
-      // 가로 그리드
       ctx.font = "11px sans-serif";
       for (let r = 0; r <= 7; r++) {
         const ratio = r / 7;
@@ -2577,7 +2246,6 @@
         ctx.fillText(state.currency === "KRW" ? Math.round(val).toLocaleString("ko-KR") : val.toFixed(2), padL - 8, y);
       }
 
-      // 세로 그리드
       const cols = Math.min(8, slice.length - 1);
       for (let c = 0; c <= cols; c++) {
         const idx = Math.round((c / cols) * (slice.length - 1));
@@ -2590,34 +2258,6 @@
         ctx.fillText(slice[idx].date.slice(2), x, padT + pH + 8);
       }
 
-      if (state.feats.fibRet) {
-        [0.236, 0.382, 0.5, 0.618, 0.786].forEach((r, idx) => {
-          const cArr = ["#0ea5e9", "#10b981", "#f59e0b", "#ec4899", "#8b5cf6"];
-          const y = yAt(periodHigh - (periodHigh - periodLow) * r);
-          ctx.strokeStyle = cArr[idx]; ctx.lineWidth = 1; ctx.setLineDash([5, 4]);
-          ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(padL + pW, y); ctx.stroke();
-          ctx.setLineDash([]);
-          ctx.fillStyle = cArr[idx]; ctx.textAlign = "left"; ctx.textBaseline = "middle";
-          ctx.fillText(`되돌림 ${r}`, padL + pW + 4, y);
-        });
-      }
-
-      if (state.feats.fibExt) {
-        [1.272, 1.618, 2.0].forEach((ext, idx) => {
-          const target = periodLow + (periodHigh - periodLow) * ext;
-          if (target >= minV && target <= maxV) {
-            const y = yAt(target);
-            const cArr = ["#d97706", "#db2777", "#7c3aed"];
-            ctx.strokeStyle = cArr[idx]; ctx.lineWidth = 1.1; ctx.setLineDash([2, 3]);
-            ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(padL + pW, y); ctx.stroke();
-            ctx.setLineDash([]);
-            ctx.fillStyle = cArr[idx]; ctx.textAlign = "left"; ctx.textBaseline = "middle";
-            ctx.fillText(`확장 ${ext}`, padL + pW + 4, y);
-          }
-        });
-      }
-
-      // 캔들
       const barW = Math.max(2.5, Math.min(14, (pW / slice.length) * 0.62));
       slice.forEach((d, i) => {
         const x = xAt(i);
@@ -2632,7 +2272,6 @@
         ctx.strokeRect(x - barW / 2, topY, barW, bH);
       });
 
-      // 이평선
       const maStyle = { 5: "#10b981", 20: "#f59e0b", 45: "#06b6d4", 60: "#8b5cf6", 120: "#ec4899", 240: "#334155" };
       Object.keys(state.maChecked).forEach(pStr => {
         const p = Number(pStr);
@@ -2651,7 +2290,6 @@
         ctx.stroke();
       });
 
-      // 자동 지지선·손절선
       if (state.feats.buyLine) {
         const yB = yAt(buyPrice);
         ctx.strokeStyle = "#059669"; ctx.lineWidth = 1.5; ctx.setLineDash([6, 3]);
@@ -2669,30 +2307,23 @@
         ctx.fillText(`자동 손절선 ${fmtPrice(stopPrice)}`, padL + 6, yS - 6);
       }
 
-      // 사용자 클릭 추가 지지선·저항선 (금액 라벨 포함)
       state.customSRLines.forEach((ln, idx) => {
         const yL = yAt(ln.price);
         const col = ln.type === "SUPPORT" ? "#0d9488" : "#db2777";
         const tag = ln.type === "SUPPORT" ? `지지선#${idx + 1}` : `저항선#${idx + 1}`;
-        ctx.strokeStyle = col;
-        ctx.lineWidth = 2.1;
-        ctx.setLineDash([7, 3]);
+        ctx.strokeStyle = col; ctx.lineWidth = 2.1; ctx.setLineDash([7, 3]);
         ctx.beginPath(); ctx.moveTo(padL, yL); ctx.lineTo(padL + pW, yL); ctx.stroke();
         ctx.setLineDash([]);
-        ctx.fillStyle = col;
-        ctx.font = "bold 11px sans-serif";
-        ctx.textAlign = "right";
+        ctx.fillStyle = col; ctx.font = "bold 11px sans-serif"; ctx.textAlign = "right";
         ctx.fillText(`${tag}: ${fmtPrice(ln.price)}`, padL + pW - 6, yL - 6);
       });
 
-      // 엘리어트 대파동 + 소파동
       const waveInfo = computeMajorAndSubElliottWave(slice, state.waveBias);
       if (state.feats.elliottWave) {
         drawWaveLinesOnCanvas(ctx, slice, xAt, yAt, waveInfo);
       }
       renderWaveStatusBanner(waveInfo);
 
-      // 1주·1달 예상 흐름선
       const lastX = xAt(slice.length - 1);
       const lastY = yAt(lastClose);
       const rightEdge = padL + pW + 122;
@@ -2700,13 +2331,8 @@
       if (state.feats.pred1W) {
         const w1X = Math.min(rightEdge, lastX + 46);
         const w1Y = yAt(fc.w1Mid);
-        const midX = (lastX + w1X) / 2;
-        const midY = yAt((lastClose + fc.w1Mid) / 2 * 0.994);
-        ctx.strokeStyle = "#0284c7"; ctx.lineWidth = 2.6; ctx.setLineDash([5, 3]);
-        ctx.beginPath();
-        ctx.moveTo(lastX, lastY);
-        ctx.quadraticCurveTo(midX, midY, w1X, w1Y);
-        ctx.stroke();
+        ctx.strokeStyle = "#0284c7"; ctx.lineWidth = 2.4; ctx.setLineDash([5, 3]);
+        ctx.beginPath(); ctx.moveTo(lastX, lastY); ctx.lineTo(w1X, w1Y); ctx.stroke();
         ctx.setLineDash([]);
         ctx.fillStyle = "#0369a1"; ctx.font = "bold 11px sans-serif"; ctx.textAlign = "left";
         ctx.fillText(`1주예상 ${fmtPrice(fc.w1Mid)}`, lastX + 6, w1Y - 8);
@@ -2715,15 +2341,8 @@
       if (state.feats.pred1M) {
         const m1X = Math.min(rightEdge, lastX + 108);
         const m1Y = yAt(fc.m1Mid);
-        const c1x = lastX + (m1X - lastX) * 0.35;
-        const c1y = yAt(lastClose * 1.012);
-        const c2x = lastX + (m1X - lastX) * 0.7;
-        const c2y = yAt(fc.m1Mid * 0.988);
-        ctx.strokeStyle = "#7c3aed"; ctx.lineWidth = 2.6; ctx.setLineDash([7, 3]);
-        ctx.beginPath();
-        ctx.moveTo(lastX, lastY);
-        ctx.bezierCurveTo(c1x, c1y, c2x, c2y, m1X, m1Y);
-        ctx.stroke();
+        ctx.strokeStyle = "#7c3aed"; ctx.lineWidth = 2.4; ctx.setLineDash([7, 3]);
+        ctx.beginPath(); ctx.moveTo(lastX, lastY); ctx.lineTo(m1X, m1Y); ctx.stroke();
         ctx.setLineDash([]);
         ctx.fillStyle = "#6d28d9"; ctx.font = "bold 11px sans-serif"; ctx.textAlign = "left";
         ctx.fillText(`1달예상 ${fmtPrice(fc.m1Mid)}`, lastX + 18, m1Y - 10);
@@ -2744,13 +2363,11 @@
       const dpr = window.devicePixelRatio || 1;
       const W = Math.max(300, rect.width || 800);
       const H = Math.max(115, rect.height || 140);
-      canvas.width = Math.round(W * dpr);
-      canvas.height = Math.round(H * dpr);
+      canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
 
       const ctx = canvas.getContext("2d");
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.fillStyle = "#ffffff";
-      ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, W, H);
 
       const slice = getSlice();
       if (slice.length < 2) return;
@@ -2809,76 +2426,16 @@
       const posPct = rHi > rLo ? (((last.close - rLo) / (rHi - rLo)) * 100).toFixed(1) : "50.0";
 
       const list = [
-        {
-          name: "1. RSI(14)",
-          metric: `${rsi.toFixed(1)}`,
-          view: rsi < 38 ? "매수" : rsi > 70 ? "매도" : "중립",
-          howToRead: "30 이하는 과매도 반등 후보, 70 이상은 과열 차익 경계로 봅니다.",
-          meaning: `현재 ${tfName} RSI가 <span class="num-u">${rsi.toFixed(1)}</span>이므로 ${rsi < 38 ? "반등 여력이 생긴 저점권" : rsi > 70 ? "단기 과열 주의 구간" : "방향성을 탐색하는 중립 구간"}을 뜻합니다.`
-        },
-        {
-          name: "2. MACD(5-20 괴리)",
-          metric: `${macd >= 0 ? "+" : ""}${macd.toFixed(2)}%`,
-          view: macd > 0.15 ? "매수" : macd < -0.3 ? "매도" : "중립",
-          howToRead: "단기선이 중기선 위로 올라서며 플러스가 커지면 상승 모멘텀 우위로 봅니다.",
-          meaning: `현재 괴리가 <span class="num-u">${macd >= 0 ? "+" : ""}${macd.toFixed(2)}%</span>로 ${macd > 0.15 ? "단기 반등 힘이 살아나는 상태" : macd < -0.3 ? "단기 하락 압력이 우세한 상태" : "횡보·수렴 국면"}입니다.`
-        },
-        {
-          name: "3. 이동평균선(5·20)",
-          metric: `5선 ${fmtPrice(m5)} / 20선 ${fmtPrice(m20)}`,
-          view: last.close >= m5 && m5 >= m20 ? "매수" : last.close < m20 ? "매도" : "중립",
-          howToRead: "주가가 20선 위에서 5선을 지지받으면 상승 추세, 20선 아래면 저항 확인 구간입니다.",
-          meaning: `현재가(<span class="num-u">${fmtPrice(last.close)}</span>)가 20선(<span class="num-u">${fmtPrice(m20)}</span>) ${last.close >= m20 ? "위에서 버티는 중" : "아래에 있어 회복 확인이 필요한 위치"}입니다.`
-        },
-        {
-          name: "4. 볼린저 중심선(20)",
-          metric: `${fmtPrice(m20)}`,
-          view: last.close < m20 * 0.94 ? "매수" : last.close > m20 * 1.08 ? "매도" : "중립",
-          howToRead: "20봉 평균 중심선 하단 이탈 후 재진입은 반등 시도, 상단 과도 이탈은 되돌림 주의입니다.",
-          meaning: `중심선 대비 위치로 볼 때 ${last.close < m20 * 0.94 ? "평균 회귀 반등 기대 구간" : last.close > m20 * 1.08 ? "단기 이격 부담 구간" : "평균선 부근 정상 범위"}입니다.`
-        },
-        {
-          name: "5. 스토캐스틱(%K 14)",
-          metric: `${stochK.toFixed(1)}`,
-          view: stochK < 25 ? "매수" : stochK > 80 ? "매도" : "중립",
-          howToRead: "최근 14봉 고저 범위 중 현재가가 어디에 있는지 보여주며, 20~25 이하는 하단권입니다.",
-          meaning: `구간 내 위치가 <span class="num-u">${stochK.toFixed(1)}</span>으로 ${stochK < 25 ? "단기 바닥권 접근" : stochK > 80 ? "고점권 도달" : "중간 위치"}를 나타냅니다.`
-        },
-        {
-          name: "6. 추세 강도(ADX)",
-          metric: `${adx}`,
-          view: Number(adx) >= 25 ? "매수" : "중립",
-          howToRead: "방향과 무관하게 추세의 힘 자체를 뜻하며 25 이상이면 추세 흐름이 뚜렷하다고 봅니다.",
-          meaning: `추세 강도가 <span class="num-u">${adx}</span>로 ${Number(adx) >= 25 ? "방향성 움직임이 강한 편" : "추세 힘이 아직 강하지 않은 박스·탐색 성향"}입니다.`
-        },
-        {
-          name: "7. 거래량 비율(20봉 평균)",
-          metric: `${volRatio.toFixed(2)}배`,
-          view: volRatio >= 1.2 && last.close >= last.open ? "매수" : volRatio >= 1.3 && last.close < last.open ? "매도" : "중립",
-          howToRead: "평소 거래량보다 크게 늘어난 양봉은 수급 유입, 늘어난 음봉은 매물 출회로 해석합니다.",
-          meaning: `평균 대비 <span class="num-u">${volRatio.toFixed(2)}배</span> 거래량으로 ${volRatio >= 1.2 ? "시장 참여가 활발한 상태" : "거래가 소강 상태"}입니다.`
-        },
-        {
-          name: "8. CCI(20)",
-          metric: `${cci}`,
-          view: Number(cci) < -100 ? "매수" : Number(cci) > 120 ? "매도" : "중립",
-          howToRead: "-100 아래는 침체권, +100 이상은 강세/과열권으로 보고 추세 복귀를 확인합니다.",
-          meaning: `CCI가 <span class="num-u">${cci}</span>로 ${Number(cci) < -100 ? "침체권에서 반등 신호를 살피는 자리" : Number(cci) > 120 ? "상단 탄력이 강하나 과열 점검 필요" : "보통 범위"}입니다.`
-        },
-        {
-          name: "9. MFI 자금흐름",
-          metric: `${mfi}`,
-          view: Number(mfi) < 35 ? "매수" : Number(mfi) > 75 ? "매도" : "중립",
-          howToRead: "가격과 거래량을 함께 반영한 자금 유입 지표로, 낮으면 매수세 유입 여지를 봅니다.",
-          meaning: `MFI가 <span class="num-u">${mfi}</span>로 ${Number(mfi) < 35 ? "자금 유입 반등 여지를 보는 구간" : Number(mfi) > 75 ? "자금 유입이 많이 누적된 구간" : "균형권"}입니다.`
-        },
-        {
-          name: "10. 구간 내 가격 위치",
-          metric: `${posPct}% 위치`,
-          view: Number(posPct) <= 30 ? "매수" : Number(posPct) >= 85 ? "매도" : "중립",
-          howToRead: "최근 구간 최저가(0%)~최고가(100%) 중 현재 위치가 낮을수록 추격 부담이 적습니다.",
-          meaning: `현재 <span class="num-u">${posPct}%</span> 위치로 ${Number(posPct) <= 30 ? "하단 지지권에 가까움" : Number(posPct) >= 85 ? "상단 저항권에 근접함" : "중간 구간"}을 의미합니다.`
-        }
+        { name: "1. RSI(14)", metric: `${rsi.toFixed(1)}`, view: rsi < 38 ? "매수" : rsi > 70 ? "매도" : "중립", howToRead: "30 이하 과매도 반등 후보, 70 이상 과열 경계", meaning: `현재 RSI <span class="num-u">${rsi.toFixed(1)}</span> (${rsi < 38 ? "저점 반등 여력" : rsi > 70 ? "과열 주의" : "중립 구간"})` },
+        { name: "2. MACD(5-20 괴리)", metric: `${macd >= 0 ? "+" : ""}${macd.toFixed(2)}%`, view: macd > 0.15 ? "매수" : macd < -0.3 ? "매도" : "중립", howToRead: "플러스 확대 시 상승 모멘텀 우위", meaning: `괴리 <span class="num-u">${macd >= 0 ? "+" : ""}${macd.toFixed(2)}%</span> (${macd > 0.15 ? "상승 탄력 우위" : macd < -0.3 ? "하락 압력 우위" : "횡보·수렴"})` },
+        { name: "3. 이동평균선(5·20)", metric: `5선 ${fmtPrice(m5)} / 20선 ${fmtPrice(m20)}`, view: last.close >= m5 && m5 >= m20 ? "매수" : last.close < m20 ? "매도" : "중립", howToRead: "20선 위 5선 지지 시 상승 추세", meaning: `현재가 <span class="num-u">${fmtPrice(last.close)}</span> vs 20선 <span class="num-u">${fmtPrice(m20)}</span>` },
+        { name: "4. 볼린저 중심선(20)", metric: `${fmtPrice(m20)}`, view: last.close < m20 * 0.94 ? "매수" : last.close > m20 * 1.08 ? "매도" : "중립", howToRead: "중심선 회귀 및 상·하단 이탈 점검", meaning: `20선 대비 ${last.close >= m20 ? "상단권" : "하단권"}` },
+        { name: "5. 스토캐스틱(%K 14)", metric: `${stochK.toFixed(1)}`, view: stochK < 25 ? "매수" : stochK > 80 ? "매도" : "중립", howToRead: "최근 14봉 고저 범위 내 위치", meaning: `구간 위치 <span class="num-u">${stochK.toFixed(1)}</span>` },
+        { name: "6. 추세 강도(ADX)", metric: `${adx}`, view: Number(adx) >= 25 ? "매수" : "중립", howToRead: "25 이상 시 추세 힘 뚜렷", meaning: `추세 강도 <span class="num-u">${adx}</span>` },
+        { name: "7. 거래량 비율(20봉 평균)", metric: `${volRatio.toFixed(2)}배`, view: volRatio >= 1.2 && last.close >= last.open ? "매수" : volRatio >= 1.3 && last.close < last.open ? "매도" : "중립", howToRead: "평균 대비 거래량 증감 확인", meaning: `거래량 <span class="num-u">${volRatio.toFixed(2)}배</span>` },
+        { name: "8. CCI(20)", metric: `${cci}`, view: Number(cci) < -100 ? "매수" : Number(cci) > 120 ? "매도" : "중립", howToRead: "-100 이하 침체, +100 이상 강세·과열", meaning: `CCI <span class="num-u">${cci}</span>` },
+        { name: "9. MFI 자금흐름", metric: `${mfi}`, view: Number(mfi) < 35 ? "매수" : Number(mfi) > 75 ? "매도" : "중립", howToRead: "가격·거래량 결합 자금 흐름", meaning: `MFI <span class="num-u">${mfi}</span>` },
+        { name: "10. 구간 내 가격 위치", metric: `${posPct}% 위치`, view: Number(posPct) <= 30 ? "매수" : Number(posPct) >= 85 ? "매도" : "중립", howToRead: "저점(0%)~고점(100%) 중 현재 위치", meaning: `현재 <span class="num-u">${posPct}%</span> 위치` }
       ];
 
       const buyItems = list.filter(x => x.view === "매수");
@@ -2889,11 +2446,9 @@
       let verdict = "중립·관망 우위 (지지선 확인 후 분할 접근)";
       let verdictColor = "#b45309";
       if (buyItems.length >= 4 && buyItems.length > sellItems.length + 1) {
-        verdict = "매수 우위 (단기 반등·추세 탄력 유효)";
-        verdictColor = "#e11d48";
+        verdict = "매수 우위 (단기 반등·추세 탄력 유효)"; verdictColor = "#e11d48";
       } else if (sellItems.length >= 4 && sellItems.length > buyItems.length + 1) {
-        verdict = "매도·경계 우위 (상단 저항·이평선 이탈 주의)";
-        verdictColor = "#2563eb";
+        verdict = "매도·경계 우위 (상단 저항·이평선 이탈 주의)"; verdictColor = "#2563eb";
       }
 
       $("ind10OverallSummary").innerHTML = `
@@ -2907,8 +2462,7 @@
         </div>
         <div style="font-size:0.83rem; color:#1e293b;">
           • <strong>매수 신호 지표:</strong> ${buyItems.length ? buyItems.map(x => x.name).join(", ") : "없음"}<br/>
-          • <strong>매도·경계 신호 지표:</strong> ${sellItems.length ? sellItems.map(x => x.name).join(", ") : "없음"}<br/>
-          • <strong>실전 해석:</strong> RSI(<span class="num-u">${rsi.toFixed(1)}</span>)와 20봉 거래량 비율(<span class="num-u">${volRatio.toFixed(2)}배</span>), 구간 내 위치(<span class="num-u">${posPct}%</span>)를 함께 볼 때 ${buyItems.length >= sellItems.length ? "하단 지지선 부근 분할 매수가 유리한 구조" : "저항선 돌파 확인 전까지 보수적 대응이 유리한 구조"}입니다.
+          • <strong>매도·경계 신호 지표:</strong> ${sellItems.length ? sellItems.map(x => x.name).join(", ") : "없음"}
         </div>
       `;
 
@@ -2926,7 +2480,7 @@
       }).join("");
 
       const cur = list[state.selectedInd] || list[0];
-      $("ind10DetailBox").innerHTML = `<strong>[${cur.name} · ${state.stockName} · ${tfName}]</strong> ${cur.meaning} <span style="display:block; margin-top:4px; font-size:0.8rem;">해석법: ${cur.howToRead}</span>`;
+      $("ind10DetailBox").innerHTML = `<strong>[${cur.name} · ${state.stockName} · ${tfName}]</strong> ${cur.meaning} · <em>${cur.howToRead}</em>`;
     }
 
     window.selectInd = idx => { state.selectedInd = idx; renderInd10(); };
@@ -2943,10 +2497,10 @@
       const pos20Pct = m20 ? ((last.close - m20) / m20) * 100 : 0;
 
       $("supplyClueGrid").innerHTML = `
-        <div class="clue-card"><strong>⚠️ 거래량 강도(<span class="num-u">${volRatio.toFixed(2)}배</span>):</strong> 평균 대비 <span class="num-u">${volRatio.toFixed(2)}배</span> 거래량입니다. ${volRatio < 0.8 ? "거래량 감소 시 추격 매수 주의" : "거래량이 실려 지지/돌파 신뢰도 확인 가능"}</div>
-        <div class="clue-card"><strong>⚠️ 윗꼬리 매물 압력(<span class="num-u">${upperWickPct.toFixed(0)}%</span>):</strong> 최근 봉 윗꼬리 비율은 <span class="num-u">${upperWickPct.toFixed(0)}%</span>입니다. ${upperWickPct >= 35 ? "상단 매물 출회 흔적 주의" : "윗꼬리 부담이 크지 않음"}</div>
+        <div class="clue-card"><strong>⚠️ 거래량 강도(<span class="num-u">${volRatio.toFixed(2)}배</span>):</strong> 평균 대비 <span class="num-u">${volRatio.toFixed(2)}배</span> 거래량입니다.</div>
+        <div class="clue-card"><strong>⚠️ 윗꼬리 매물 압력(<span class="num-u">${upperWickPct.toFixed(0)}%</span>):</strong> 최근 봉 윗꼬리 비율은 <span class="num-u">${upperWickPct.toFixed(0)}%</span>입니다.</div>
         <div class="clue-card"><strong>⚠️ 20봉선 이격도(<span class="num-u">${pos20Pct >= 0 ? "+" : ""}${pos20Pct.toFixed(2)}%</span>):</strong> 20봉 이평선 대비 <span class="num-u">${pos20Pct >= 0 ? "+" : ""}${pos20Pct.toFixed(2)}%</span> 위치입니다.</div>
-        <div class="clue-card"><strong>⚠️ 직전 봉 대비 흐름:</strong> 직전 종가(<span class="num-u">${fmtPrice(prev.close)}</span>) → 현재 종가(<span class="num-u">${fmtPrice(last.close)}</span>) 기준 지지/손절선을 함께 보세요.</div>
+        <div class="clue-card"><strong>⚠️ 직전 봉 대비 흐름:</strong> 직전 종가(<span class="num-u">${fmtPrice(prev.close)}</span>) → 현재 종가(<span class="num-u">${fmtPrice(last.close)}</span>)</div>
       `;
     }
 
@@ -2955,20 +2509,12 @@
       if (!cArr.length) return { supPrice: 0, resPrice: 0, volNote: "-" };
       const last = cArr[cArr.length - 1];
       let maxVolBar = cArr[0];
-      for (const b of cArr) {
-        if ((b.volume || 0) > (maxVolBar.volume || 0)) maxVolBar = b;
-      }
+      for (const b of cArr) { if ((b.volume || 0) > (maxVolBar.volume || 0)) maxVolBar = b; }
       const recentHi = Math.max(...cArr.slice(-Math.min(10, cArr.length)).map(x => x.high));
       const supPrice = Math.min(last.close, (maxVolBar.low + maxVolBar.close) / 2);
       const resPrice = Math.max(last.close * 1.04, recentHi);
       const tfLabel = tf === "D" ? "일봉" : tf === "W" ? "주봉" : "월봉";
-      return {
-        tfLabel,
-        lastClose: last.close,
-        supPrice,
-        resPrice,
-        volNote: `${tfLabel} 최대거래량일(${maxVolBar.date}) 매물대 지지 ${fmtPrice(supPrice)} · 상단 저항 ${fmtPrice(resPrice)}`
-      };
+      return { tfLabel, lastClose: last.close, supPrice, resPrice, volNote: `${tfLabel} 최대거래량일(${maxVolBar.date}) 지지 ${fmtPrice(supPrice)} · 저항 ${fmtPrice(resPrice)}` };
     }
 
     function estimateTimeToTarget(curPrice, targetPrice, dailyArr) {
@@ -2981,19 +2527,9 @@
       const estTradingDays = Math.max(2, Math.min(240, Math.ceil(gapPct / effectiveDailyGainPct)));
       const estWeeks = Math.max(1, Math.round(estTradingDays / 5));
       const estMonths = (estTradingDays / 22).toFixed(1);
-
-      const etaDate = new Date(Date.now() + estTradingDays * 1.4 * 86400000);
-      const etaStr = etaDate.toISOString().slice(0, 10);
-
-      let periodLabel = `약 ${estTradingDays}거래일 (약 ${estWeeks}주)`;
-      if (estTradingDays >= 22) {
-        periodLabel = `약 ${estMonths}개월 (약 ${estTradingDays}거래일)`;
-      }
-
-      return {
-        text: `${periodLabel} (예상 시점 ${etaStr} 전후)`,
-        detail: `목표가까지 +${gapPct.toFixed(1)}% 상승 필요 · 최근 일평균 변동폭 ${fc.dailyVolPct.toFixed(1)}% 기준 보수적 추정`
-      };
+      const etaStr = new Date(Date.now() + estTradingDays * 1.4 * 86400000).toISOString().slice(0, 10);
+      const periodLabel = estTradingDays >= 22 ? `약 ${estMonths}개월 (약 ${estTradingDays}거래일)` : `약 ${estTradingDays}거래일 (약 ${estWeeks}주)`;
+      return { text: `${periodLabel} (예상 시점 ${etaStr} 전후)`, detail: `목표가까지 +${gapPct.toFixed(1)}% 상승 필요` };
     }
 
     function autoPopulateRescueLevels() {
@@ -3005,7 +2541,6 @@
       const avg = parseFloat($("resAvg").value) || curClose * 1.15;
       const qty = parseFloat($("resQty").value) || 10;
       const targetPct = parseFloat($("resTargetPct").value) || 0;
-
       const estNewAvg = (avg * qty + recommendedAdd * qty) / (qty * 2);
       const estExit = estNewAvg * (1 + targetPct / 100);
 
@@ -3018,7 +2553,6 @@
     function renderRescueAnalysis() {
       $("rescueTargetBadge").textContent = `대상: ${state.stockName} (${state.symbol})`;
       if (!state.dailySeries.length) return;
-
       const dAn = analyzeTimeframeVolumeSupport(state.dailySeries, "D");
       const wAn = analyzeTimeframeVolumeSupport(state.dailySeries, "W");
       const mAn = analyzeTimeframeVolumeSupport(state.dailySeries, "M");
@@ -3045,7 +2579,6 @@
       const addAmount = addP * addQ;
       const curLossPct = avg > 0 ? ((dAn.lastClose - avg) / avg) * 100 : 0;
       const gainFromNewAvgPct = newAvg > 0 ? ((exitP - newAvg) / newAvg) * 100 : 0;
-
       const etaAddExit = estimateTimeToTarget(dAn.lastClose, exitP, state.dailySeries);
       const etaNoAddAvg = estimateTimeToTarget(dAn.lastClose, avg, state.dailySeries);
 
@@ -3060,38 +2593,31 @@
         <div style="margin-top:4px;">
           • <strong>목표 탈출가(<span class="num-u">${fmtPrice(exitP)}</span>) 도달 예상 시간:</strong> <span class="num-u big-num">${etaAddExit.text}</span> (${etaAddExit.detail})
         </div>
-
         <div class="scenario-pair">
           <div class="sc-card-add">
             <strong>✅ 시나리오 A: 거래량 지지 추매 후 탈출</strong><br/>
-            새 평단 <span class="num-u">${fmtPrice(newAvg)}</span> → 목표가 <span class="num-u">${fmtPrice(exitP)}</span> 도달 시 평단 대비 <span class="num-u">${gainFromNewAvgPct >= 0 ? "+" : ""}${gainFromNewAvgPct.toFixed(2)}%</span><br/>
-            예상 소요: <strong>${etaAddExit.text}</strong>
+            새 평단 <span class="num-u">${fmtPrice(newAvg)}</span> → 목표가 <span class="num-u">${fmtPrice(exitP)}</span> 도달 시 <span class="num-u">${gainFromNewAvgPct >= 0 ? "+" : ""}${gainFromNewAvgPct.toFixed(2)}%</span> · 예상 소요: <strong>${etaAddExit.text}</strong>
           </div>
           <div class="sc-card-hold">
-            <strong>⏸️ 시나리오 B: 추가 현금 미투입(보유 유지/반등 축소)</strong><br/>
-            기존 평단 <span class="num-u">${fmtPrice(avg)}</span> 회복까지 예상 소요: <strong>${etaNoAddAvg.text}</strong><br/>
-            ${etaNoAddAvg.detail}
+            <strong>⏸️ 시나리오 B: 추가 현금 미투입(보유 유지)</strong><br/>
+            기존 평단 <span class="num-u">${fmtPrice(avg)}</span> 회복까지 예상 소요: <strong>${etaNoAddAvg.text}</strong>
           </div>
         </div>
       `;
     }
 
     function syncTfButtons() {
-      $("candleTfGroup").querySelectorAll("button").forEach(btn => {
-        btn.classList.toggle("active", btn.dataset.tf === state.tf);
-      });
+      $("candleTfGroup").querySelectorAll("button").forEach(btn => btn.classList.toggle("active", btn.dataset.tf === state.tf));
     }
 
     function updateSrModeButtons() {
       $("addSupportModeBtn").classList.toggle("sr-btn-active", state.srDrawMode === "SUPPORT");
       $("addResistModeBtn").classList.toggle("sr-btn-active", state.srDrawMode === "RESIST");
-      if (state.srDrawMode === "SUPPORT") {
-        $("srModeHint").textContent = "🟢 지지선 추가 모드 활성: 차트 안에서 원하는 지지 가격 높이를 클릭하세요!";
-      } else if (state.srDrawMode === "RESIST") {
-        $("srModeHint").textContent = "🩷 저항선 추가 모드 활성: 차트 안에서 원하는 저항 가격 높이를 클릭하세요!";
-      } else {
-        $("srModeHint").textContent = "버튼을 누른 뒤 차트에서 원하는 가격 높이를 클릭하세요.";
-      }
+      $("srModeHint").textContent = state.srDrawMode === "SUPPORT"
+        ? "🟢 지지선 추가 모드 활성: 차트 안에서 원하는 지지 가격 높이를 클릭하세요!"
+        : state.srDrawMode === "RESIST"
+          ? "🩷 저항선 추가 모드 활성: 차트 안에서 원하는 저항 가격 높이를 클릭하세요!"
+          : "버튼을 누른 뒤 차트에서 원하는 가격 높이를 클릭하세요.";
     }
 
     async function fetchMarketLive(noCache = false) {
@@ -3102,15 +2628,14 @@
           const mergedNews = { ...FALLBACK_MARKET.newsBySector };
           if (data.newsBySector) {
             for (const [k, v] of Object.entries(data.newsBySector)) {
-              if (Array.isArray(v) && v.length) {
-                mergedNews[k] = [...v, ...(mergedNews[k] || [])];
-              }
+              if (Array.isArray(v) && v.length) mergedNews[k] = [...v, ...(mergedNews[k] || [])];
             }
           }
           state.marketData = {
             ...FALLBACK_MARKET,
             ...data,
             newsSynthesisHtml: FALLBACK_MARKET.newsSynthesisHtml,
+            weeklySummary: FALLBACK_MARKET.weeklySummary,
             newsBySector: mergedNews
           };
         }
@@ -3124,10 +2649,7 @@
         const data = await res.json();
         if (res.ok && data.ok && Array.isArray(data.stocks) && data.stocks.length) {
           const roleCycle = ["대장주", "힘있는주", "유망주", "눌림목 반등주"];
-          const liveMapped = data.stocks.map((s, idx) => ({
-            ...s,
-            role: s.role || roleCycle[idx % roleCycle.length]
-          }));
+          const liveMapped = data.stocks.map((s, idx) => ({ ...s, role: s.role || roleCycle[idx % roleCycle.length] }));
           const existingCodes = new Set(liveMapped.map(x => x.code));
           const extra = FALLBACK_STOCKS.filter(x => !existingCodes.has(x.code));
           state.stocksPool = [...liveMapped, ...extra].map(s => ({
@@ -3149,15 +2671,9 @@
       const q = String(queryInput || "").trim() || state.symbol;
       if (forceTf) state.tf = forceTf;
       syncTfButtons();
-
-      $("symbolInput").value = q;
-      $("chartInlineInput").value = q;
-      $("rescueStockInput").value = q;
+      $("symbolInput").value = q; $("chartInlineInput").value = q; $("rescueStockInput").value = q;
       $("chartPrice").textContent = "조회 중...";
-
-      if (shouldScroll) {
-        $("sec-chart").scrollIntoView({ behavior: "smooth", block: "start" });
-      }
+      if (shouldScroll) $("sec-chart").scrollIntoView({ behavior: "smooth", block: "start" });
 
       const matchedPool = state.stocksPool.find(
         s => s.code.toLowerCase() === q.toLowerCase() || s.displayName.toLowerCase() === q.toLowerCase() || s.displayName.includes(q)
@@ -3165,8 +2681,7 @@
 
       let loadedReal = false;
       try {
-        const qs = `symbol=${encodeURIComponent(q)}&range=1Y${noCache ? "&nocache=1" : ""}`;
-        const res = await fetch(`${WORKER_ORIGIN}/api/chart?${qs}`);
+        const res = await fetch(`${WORKER_ORIGIN}/api/chart?symbol=${encodeURIComponent(q)}&range=1Y${noCache ? "&nocache=1" : ""}`);
         const data = await res.json();
         if (res.ok && data.ok && Array.isArray(data.candles) && data.candles.length >= 5) {
           state.symbol = data.symbol || q;
@@ -3175,9 +2690,7 @@
           state.dailySeries = data.candles;
           loadedReal = true;
         }
-      } catch (_) {
-        loadedReal = false;
-      }
+      } catch (_) { loadedReal = false; }
 
       if (!loadedReal) {
         state.symbol = matchedPool?.code || q;
@@ -3188,9 +2701,7 @@
       }
 
       state.customSRLines = [];
-      $("symbolInput").value = state.stockName;
-      $("chartInlineInput").value = state.stockName;
-      $("rescueStockInput").value = state.stockName;
+      $("symbolInput").value = state.stockName; $("chartInlineInput").value = state.stockName; $("rescueStockInput").value = state.stockName;
       $("chartStockTitle").innerHTML = `<strong>${state.stockName}</strong> (${state.symbol})`;
 
       const curLast = state.dailySeries[state.dailySeries.length - 1].close;
@@ -3208,10 +2719,8 @@
 
       $("searchBtn").addEventListener("click", () => loadStock($("symbolInput").value, true));
       $("symbolInput").addEventListener("keydown", e => { if (e.key === "Enter") loadStock($("symbolInput").value, true); });
-
       $("chartInlineSearchBtn").addEventListener("click", () => loadStock($("chartInlineInput").value, false));
       $("chartInlineInput").addEventListener("keydown", e => { if (e.key === "Enter") loadStock($("chartInlineInput").value, false); });
-
       $("rescueSearchBtn").addEventListener("click", () => loadStock($("rescueStockInput").value, false));
       $("rescueStockInput").addEventListener("keydown", e => { if (e.key === "Enter") loadStock($("rescueStockInput").value, false); });
 
@@ -3220,63 +2729,36 @@
         $("usToggleBtn").textContent = state.includeUS ? "🇺🇸 미국장 섹터: ON" : "🇺🇸 미국장 섹터: OFF";
         $("usToggleBtn").className = state.includeUS ? "us-on" : "us-off";
         state.activeStep = 0;
-        renderHorizonFlow();
-        renderPeriodRecommendations();
-        runCustomFilter();
+        renderHorizonFlow(); renderPeriodRecommendations(); runCustomFilter();
       });
 
       $("refreshLiveBtn").addEventListener("click", async () => {
-        await Promise.all([
-          fetchMarketLive(true),
-          fetchSectorsLive(true),
-          loadStock(state.symbol, false, state.tf, true)
-        ]);
+        await Promise.all([fetchMarketLive(true), fetchSectorsLive(true), loadStock(state.symbol, false, state.tf, true)]);
       });
 
       $("marketScopeGroup").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
         $("marketScopeGroup").querySelectorAll("button").forEach(x => x.classList.remove("active"));
-        b.classList.add("active");
-        state.marketScope = b.dataset.mscope;
-        renderMarketSection();
+        b.classList.add("active"); state.marketScope = b.dataset.mscope; renderMarketSection();
       }));
 
       $("horizonGroup").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
         $("horizonGroup").querySelectorAll("button").forEach(x => x.classList.remove("active"));
-        b.classList.add("active");
-        state.horizon = b.dataset.hz;
-        state.activeStep = 0;
-        renderHorizonFlow();
+        b.classList.add("active"); state.horizon = b.dataset.hz; state.activeStep = 0; renderHorizonFlow();
       }));
 
       $("recPeriodGroup").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
         $("recPeriodGroup").querySelectorAll("button").forEach(x => x.classList.remove("active"));
-        b.classList.add("active");
-        state.recPeriod = b.dataset.rperiod;
-        renderPeriodRecommendations();
+        b.classList.add("active"); state.recPeriod = b.dataset.rperiod; renderPeriodRecommendations();
       }));
 
       $("waveBiasGroup").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
         $("waveBiasGroup").querySelectorAll("button").forEach(x => x.classList.remove("active"));
-        b.classList.add("active");
-        state.waveBias = b.dataset.wbias;
-        drawMainChart();
+        b.classList.add("active"); state.waveBias = b.dataset.wbias; drawMainChart();
       }));
 
-      $("addSupportModeBtn").addEventListener("click", () => {
-        state.srDrawMode = state.srDrawMode === "SUPPORT" ? null : "SUPPORT";
-        updateSrModeButtons();
-      });
-      $("addResistModeBtn").addEventListener("click", () => {
-        state.srDrawMode = state.srDrawMode === "RESIST" ? null : "RESIST";
-        updateSrModeButtons();
-      });
-      $("clearCustomSrBtn").addEventListener("click", () => {
-        state.customSRLines = [];
-        state.srDrawMode = null;
-        updateSrModeButtons();
-        drawMainChart();
-        renderStockIssue();
-      });
+      $("addSupportModeBtn").addEventListener("click", () => { state.srDrawMode = state.srDrawMode === "SUPPORT" ? null : "SUPPORT"; updateSrModeButtons(); });
+      $("addResistModeBtn").addEventListener("click", () => { state.srDrawMode = state.srDrawMode === "RESIST" ? null : "RESIST"; updateSrModeButtons(); });
+      $("clearCustomSrBtn").addEventListener("click", () => { state.customSRLines = []; state.srDrawMode = null; updateSrModeButtons(); drawMainChart(); renderStockIssue(); });
 
       document.querySelectorAll(".preset-btn").forEach(b => b.addEventListener("click", () => applyPreset(b.dataset.preset)));
 
@@ -3289,43 +2771,31 @@
         state.stocksPool.forEach(s => { s[customKey] = Boolean(s[rule]); });
         state.selectedConds.push(customKey);
         $("newCondNameInput").value = "";
-        renderConditionCheckboxes();
-        runCustomFilter();
+        renderConditionCheckboxes(); runCustomFilter();
       });
 
       $("applyCustomFilterBtn").addEventListener("click", runCustomFilter);
 
       $("candleTfGroup").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
-        state.tf = b.dataset.tf;
-        syncTfButtons();
-        applyTimeframeToChart();
+        state.tf = b.dataset.tf; syncTfButtons(); applyTimeframeToChart();
       }));
 
       $("maTogglePanel").querySelectorAll("input[type='checkbox']").forEach(cb => cb.addEventListener("change", () => {
-        state.maChecked[Number(cb.dataset.ma)] = cb.checked;
-        drawMainChart();
+        state.maChecked[Number(cb.dataset.ma)] = cb.checked; drawMainChart();
       }));
 
       $("chartFeatureToggles").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
-        const f = b.dataset.feat;
-        state.feats[f] = !state.feats[f];
-        b.classList.toggle("on", state.feats[f]);
-        drawMainChart();
+        const f = b.dataset.feat; state.feats[f] = !state.feats[f]; b.classList.toggle("on", state.feats[f]); drawMainChart();
       }));
 
       $("mainChartCanvas").addEventListener("click", e => {
         if (!state.srDrawMode) return;
         const meta = $("mainChartCanvas")._meta;
         if (!meta || !meta.priceAtY) return;
-        const rect = $("mainChartCanvas").getBoundingClientRect();
-        const my = e.clientY - rect.top;
+        const my = e.clientY - $("mainChartCanvas").getBoundingClientRect().top;
         if (my < meta.padT || my > meta.padT + meta.pH) return;
-        const clickedPrice = meta.priceAtY(my);
-        state.customSRLines.push({ type: state.srDrawMode, price: clickedPrice });
-        state.srDrawMode = null;
-        updateSrModeButtons();
-        drawMainChart();
-        renderStockIssue();
+        state.customSRLines.push({ type: state.srDrawMode, price: meta.priceAtY(my) });
+        state.srDrawMode = null; updateSrModeButtons(); drawMainChart(); renderStockIssue();
       });
 
       $("mainChartCanvas").addEventListener("wheel", e => {
@@ -3338,8 +2808,7 @@
         let ns = Math.max(0, mid - Math.floor(next / 2));
         let ne = Math.min(total, ns + next);
         if (ne === total) ns = Math.max(0, total - next);
-        state.viewStart = ns; state.viewEnd = ne;
-        drawMainChart(); drawSubChart();
+        state.viewStart = ns; state.viewEnd = ne; drawMainChart(); drawSubChart();
       }, { passive: false });
 
       $("mainChartCanvas").addEventListener("mousedown", e => {
@@ -3360,9 +2829,7 @@
           const win = (state.viewEnd ?? total) - state.viewStart;
           const shift = -Math.round(((mx - state.dragX) / Math.max(1, meta.pW)) * win);
           const ns = Math.max(0, Math.min(total - win, state.dragView + shift));
-          state.viewStart = ns; state.viewEnd = ns + win;
-          drawMainChart(); drawSubChart();
-          return;
+          state.viewStart = ns; state.viewEnd = ns + win; drawMainChart(); drawSubChart(); return;
         }
         if (mx < meta.padL || mx > meta.padL + meta.pW) { $("tooltip").style.display = "none"; return; }
         const idx = Math.max(0, Math.min(meta.slice.length - 1, Math.round(((mx - meta.padL) / meta.pW) * (meta.slice.length - 1))));
@@ -3382,11 +2849,7 @@
       ["resAvg", "resQty", "resTargetPct", "resAddPrice", "resAddQty", "resExitPrice", "resFirstRebound"]
         .forEach(id => $(id).addEventListener("input", renderRescueAnalysis));
 
-      $("syncRescueBtn").addEventListener("click", () => {
-        autoPopulateRescueLevels();
-        renderRescueAnalysis();
-      });
-
+      $("syncRescueBtn").addEventListener("click", () => { autoPopulateRescueLevels(); renderRescueAnalysis(); });
       window.addEventListener("resize", () => { drawMainChart(); drawSubChart(); });
 
       loadStock("메지온", false, "D", false);
@@ -3394,11 +2857,8 @@
       fetchSectorsLive(false);
     }
 
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", initDashboard);
-    } else {
-      initDashboard();
-    }
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initDashboard);
+    else initDashboard();
   </script>
 </body>
 </html>
