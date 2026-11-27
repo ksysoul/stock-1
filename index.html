@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>실시간 시황 · 전섹터 순환매 · 기간별추천 · 일/주/월차트 · 엘리어트파동 · 물린주식탈출</title>
+  <title>실시간 시황·용어주석 · 미국시황·일정 · 전섹터 순환매 · 엘리어트 대/소파동 · 매물대% · 물린주식탈출</title>
   <style>
     :root {
       --bg: #f1f5f9;
@@ -40,22 +40,36 @@
         linear-gradient(to bottom, rgba(148, 163, 184, 0.16) 1px, transparent 1px);
       background-size: 28px 28px;
       color: var(--text);
-      line-height: 1.56;
+      line-height: 1.58;
     }
 
-    u {
+    /* 중요 수치에만 사용하는 밑줄 */
+    .num-u {
       text-decoration: underline;
-      text-decoration-thickness: 2.5px;
+      text-decoration-thickness: 2.2px;
       text-underline-offset: 4px;
       text-decoration-color: #1d4ed8;
+      font-weight: 900;
     }
 
-    .big-u {
+    .big-num {
       font-size: 1.08rem;
       font-weight: 900;
-      text-decoration: underline;
-      text-decoration-thickness: 2.5px;
-      text-underline-offset: 4px;
+    }
+
+    /* 어려운 용어 주석 트리거 */
+    .term-ref {
+      background: #fef3c7;
+      color: #92400e;
+      border-bottom: 1.5px dashed #d97706;
+      padding: 0 4px;
+      border-radius: 4px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .term-ref:hover, .term-ref.active {
+      background: #fde68a;
+      color: #78350f;
     }
 
     header {
@@ -69,7 +83,7 @@
     }
 
     .header-inner {
-      max-width: 1740px;
+      max-width: 1760px;
       margin: 0 auto;
       display: flex;
       flex-wrap: wrap;
@@ -90,7 +104,7 @@
     .brand h1 { font-size: 1.02rem; margin: 0; font-weight: 900; }
 
     .top-banner-wrap {
-      max-width: 1740px;
+      max-width: 1760px;
       margin: 12px auto 0;
       padding: 0 20px;
       display: flex;
@@ -105,7 +119,7 @@
       padding: 11px 16px;
       text-align: center;
       font-size: 0.94rem;
-      font-weight: 900;
+      font-weight: 800;
       color: #0f172a;
       box-shadow: var(--shadow);
     }
@@ -116,8 +130,8 @@
       border-radius: 12px;
       padding: 9px 16px;
       text-align: center;
-      font-size: 0.92rem;
-      font-weight: 900;
+      font-size: 0.91rem;
+      font-weight: 800;
       color: #78350f;
     }
 
@@ -141,11 +155,11 @@
     button.us-off { background: #e2e8f0; color: #334155; }
 
     .shell {
-      max-width: 1740px;
+      max-width: 1760px;
       margin: 14px auto 56px;
       padding: 0 20px;
       display: grid;
-      grid-template-columns: 270px 1fr;
+      grid-template-columns: 260px 1fr;
       gap: 18px;
       align-items: start;
     }
@@ -214,6 +228,7 @@
     }
 
     .card.tone-market { background: #f8faff; border-top: 5px solid #2563eb; }
+    .card.tone-us     { background: #fdf7fb; border-top: 5px solid #be185d; }
     .card.tone-sector { background: #fdf8ff; border-top: 5px solid #7c3aed; }
     .card.tone-rec    { background: #f4fdf9; border-top: 5px solid #059669; }
     .card.tone-chart  { background: #ffffff; border-top: 5px solid #0284c7; }
@@ -284,64 +299,121 @@
       box-shadow: 0 1px 4px rgba(0,0,0,0.12);
     }
 
+    /* 1번 섹션: 왼쪽 시황 요약 + 오른쪽 여유공간 낱말풀이 주석 패널 */
+    .market-split-layout {
+      display: grid;
+      grid-template-columns: 1fr 330px;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 14px;
+    }
+
+    @media (max-width: 1180px) {
+      .market-split-layout { grid-template-columns: 1fr; }
+    }
+
+    .glossary-margin-box {
+      background: #fffbeb;
+      border: 1.5px solid #fcd34d;
+      border-radius: 14px;
+      padding: 13px 14px;
+      font-size: 0.81rem;
+      color: #451a03;
+    }
+
+    .glossary-item {
+      padding: 7px 9px;
+      border-radius: 9px;
+      background: #ffffff;
+      border: 1px solid #fde68a;
+      margin-top: 7px;
+      transition: all 0.15s ease;
+    }
+
+    .glossary-item.highlight {
+      border-color: #d97706;
+      background: #fef3c7;
+      box-shadow: 0 2px 8px rgba(217, 119, 6, 0.16);
+    }
+
     .market-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 11px;
-      margin-bottom: 12px;
+      gap: 10px;
+      margin-bottom: 11px;
     }
 
-    @media (max-width: 900px) { .market-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 560px) { .market-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 820px) { .market-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 540px) { .market-grid { grid-template-columns: 1fr; } }
 
     .idx-box {
       border: 1.5px solid var(--border);
       border-radius: 12px;
-      padding: 11px 13px;
+      padding: 10px 12px;
       background: #ffffff;
       box-shadow: 0 2px 6px rgba(15,23,42,0.03);
     }
 
     .idx-name { font-size: 0.76rem; color: var(--muted); font-weight: 800; }
-    .idx-val { font-size: 1.08rem; font-weight: 900; margin: 3px 0; }
+    .idx-val { font-size: 1.06rem; font-weight: 900; margin: 3px 0; }
     .up { color: var(--up); }
     .down { color: var(--down); }
 
-    .weekly-box {
-      background: #ede9fe;
-      border: 1.5px solid #c4b5fd;
-      border-radius: 12px;
-      padding: 12px 15px;
-      font-size: 0.86rem;
-      color: #2e1065;
-      margin-bottom: 12px;
-    }
-
-    .opinion-pair {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 11px;
-      margin-bottom: 14px;
-    }
-
-    @media (max-width: 820px) { .opinion-pair { grid-template-columns: 1fr; } }
-
-    .brief-box {
+    .news-synth-box {
       background: #dbeafe;
       border: 1.5px solid #93c5fd;
       border-radius: 12px;
       padding: 12px 15px;
       font-size: 0.86rem;
       color: #1e3a8a;
+      margin-bottom: 10px;
     }
 
-    .analogy-box {
-      background: #fef3c7;
-      border: 1.5px solid #fcd34d;
+    .weekly-box {
+      background: #ede9fe;
+      border: 1.5px solid #c4b5fd;
       border-radius: 12px;
-      padding: 12px 15px;
-      font-size: 0.86rem;
-      color: #78350f;
+      padding: 11px 14px;
+      font-size: 0.85rem;
+      color: #2e1065;
+    }
+
+    /* 미국·글로벌 시황 & 이번주 미국장 주요 일정 */
+    .us-split-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    @media (max-width: 1020px) { .us-split-grid { grid-template-columns: 1fr; } }
+
+    .us-period-box {
+      background: #ffffff;
+      border: 1.5px solid #fbcfe8;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 9px;
+      font-size: 0.85rem;
+    }
+
+    .us-cal-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .us-cal-item {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 11px;
+      padding: 9px 12px;
+      font-size: 0.82rem;
+    }
+
+    .us-cal-item.imp-high {
+      border-color: #f472b6;
+      background: #fdf2f8;
     }
 
     .keyword-bar {
@@ -623,6 +695,27 @@
       color: #78350f;
     }
 
+    .sr-draw-panel {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 8px;
+      padding: 8px 12px;
+      border-radius: 12px;
+      background: #ecfdf5;
+      border: 1.5px solid #6ee7b7;
+      font-size: 0.79rem;
+      font-weight: 800;
+      color: #064e3b;
+    }
+
+    .sr-btn-active {
+      background: #059669 !important;
+      color: #ffffff !important;
+      border-color: #047857 !important;
+    }
+
     .overlay-toggles { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
 
     .toggle-chip {
@@ -653,7 +746,7 @@
     .chart-box {
       position: relative;
       width: 100%;
-      height: 440px;
+      height: 460px;
       border: 1.5px solid #94a3b8;
       border-radius: 12px;
       background: #fff;
@@ -691,6 +784,16 @@
       background: #eff6ff;
       border: 1.5px solid #93c5fd;
       font-size: 0.84rem;
+    }
+
+    .ind10-summary-banner {
+      background: #ffffff;
+      border: 2px solid #f59e0b;
+      border-radius: 13px;
+      padding: 13px 15px;
+      margin-bottom: 12px;
+      font-size: 0.86rem;
+      box-shadow: 0 2px 8px rgba(217, 119, 6, 0.08);
     }
 
     .ind10-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -831,15 +934,15 @@
       <div class="brand">
         <div class="mascot">🐱📈</div>
         <div>
-          <h1>🌍 시황·뉴스 · 🔄 전섹터 순환매 · ⭐ 기간별추천 · 📊 일/주/월차트 · 🌊 엘리어트 대파동 · 🛟 물린주식탈출</h1>
-          <div style="font-size:0.75rem; color:var(--muted);">미국장 기본 <b>OFF</b> · 규정 충족 대파동(미완성 가능성 포함) 또는 예상 현재 진행파동 · 지표 수치 매수=붉은색 큰글씨/매도=푸른색/중립=검정</div>
+          <h1>🌍 뉴스종합 시황·용어주석 · 🇺🇸 미국시황·일정 · 🔄 전섹터 순환매 · 🌊 대/소파동 · 📊 매물대% · 🛟 탈출분석</h1>
+          <div style="font-size:0.75rem; color:var(--muted);">중요 수치 밑줄 강조 · 어려운 용어 우측 주석 풀이 · 대파동 내 소파동 표시 · 클릭형 지지/저항선 & 매물대 비율(%)</div>
         </div>
       </div>
 
       <div class="controls">
         <input type="text" id="symbolInput" value="메지온" placeholder="종목명/코드/티커 (메지온, 저스템, NVDA)" />
         <button class="primary" id="searchBtn">🔍 종목·탈출 분석</button>
-        <button id="usToggleBtn" class="us-off">🇺🇸 미국장: OFF</button>
+        <button id="usToggleBtn" class="us-off">🇺🇸 미국장 섹터: OFF</button>
         <button id="refreshLiveBtn">🔄 전체 새로고침</button>
       </div>
     </div>
@@ -847,7 +950,7 @@
 
   <div class="top-banner-wrap">
     <div class="top-stance-banner" id="topStanceBanner">실시간 시장 스탠스 로딩 중...</div>
-    <div class="action-guide-line" id="todayActionLine">🎯 오늘 대응 한 줄: 코스피 4,700선 변동성·전강후약·외국인 수급 공방 구간이므로 오전 급등 추격보다 <u>거래량 지지선 확인 후 선별·분할 접근</u>을 권장합니다.</div>
+    <div class="action-guide-line" id="todayActionLine">🎯 오늘 대응 한 줄: 코스닥 <span class="num-u">5.7~5.9% 급등</span>으로 매수 사이드카가 발동되고 코스피도 <span class="num-u">4,800선(4,840선대)을 회복</span>했으나 단기 급반등 구간이므로 추격 매수보다 <strong>매물대 지지선 확인 후 분할 접근</strong>을 권장합니다.</div>
   </div>
 
   <div class="shell">
@@ -857,49 +960,104 @@
         <span class="badge" id="liveClock">실시간 동기화</span>
       </div>
       <div class="toc-list">
-        <a class="toc-link active" href="#sec-market"><span>1. 🌍 시황·주간흐름·뉴스(10+)</span><span>→</span></a>
+        <a class="toc-link active" href="#sec-market"><span>1. 🌍 뉴스종합 시황 & 용어주석</span><span>→</span></a>
+        <a class="toc-link" href="#sec-us"><span>1-2. 🇺🇸 미국 시황(오늘/주간) & 일정</span><span>→</span></a>
         <a class="toc-link" href="#sec-sector"><span>2. 🔄 전섹터 순환매 & 4종목</span><span>→</span></a>
         <a class="toc-link" href="#sec-rec"><span>3. ⭐ 오늘/주간/월간추천 & 조건</span><span>→</span></a>
-        <a class="toc-link" href="#sec-chart"><span>4. 📊 일/주/월봉 & 엘리어트 대파동</span><span>→</span></a>
-        <a class="toc-link" href="#sec-ind10"><span>4-2. 📐 10개 지표 수치·해석</span><span>→</span></a>
+        <a class="toc-link" href="#sec-chart"><span>4. 📊 일/주/월봉 · 파동 · 매물대%</span><span>→</span></a>
+        <a class="toc-link" href="#sec-ind10"><span>4-2. 📐 10개 지표 종합의견·수치</span><span>→</span></a>
         <a class="toc-link" href="#sec-supply"><span>5. 🚨 수급·변동 주의단서</span><span>→</span></a>
         <a class="toc-link" href="#sec-rescue"><span>6. 🛟 물린주식탈출 & 예상시간</span><span>→</span></a>
       </div>
     </aside>
 
     <main class="wrap">
-      <!-- 1. 시황 · 이번주 흐름 · 오늘의 주요 뉴스(최소 10개) -->
+      <!-- 1. 뉴스 종합 실시간 시황 요약 + 오른쪽 여유공간 용어 주석 패널 -->
       <section class="card tone-market" id="sec-market">
         <div class="card-head">
-          <h2 class="card-title">🌍 1. 지수 시황 · 이번주 한주간 흐름 · 오늘의 주요 뉴스 <span class="badge mint" id="marketUpdatedBadge">2026.11.27 반영</span></h2>
+          <h2 class="card-title">🌍 1. 뉴스 종합 실시간 시황 요약 & 어려운 용어 낱말풀이 <span class="badge mint" id="marketUpdatedBadge">2026.11.27 반영</span></h2>
           <div class="seg" id="marketScopeGroup">
-            <button data-mscope="TODAY" class="active">실시간 지수</button>
-            <button data-mscope="WEEK">이번주 한주간 흐름</button>
-            <button data-mscope="GLOBAL">미국·글로벌 시황</button>
+            <button data-mscope="ALL" class="active">국내·미국 전체 지수</button>
+            <button data-mscope="KR">국내 지수만</button>
+            <button data-mscope="US">미국 지수만</button>
           </div>
         </div>
 
-        <div class="market-grid" id="marketGrid"></div>
-        <div class="weekly-box" id="weeklyFlowBox"></div>
+        <div class="market-split-layout">
+          <div>
+            <div class="market-grid" id="marketGrid"></div>
+            <div class="news-synth-box" id="newsSynthesisBox"></div>
+            <div class="weekly-box" id="weeklyFlowBox"></div>
+          </div>
 
-        <div class="opinion-pair">
-          <div class="brief-box" id="totalOpinionBox"></div>
-          <div class="analogy-box" id="analogyOpinionBox"></div>
+          <aside class="glossary-margin-box" id="glossaryMarginBox">
+            <div style="font-weight:900; font-size:0.9rem; color:#78350f; display:flex; justify-content:space-between; align-items:center;">
+              <span>📖 어려운 시황 용어 주석</span>
+              <span class="badge amber">클릭 시 강조</span>
+            </div>
+            <div style="font-size:0.75rem; color:#92400e; margin-top:3px;">왼쪽 시황 요약의 노란색 용어를 누르면 해당 풀이가 강조됩니다.</div>
+            <div id="glossaryList"></div>
+          </aside>
         </div>
 
         <div class="keyword-bar" id="todayKeywordBar">
           <span>🔥 오늘 반복 핵심 키워드:</span>
-          <span class="badge">코스피 4700선</span>
-          <span class="badge mint">코스닥 반등</span>
-          <span class="badge purple">외국인·수급</span>
-          <span class="badge amber">전강후약·변동성</span>
-          <span class="badge pink">금리·거시</span>
-          <span class="badge neutral">미국 추수감사절 휴장</span>
+          <span class="badge">코스피 4840선 회복</span>
+          <span class="badge mint">코스닥 5.7%↑ 매수 사이드카</span>
+          <span class="badge purple">증안펀드·저가 매수</span>
+          <span class="badge amber">한은 금리 3.25%</span>
+          <span class="badge pink">미국 추수감사절·블프 조기폐장</span>
         </div>
 
-        <div style="font-weight:900; font-size:0.9rem; margin-bottom:6px;">📰 오늘의 주요 뉴스 <span class="badge" id="newsCountBadge">10건 이상 표시</span></div>
+        <div style="font-weight:900; font-size:0.9rem; margin-bottom:6px;">📰 오늘의 주요 뉴스 원문 <span class="badge" id="newsCountBadge">11건 표시</span></div>
         <div class="sector-news-tabs" id="sectorNewsTabs"></div>
         <div class="market-news-grid" id="sectorNewsGrid"></div>
+      </section>
+
+      <!-- 1-2. 미국·글로벌 시황 (오늘/직전장 vs 이번주) & 이번주 미국장 주요 일정 -->
+      <section class="card tone-us" id="sec-us">
+        <div class="card-head">
+          <h2 class="card-title">🇺🇸 1-2. 미국·글로벌 시황 (오늘 · 이번주) & 이번주 미국장 주요 일정 <span class="badge pink">국내장 핵심 선행 변수</span></h2>
+          <span style="font-size:0.78rem; color:var(--muted); font-weight:800;">미국장 섹터 ON/OFF와 무관하게 항상 표시</span>
+        </div>
+
+        <div class="us-split-grid">
+          <div>
+            <div class="us-period-box">
+              <div style="font-weight:900; color:#be185d; margin-bottom:5px;">📌 [오늘 · 11/26~27 미국장 현황] 추수감사절 휴장 & 블랙프라이데이 조기 폐장</div>
+              <div>
+                • <strong>11/26(목) 추수감사절 휴장</strong>으로 밤사이 뉴욕 증시 본장 거래는 쉬어갔으며, 오늘 <strong>11/27(금)</strong>은 블랙프라이데이 단축 거래일로 <strong>한국시간 11/28(토) 새벽 3시(미 동부 오후 1시) 조기 폐장</strong>합니다.<br/>
+                • 직전 거래일(11/25 수요일) 기준 다우 <span class="num-u">47,890.50</span>, S&P 500 <span class="num-u">6,945.20</span>, 나스닥 <span class="num-u">22,410.80</span> 수준에서 연휴 관망세 속 다음 주 수급 재개를 앞두고 있습니다.
+              </div>
+            </div>
+
+            <div class="us-period-box" style="background:#fffbeb; border-color:#fcd34d;">
+              <div style="font-weight:900; color:#92400e; margin-bottom:5px;">📅 [이번주(11/23~11/27) 미국·글로벌 주간 시황 흐름]</div>
+              <div>
+                • 월~수요일 3거래일 동안 12월 <span class="term-ref" onclick="focusGlossary('fomc')">FOMC</span> 직전 핵심 물가 지표인 <span class="term-ref" onclick="focusGlossary('pce')">근원 PCE</span>와 3분기 <span class="term-ref" onclick="focusGlossary('gdp')">GDP</span> 2차 추정치 발표를 소화하며 <span class="term-ref" onclick="focusGlossary('vix')">VIX</span> 변동성 경계감이 교차했습니다.<br/>
+                • 목·금 추수감사절 연휴 유동성 축소 구간에서는 미국발 직격 충격이 일시 진정되며 한국 증시 자체 수급(저가 매수·증안펀드 기대)이 부각되는 흐름입니다.
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-weight:900; font-size:0.92rem; color:#831843; margin-bottom:7px;">🗓️ 이번주 미국·글로벌 핵심 일정 캘린더 (한국시간 기준)</div>
+            <div class="us-cal-list">
+              <div class="us-cal-item">
+                <strong>11/23(월)~24(화)</strong> · 미국·유로존 제조업/서비스업 <span class="term-ref" onclick="focusGlossary('pmi')">PMI</span> & 델·워크데이 실적 발표
+              </div>
+              <div class="us-cal-item imp-high">
+                <strong>11/25(수) 밤 [핵심 물가·성장]</strong> · <strong>미국 <span class="term-ref" onclick="focusGlossary('pce')">근원 PCE</span> 물가지수 & GDP 2차 추정치 발표</strong> (연준 12월 금리 경로 가늠자)
+              </div>
+              <div class="us-cal-item imp-high">
+                <strong>11/26(목) [휴장 · 한국 금통위]</strong> · <strong>미국 증시 추수감사절(Thanksgiving) 휴장</strong> / 한국은행 기준금리 <span class="num-u">3.25%</span> 결정
+              </div>
+              <div class="us-cal-item imp-high">
+                <strong>11/27(금) 오늘 [조기 폐장]</strong> · <strong>미국 증시 블랙프라이데이 조기 폐장 (한국시간 28일 새벽 3시 종료)</strong> · 연말 소비 시즌 개막
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- 2. 전 섹터 순환매 파악 & 섹터 클릭 시 4종목 -->
@@ -966,7 +1124,7 @@
         </div>
       </section>
 
-      <!-- 4. 일봉 / 주봉 / 월봉 실전차트 + 엘리어트 대파동(규정 부합 / 예상 현재 진행파동) + 1주·1달 예상 -->
+      <!-- 4. 일봉 / 주봉 / 월봉 실전차트 + 대파동·소파동 + 클릭형 지지/저항선 + 매물대(%) -->
       <section class="card tone-chart" id="sec-chart">
         <div class="chart-quick-search">
           <strong style="font-size:0.82rem; color:#1e3a8a;">⚡ 차트 바로 검색:</strong>
@@ -996,7 +1154,7 @@
         <div class="forecast-strip" id="forecastPriceStrip"></div>
 
         <div class="wave-control-panel">
-          <span>🌊 엘리어트 대파동 (큰 파동 단일 표시):</span>
+          <span>🌊 엘리어트 파동 (기간 균형 + 대파동 & 내부 소파동):</span>
           <div class="seg" id="waveBiasGroup">
             <button data-wbias="POS" class="active">상승 파동 (1-2-3-4-5)</button>
             <button data-wbias="NEG">조정·하락 파동 (A-B-C)</button>
@@ -1004,7 +1162,16 @@
           <span class="badge purple" id="waveValidityBadge">규정 판별 중</span>
         </div>
 
-        <div class="wave-status-banner" id="waveStatusBanner">엘리어트 대파동 규정 및 예상 현재 진행파동 판별 중...</div>
+        <div class="wave-status-banner" id="waveStatusBanner">엘리어트 대파동·소파동 및 기간 균형 판별 중...</div>
+
+        <!-- 클릭형 지지선·저항선 추가 패널 -->
+        <div class="sr-draw-panel">
+          <span>📏 클릭으로 지지·저항선 추가:</span>
+          <button type="button" id="addSupportModeBtn">+ 지지선 클릭 추가</button>
+          <button type="button" id="addResistModeBtn">+ 저항선 클릭 추가</button>
+          <button type="button" id="clearCustomSrBtn">사용자 선 초기화</button>
+          <span id="srModeHint" style="font-size:0.76rem; color:#047857;">버튼을 누른 뒤 차트에서 원하는 가격 높이를 클릭하세요.</span>
+        </div>
 
         <div class="ma-panel" id="maTogglePanel">
           <span>이동평균선:</span>
@@ -1017,17 +1184,19 @@
         </div>
 
         <div class="overlay-toggles" id="chartFeatureToggles">
-          <button class="toggle-chip on" data-feat="buyLine">매수 추천선</button>
-          <button class="toggle-chip on" data-feat="stopLine">손절선</button>
+          <button class="toggle-chip on" data-feat="volProfile">매물대 비율(%)</button>
+          <button class="toggle-chip on" data-feat="elliottWave">대파동 선</button>
+          <button class="toggle-chip on" data-feat="subWave">대파동 내 소파동 선</button>
+          <button class="toggle-chip on" data-feat="buyLine">자동 지지·매수선</button>
+          <button class="toggle-chip on" data-feat="stopLine">자동 손절선</button>
           <button class="toggle-chip" data-feat="fibRet">피보나치 되돌림</button>
           <button class="toggle-chip" data-feat="fibExt">피보나치 확장</button>
-          <button class="toggle-chip on" data-feat="elliottWave">엘리어트 대파동</button>
           <button class="toggle-chip on" data-feat="pred1W">1주 예상 흐름선</button>
           <button class="toggle-chip on" data-feat="pred1M">1달 예상 흐름선</button>
         </div>
 
         <div class="chart-meta">
-          <span id="chartMetaLeft">휠 확대/축소 · 드래그 이동</span>
+          <span id="chartMetaLeft">휠 확대/축소 · 드래그 이동 · 클릭 시 지지/저항선 추가</span>
           <span id="chartHoverReadout">차트 위에 마우스를 올려보세요.</span>
         </div>
 
@@ -1042,12 +1211,16 @@
         <div class="issue-box" id="stockIssueBox"></div>
       </section>
 
-      <!-- 4-2. 전문가 10개 보조지표: 매수=붉은색 큰글씨, 매도=푸른색, 중립=검정 -->
+      <!-- 4-2. 전문가 10개 보조지표: 앞쪽에 종합 의견 + 개별 지표 수치 -->
       <section class="card tone-ind" id="sec-ind10">
         <div class="card-head">
-          <h2 class="card-title">📐 전문가 10개 보조지표 · 해석방법 & 지금 지표의 의미 <span class="badge neutral" id="ind10BasisBadge">일봉 실측</span> <span class="badge purple" id="ind10VoteBadge">매수 · 매도 · 중립</span></h2>
+          <h2 class="card-title">📐 전문가 10개 보조지표 · 종합 의견 & 개별 수치·해석 <span class="badge neutral" id="ind10BasisBadge">일봉 실측</span> <span class="badge purple" id="ind10VoteBadge">매수 · 매도 · 중립</span></h2>
           <span style="font-size:0.78rem; font-weight:800;">수치 표기: <span style="color:#e11d48; font-weight:900;">매수(붉은색·큰글씨)</span> · <span style="color:#2563eb; font-weight:800;">매도(푸른색)</span> · <span style="color:#0f172a; font-weight:800;">중립(검정)</span></span>
         </div>
+
+        <!-- 앞쪽에 정리한 10개 보조지표 종합 의견 -->
+        <div class="ind10-summary-banner" id="ind10OverallSummary"></div>
+
         <div class="ind10-grid" id="ind10Grid"></div>
         <div class="ind10-guide" id="ind10DetailBox"></div>
       </section>
@@ -1120,6 +1293,16 @@
   <script>
     const WORKER_ORIGIN = "https://stock.ksy6pp.workers.dev";
 
+    const GLOSSARY_TERMS = [
+      { key: "sidecar", term: "매수 사이드카", desc: "선물 가격이 급등할 때 시장 과열을 식히기 위해 프로그램 매수 호가 효력을 5분간 일시 정지시키는 안전장치입니다." },
+      { key: "stfund", term: "증안펀드(증시안정펀드)", desc: "증시 급락 시 시장 안정을 위해 금융권·유관기관이 공동 조성해 지수 관련 대형주 등을 매입하는 안전판 자금입니다." },
+      { key: "pce", term: "근원 PCE(개인소비지출 물가)", desc: "변동성이 큰 식료품·에너지를 제외한 미국 물가 지표로, 미국 연준(Fed)이 금리 결정 시 가장 중시하는 지표입니다." },
+      { key: "fomc", term: "FOMC", desc: "미국 연방공개시장위원회로, 미국의 기준금리와 통화정책 방향을 결정하는 핵심 회의입니다." },
+      { key: "vix", term: "VIX(변동성 지수)", desc: "향후 30일간 S&P 500 지수의 예상 변동폭을 나타내는 공포 지수로, 높을수록 시장 불안이 크다는 뜻입니다." },
+      { key: "gdp", term: "GDP 2차 추정치", desc: "미국 경제성장률(국내총생산)의 수정 발표치로, 소비와 경기 둔화 속도를 판단할 때 활용됩니다." },
+      { key: "pmi", term: "PMI(구매관리자지수)", desc: "기업 구매 담당자 설문을 통해 경기 확장을 50 이상, 위축을 50 미만으로 보여주는 선행 경기 지표입니다." }
+    ];
+
     const DEFAULT_CONDITIONS = [
       { key: "weekUp",   label: "최근 1주 반등/상승(+)" },
       { key: "monthUp",  label: "최근 1개월 상승/추세(+)" },
@@ -1135,183 +1318,182 @@
       4: { title: "4번 묶음 (월간 추세·탄력 유지)", keys: ["monthUp", "leadMove"] }
     };
 
-    // 각 항목에 개별 기사 원문 URL 직접 연결
     const TODAY_KEYWORD_NEWS = [
       {
-        sector: "코스피 4700",
+        sector: "코스닥 매수사이드카",
+        isUS: false,
+        title: "코스닥, 5.9% 급등에 매수사이드카…코스피도 4800선 회복",
+        source: "뉴시스",
+        pubDate: "2026-11-27",
+        url: "https://mobile.newsis.com/view/NISX20261127_0003885928",
+        summary: "오전 10시 22분께 올해 23번째 코스닥 매수 사이드카가 발동됐고, 코스닥 지수가 5.9%대 급등하며 코스피도 4,800선을 회복했습니다."
+      },
+      {
+        sector: "증안펀드·반등",
+        isUS: false,
+        title: "증안펀드 기대에 코스닥 5%대 급등…코스피 4800선 회복",
+        source: "이데일리 마켓인",
+        pubDate: "2026-11-27",
+        url: "https://marketin.edaily.co.kr/News/ReadE?newsId=02072966645649984",
+        summary: "증시안정펀드 기대감과 저가 매수세 유입으로 코스닥이 692선까지 치솟고 코스피 역시 장 초반 하락을 딛고 강세 전환했습니다."
+      },
+      {
+        sector: "코스피 4840선",
+        isUS: false,
+        title: "[오전시황] 증안펀드 기대에 코스닥 5%대 급등...코스피도 4800선 회복",
+        source: "한국경제",
+        pubDate: "2026-11-27",
+        url: "https://www.hankyung.com/article/202611274438i",
+        summary: "장 초반 4,682.43까지 밀렸던 코스피가 매수세 유입으로 4,800선을 돌파하며 4,835~4,849선대까지 상승폭을 키웠습니다."
+      },
+      {
+        sector: "코스닥 매수사이드카",
+        isUS: false,
+        title: "코스닥 5% 급등에 '매수 사이드카'...코스피도 1.7% 상승세",
+        source: "조선일보",
+        pubDate: "2026-11-27",
+        url: "https://www.chosun.com/economy/money/2026/11/27/ZRXWI6FSPFCXBPIF4THL4E5KKU/",
+        summary: "저가 매수세 유입에 힘입어 양 시장이 동반 반등하면서 낙폭 과대주 중심의 단기 순환매가 빠르게 전개되고 있습니다."
+      },
+      {
+        sector: "코스피 4840선",
         isUS: false,
         title: "불안한 코스피, 4700선에서 등락 거듭…코스닥은 3% 상승",
         source: "머니투데이",
         pubDate: "2026-11-27",
         url: "https://www.mt.co.kr/stock/2026/11/27/2026112709152912185",
-        summary: "핵심 키워드 [코스피 4700·코스닥 반등] — 코스피가 4,700선 부근에서 등락을 반복하는 가운데 코스닥 지수는 반등 탄력을 보였습니다."
+        summary: "장 초반 4,700선 공방을 거친 뒤 오전 중반 이후 대형주 수급이 개선되며 4,800선 안착 시도로 이어졌습니다."
       },
       {
-        sector: "코스피 4700",
-        isUS: false,
-        title: "코스피, 장초반 1% 안팎 상승 4,700대…코스닥 2%대 강세",
-        source: "연합뉴스",
-        pubDate: "2026-11-26",
-        url: "https://www.yna.co.kr/view/AKR20261126038100008",
-        summary: "핵심 키워드 [4,700대·변동성] — 장초반 상승세 출발 뒤 장중 변동성이 커지는 흐름이 이어져 지지선 확인이 중요합니다."
-      },
-      {
-        sector: "코스닥 반등",
+        sector: "외국인·수급",
         isUS: false,
         title: "코스닥 2.61% 급반등… 외국인·기관 동반 순매수",
         source: "서울신문",
         pubDate: "2026-11-26",
         url: "https://www.seoul.co.kr/news/economy/securities/2026/11/26/20261126500027",
-        summary: "핵심 키워드 [코스닥 반등·외국인·기관 수급] — 양 시장 수급이 유입되며 중소형주·순환매 종목의 반등 시도가 부각됐습니다."
+        summary: "전일에 이어 오늘까지 코스닥 중심으로 매수 수급이 집중되며 단기 반등 탄력이 강화되고 있습니다."
       },
       {
-        sector: "외국인·수급",
-        isUS: false,
-        title: "외국인 수급 공방 속 종목별 선별 장세…거래량 동반 여부 주시",
-        source: "이데일리",
-        pubDate: "2026-11-27",
-        url: "https://www.edaily.co.kr/News/Read?newsId=01427046642450536&mediaCodeNo=257",
-        summary: "핵심 키워드 [외국인·수급] — 지수 전체 추격보다 수급과 거래량이 뒷받침되는 종목·섹터를 선별하는 접근이 유효합니다."
-      },
-      {
-        sector: "전강후약·변동성",
-        isUS: false,
-        title: "장중 변동성 확대·전강후약 패턴 주의…분할 매수·저점 확인 부각",
-        source: "한국경제",
-        pubDate: "2026-11-27",
-        url: "https://www.hankyung.com/article/2026112731846",
-        summary: "핵심 키워드 [전강후약·변동성] — 장 초반 급등 후 차익 물량이 출회되는 구간에서는 지지선 확인 후 분할 진입이 유리합니다."
-      },
-      {
-        sector: "금리·거시",
-        isUS: false,
-        title: "한은 기준금리 3.25% 결정 이후 채권·환율·증시 영향 점검",
-        source: "매일경제",
-        pubDate: "2026-11-26",
-        url: "https://www.mk.co.kr/news/stock/11482910",
-        summary: "핵심 키워드 [금리 3.25%·거시] — 기준금리 수준과 환율 움직임이 외국인 자금 흐름 및 성장주 할인율에 영향을 줍니다."
-      },
-      {
-        sector: "추수감사절 휴장",
+        sector: "미국·글로벌 일정",
         isUS: true,
-        title: "미국 추수감사절 휴장 속 글로벌 관망세…연휴 이후 수급 변수 체크",
-        source: "조선비즈",
-        pubDate: "2026-11-27",
-        url: "https://biz.chosun.com/stock/world_stock/2026/11/27/2026112700112/",
-        summary: "핵심 키워드 [미국 추수감사절 휴장] — 미 증시 휴장·연휴 분위기로 글로벌 직결 모멘텀이 제한되며 국내 수급과 개별 이슈가 돋보입니다."
+        title: "[11월4주 글로벌 증시 캘린더] 한은 금통위·미국 PCE·GDP…추수감사절 휴장 변수",
+        source: "더커넥트머니",
+        pubDate: "2026-11-21",
+        url: "https://www.theconnectmoney.com/ko-kr/articles/4735",
+        summary: "11/25 미국 PCE·GDP 발표, 11/26 한국 금통위 및 미국 추수감사절 휴장, 11/27 미국 블랙프라이데이 조기 폐장 일정이 핵심 변수입니다."
+      },
+      {
+        sector: "미국·글로벌 일정",
+        isUS: true,
+        title: "미국 추수감사절 휴장과 블랙프라이데이 조기폐장, PCE까지 이번 주",
+        source: "증시브리핑",
+        pubDate: "2026-11-25",
+        url: "https://ggobukk2.tistory.com/entry/us-stock-market-thanksgiving-holiday-2026",
+        summary: "11월 26일 휴장 후 27일은 한국시간 28일 새벽 3시에 조기 폐장하며 연말 소비 시즌 개막과 금리 경로를 점검합니다."
       },
       {
         sector: "반도체/AI",
         isUS: false,
-        title: "반도체·AI 대표주 변동성 완화 및 주요 이평선 안착 여부 점검",
+        title: "반도체·AI 대표주 저가 매수 유입과 매물대 소화 점검",
         source: "전자신문",
         pubDate: "2026-11-27",
         url: "https://www.etnews.com/20261127000045",
-        summary: "핵심 키워드 [반도체/AI·지지선] — 단기 조정 뒤 5일·20일선 지지 여부와 거래량 회복 흐름을 함께 확인해야 합니다."
+        summary: "지수 급반등 과정에서 상단 매물대 저항 돌파 여부와 거래량 동반이 관건입니다."
       },
       {
-        sector: "전력/에너지/원전",
+        sector: "전력/원전/방산",
         isUS: false,
-        title: "전력기기·원전·ESS 섹터 순환매 흐름과 중장기 수주 모멘텀",
+        title: "전력기기·원전·방산 업종 순환매 흐름과 지지선 확인",
         source: "파이낸셜뉴스",
         pubDate: "2026-11-26",
         url: "https://www.fnnews.com/news/202611261420189123",
-        summary: "핵심 키워드 [전력/원전 순환매] — 중기 추세를 유지하는 가운데 단기 1주 반등 탄력이 붙는 종목군으로 자금이 순환합니다."
-      },
-      {
-        sector: "방산/우주항공",
-        isUS: false,
-        title: "방산·우주항공 업종 강세 뒤 단기 숨고르기·순환매 점검",
-        source: "서울경제",
-        pubDate: "2026-11-26",
-        url: "https://www.sedaily.com/NewsView/20261126884120",
-        summary: "핵심 키워드 [방산/우주항공] — 누적 상승 구간에서는 고점 추격보다 눌림목 지지 및 차익 물량 소화 과정을 살핍니다."
+        summary: "단기 급등락 장세에서는 고점 추격보다 거래량이 실린 매물대 지지 구간 공략이 유효합니다."
       },
       {
         sector: "바이오/헬스케어",
         isUS: false,
-        title: "바이오·헬스케어 섹터 바닥 확인 및 반등 탄력 종목군 관심",
+        title: "코스닥 급등 속 바이오·헬스케어 반등 탄력 종목군 주목",
         source: "히트뉴스",
         pubDate: "2026-11-27",
         url: "https://www.hitnews.co.kr/news/articleView.html?idxno=58421",
-        summary: "핵심 키워드 [바이오 반등] — 구간 하단에서 거래량이 늘어나며 반등을 시도하는 종목의 지지력을 점검합니다."
+        summary: "코스닥 매수 사이드카 발동과 함께 낙폭이 컸던 바이오·기술주 중심으로 강한 반등세가 유입되고 있습니다."
       }
     ];
 
     const FALLBACK_MARKET = {
       ok: true,
-      updatedAt: "2026-11-27T10:31:00+09:00",
-      stance: "🧭 <strong>2026.11.27(금) 실시간 시장 스탠스:</strong> 코스피 <span class='big-u'>4,705.32 (4700선 공방)</span> · 코스닥 <span class='big-u'>반등 시도</span> · 한은 금리 <span class='big-u'>3.25%</span> · 🇺🇸 미국장 기본 OFF",
+      updatedAt: "2026-11-27T12:00:00+09:00",
+      stance: "🧭 <strong>2026.11.27(금) 12:00 뉴스 종합 스탠스:</strong> 코스피 <span class='num-u big-num'>4,835.47 (+2.64%)</span> · 코스닥 <span class='num-u big-num'>693.12 (+5.70% · 매수 사이드카)</span> · 한은 기준금리 <span class='num-u'>3.25%</span>",
       indices: [
-        { name: "코스피 (KOSPI)", val: "4,705.32", chg: "4,700선 등락·전강후약 주의", up: false, us: false, weekChg: "주간 4,700선 방어·장중 변동성" },
-        { name: "코스닥 (KOSDAQ)", val: "655.71+", chg: "상승 탄력·순환매 시도", up: true, us: false, weekChg: "주간 중소형 반등 흐름" },
-        { name: "원/달러 환율", val: "1,342.70원", chg: "외국인 수급·금리 연동", up: false, us: false, weekChg: "1,340원대 수급 공방" },
-        { name: "나스닥 (NASDAQ)", val: "22,410.80", chg: "추수감사절 휴장/직전 마감 반영", up: false, us: true, weekChg: "AI·빅테크 변동성 소화" },
-        { name: "S&P 500", val: "6,945.20", chg: "국채금리·거시 변수 주시", up: false, us: true, weekChg: "연휴 전후 방향성 탐색" },
-        { name: "다우 (DOW)", val: "47,890.50", chg: "저가 매수·관망 교차", up: true, us: true, weekChg: "방어·순환 흐름 점검" }
+        { name: "코스피 (KOSPI)", val: "4,835.47", chg: "+124.26 (+2.64%)", up: true, us: false, weekChg: "장중 저점 4,682.43 → 고점 4,849.42 반등" },
+        { name: "코스닥 (KOSDAQ)", val: "693.12", chg: "+37.41 (+5.70%)", up: true, us: false, weekChg: "오전 10:22 매수 사이드카 발동" },
+        { name: "원/달러 환율", val: "1,341.80원", chg: "-1.90 (-0.14%)", up: false, us: false, weekChg: "1,340원대 수급 공방·안정 탐색" },
+        { name: "나스닥 (NASDAQ)", val: "22,410.80", chg: "11/26 휴장 · 11/27 조기폐장", up: true, us: true, weekChg: "주간 근원 PCE·GDP 소화 후 연휴" },
+        { name: "S&P 500", val: "6,945.20", chg: "블프 단축장(새벽 3시 종료)", up: true, us: true, weekChg: "연준 12월 금리 경로 경계" },
+        { name: "다우 (DOW)", val: "47,890.50", chg: "연휴 관망 · 소비시즌 개막", up: true, us: true, weekChg: "낙폭 과대 후 반발 매수 유입" }
       ],
-      weeklySummary: "📅 <strong>이번주(11월 23일~27일) 한 주간 흐름:</strong> 코스피는 <span class='big-u'>4,700선 공방과 전강후약 변동성</span>을 겪고 있으며, 코스닥과 일부 섹터에서는 <u>순환매 반등</u>이 시도되고 있습니다. 한은 기준금리 3.25%와 외국인 수급 방향을 함께 살피는 주간입니다.",
-      totalOpinion: "📌 <strong>[실시간 종합 시황]</strong> 코스피 4,700선 등락과 전강후약 패턴이 나타나므로 <span class='big-u'>장중 급등 추격보다 지지선·거래량 확인</span>이 중요합니다.",
-      analogyOpinion: "💡 <strong>[쉬운 시장 비유]</strong> 바람이 변덕스러운 날엔 <u>단단한 방파제(거래량 지지선) 안쪽에서 파도의 방향</u>을 먼저 확인하는 것이 안전합니다.",
+      newsSynthesisHtml: `
+        <div style="font-weight:900; font-size:0.93rem; margin-bottom:6px;">📰 오늘(11/27) 주요 뉴스 종합 시황 요약</div>
+        <div>
+          1. <strong>증안펀드 기대 + 저가 매수 유입으로 양 시장 급반등:</strong> 장 초반 <span class="num-u">4,682.43</span>까지 밀렸던 코스피가 매수세 유입으로 <span class="num-u">4,800선</span>을 회복해 <span class="num-u">4,835~4,849선</span>까지 올라섰습니다.<br/>
+          2. <strong>코스닥 5.7%대 급등 & 매수 사이드카 발동:</strong> 코스닥 지수가 <span class="num-u">693선(+5.7%)</span>까지 급등하면서 오전 10시 22분께 올해 23번째 <span class="term-ref" onclick="focusGlossary('sidecar')">매수 사이드카</span>가 발동됐고, <span class="term-ref" onclick="focusGlossary('stfund')">증안펀드</span> 기대감이 투자심리를 자극했습니다.<br/>
+          3. <strong>실전 대응 포인트:</strong> 단기 급반등 구간에서는 상단 매물대 저항이 출회할 수 있으므로 추격 매수보다 <strong>차트의 매물대(%) 지지 구간과 거래량</strong>을 확인하며 분할 대응하는 전략이 유리합니다.
+        </div>
+      `,
+      weeklySummary: `
+        📅 <strong>이번주(11/23~11/27) 한 주간 흐름 종합:</strong> 주 초·중반 미국 <span class="term-ref" onclick="focusGlossary('pce')">근원 PCE</span>·<span class="term-ref" onclick="focusGlossary('gdp')">GDP</span> 경계감과 한은 금통위(기준금리 <span class="num-u">3.25%</span>)를 거치며 변동성을 겪었으나, 목·금 미국 추수감사절 연휴 동안 국내 저가 매수세가 유입되며 주간 낙폭을 빠르게 만회하는 흐름입니다.
+      `,
       newsBySector: {
         "전체": TODAY_KEYWORD_NEWS,
-        "코스피 4700": TODAY_KEYWORD_NEWS.filter(n => n.sector.includes("코스피") || n.sector.includes("전강후약")),
-        "코스닥 반등": TODAY_KEYWORD_NEWS.filter(n => n.sector.includes("코스닥") || n.sector.includes("바이오")),
-        "외국인·수급": TODAY_KEYWORD_NEWS.filter(n => n.sector.includes("외국인") || n.sector.includes("반도체")),
-        "금리·추수감사절": TODAY_KEYWORD_NEWS.filter(n => n.sector.includes("금리") || n.sector.includes("추수감사절") || n.sector.includes("미국"))
+        "코스닥 매수사이드카": TODAY_KEYWORD_NEWS.filter(n => n.sector.includes("사이드카") || n.sector.includes("바이오")),
+        "코스피 4840선": TODAY_KEYWORD_NEWS.filter(n => n.sector.includes("코스피") || n.sector.includes("증안펀드")),
+        "미국·글로벌 일정": TODAY_KEYWORD_NEWS.filter(n => n.sector.includes("미국") || n.isUS),
+        "반도체·전력·방산": TODAY_KEYWORD_NEWS.filter(n => n.sector.includes("반도체") || n.sector.includes("전력"))
       }
     };
 
     const FALLBACK_STOCKS = [
-      // 1. 반도체/AI
-      { code: "005930", displayName: "삼성전자", sector: "반도체/AI", role: "대장주", us: false, price: 171300, r1D: 0.35, r1W: 2.1, r1M: 5.4, r3M: 12.8, r6M: 21.0, r1Y: 34.5, posInRange: 54 },
-      { code: "000660", displayName: "SK하이닉스", sector: "반도체/AI", role: "힘있는주", us: false, price: 1053000, r1D: -0.65, r1W: -0.8, r1M: 8.2, r3M: 19.5, r6M: 32.0, r1Y: 48.0, posInRange: 72 },
-      { code: "042700", displayName: "한미반도체", sector: "반도체/AI", role: "유망주", us: false, price: 138500, r1D: 2.15, r1W: 4.5, r1M: 7.9, r3M: 15.2, r6M: 24.0, r1Y: 39.0, posInRange: 58 },
-      { code: "417840", displayName: "저스템", sector: "반도체/AI", role: "눌림목 반등주", us: false, price: 11450, r1D: 1.85, r1W: 3.1, r1M: 4.1, r3M: 7.5, r6M: 12.0, r1Y: 18.2, posInRange: 38 },
+      { code: "005930", displayName: "삼성전자", sector: "반도체/AI", role: "대장주", us: false, price: 173800, r1D: 1.85, r1W: 3.4, r1M: 6.2, r3M: 13.5, r6M: 21.8, r1Y: 35.4, posInRange: 56 },
+      { code: "000660", displayName: "SK하이닉스", sector: "반도체/AI", role: "힘있는주", us: false, price: 1068000, r1D: 1.42, r1W: 1.9, r1M: 9.1, r3M: 20.4, r6M: 33.0, r1Y: 49.2, posInRange: 74 },
+      { code: "042700", displayName: "한미반도체", sector: "반도체/AI", role: "유망주", us: false, price: 142500, r1D: 3.10, r1W: 5.8, r1M: 8.8, r3M: 16.0, r6M: 25.1, r1Y: 40.2, posInRange: 60 },
+      { code: "417840", displayName: "저스템", sector: "반도체/AI", role: "눌림목 반등주", us: false, price: 11850, r1D: 3.45, r1W: 4.9, r1M: 5.3, r3M: 8.4, r6M: 13.2, r1Y: 19.5, posInRange: 41 },
 
-      // 2. 전력/에너지/원전
-      { code: "267260", displayName: "HD현대일렉트릭", sector: "전력/에너지/원전", role: "대장주", us: false, price: 438000, r1D: 1.45, r1W: 4.2, r1M: 9.1, r3M: 16.4, r6M: 28.5, r1Y: 44.2, posInRange: 66 },
-      { code: "034020", displayName: "두산에너빌리티", sector: "전력/에너지/원전", role: "힘있는주", us: false, price: 29850, r1D: 2.30, r1W: 3.8, r1M: 6.4, r3M: 14.0, r6M: 25.2, r1Y: 36.5, posInRange: 52 },
-      { code: "298040", displayName: "효성중공업", sector: "전력/에너지/원전", role: "유망주", us: false, price: 462000, r1D: 1.90, r1W: 4.9, r1M: 10.2, r3M: 18.5, r6M: 31.0, r1Y: 47.0, posInRange: 64 },
-      { code: "001040", displayName: "LS ELECTRIC", sector: "전력/에너지/원전", role: "눌림목 반등주", us: false, price: 192000, r1D: 1.15, r1W: 2.4, r1M: 2.9, r3M: 6.8, r6M: 13.5, r1Y: 22.0, posInRange: 35 },
+      { code: "267260", displayName: "HD현대일렉트릭", sector: "전력/에너지/원전", role: "대장주", us: false, price: 444500, r1D: 1.95, r1W: 4.8, r1M: 9.7, r3M: 17.0, r6M: 29.1, r1Y: 45.0, posInRange: 67 },
+      { code: "034020", displayName: "두산에너빌리티", sector: "전력/에너지/원전", role: "힘있는주", us: false, price: 30450, r1D: 2.85, r1W: 4.6, r1M: 7.1, r3M: 14.8, r6M: 26.0, r1Y: 37.4, posInRange: 54 },
+      { code: "298040", displayName: "효성중공업", sector: "전력/에너지/원전", role: "유망주", us: false, price: 469000, r1D: 2.20, r1W: 5.3, r1M: 10.8, r3M: 19.1, r6M: 31.8, r1Y: 48.0, posInRange: 65 },
+      { code: "001040", displayName: "LS ELECTRIC", sector: "전력/에너지/원전", role: "눌림목 반등주", us: false, price: 195500, r1D: 1.80, r1W: 3.1, r1M: 3.6, r3M: 7.4, r6M: 14.2, r1Y: 22.8, posInRange: 37 },
 
-      // 3. 방산/우주항공
-      { code: "012450", displayName: "한화에어로스페이스", sector: "방산/우주항공", role: "대장주", us: false, price: 392000, r1D: 2.65, r1W: 5.1, r1M: 11.3, r3M: 22.0, r6M: 35.1, r1Y: 52.4, posInRange: 70 },
-      { code: "079550", displayName: "LIG넥스원", sector: "방산/우주항공", role: "힘있는주", us: false, price: 254000, r1D: 1.75, r1W: 3.4, r1M: 7.5, r3M: 16.8, r6M: 27.0, r1Y: 41.5, posInRange: 59 },
-      { code: "047810", displayName: "한국항공우주", sector: "방산/우주항공", role: "유망주", us: false, price: 62400, r1D: 1.40, r1W: 2.7, r1M: 4.8, r3M: 9.6, r6M: 16.4, r1Y: 25.0, posInRange: 47 },
-      { code: "064350", displayName: "현대로템", sector: "방산/우주항공", role: "눌림목 반등주", us: false, price: 68900, r1D: 1.95, r1W: 3.6, r1M: 3.2, r3M: 11.2, r6M: 19.8, r1Y: 31.0, posInRange: 41 },
+      { code: "012450", displayName: "한화에어로스페이스", sector: "방산/우주항공", role: "대장주", us: false, price: 396000, r1D: 2.10, r1W: 5.4, r1M: 11.8, r3M: 22.5, r6M: 35.8, r1Y: 53.0, posInRange: 71 },
+      { code: "079550", displayName: "LIG넥스원", sector: "방산/우주항공", role: "힘있는주", us: false, price: 257500, r1D: 1.90, r1W: 3.8, r1M: 7.9, r3M: 17.2, r6M: 27.5, r1Y: 42.0, posInRange: 60 },
+      { code: "047810", displayName: "한국항공우주", sector: "방산/우주항공", role: "유망주", us: false, price: 63200, r1D: 1.65, r1W: 3.1, r1M: 5.2, r3M: 10.1, r6M: 17.0, r1Y: 25.8, posInRange: 49 },
+      { code: "064350", displayName: "현대로템", sector: "방산/우주항공", role: "눌림목 반등주", us: false, price: 69800, r1D: 2.15, r1W: 4.0, r1M: 3.8, r3M: 11.8, r6M: 20.4, r1Y: 31.6, posInRange: 43 },
 
-      // 4. 조선/해운/기계
-      { code: "009540", displayName: "HD한국조선해양", sector: "조선/해운/기계", role: "대장주", us: false, price: 218000, r1D: 1.25, r1W: 2.6, r1M: 6.8, r3M: 15.4, r6M: 26.8, r1Y: 43.0, posInRange: 61 },
-      { code: "329180", displayName: "HD현대중공업", sector: "조선/해운/기계", role: "힘있는주", us: false, price: 286000, r1D: 2.05, r1W: 3.9, r1M: 8.4, r3M: 17.9, r6M: 29.4, r1Y: 46.5, posInRange: 65 },
-      { code: "011200", displayName: "HMM", sector: "조선/해운/기계", role: "유망주", us: false, price: 19850, r1D: 0.90, r1W: 1.8, r1M: 3.5, r3M: 6.2, r6M: 11.0, r1Y: 16.5, posInRange: 44 },
-      { code: "042660", displayName: "한화오션", sector: "조선/해운/기계", role: "눌림목 반등주", us: false, price: 38400, r1D: 1.60, r1W: 2.9, r1M: 2.1, r3M: 8.5, r6M: 15.2, r1Y: 24.0, posInRange: 36 },
+      { code: "009540", displayName: "HD한국조선해양", sector: "조선/해운/기계", role: "대장주", us: false, price: 221000, r1D: 1.55, r1W: 3.0, r1M: 7.2, r3M: 15.8, r6M: 27.2, r1Y: 43.5, posInRange: 62 },
+      { code: "329180", displayName: "HD현대중공업", sector: "조선/해운/기계", role: "힘있는주", us: false, price: 290500, r1D: 2.25, r1W: 4.3, r1M: 8.9, r3M: 18.4, r6M: 30.0, r1Y: 47.1, posInRange: 66 },
+      { code: "011200", displayName: "HMM", sector: "조선/해운/기계", role: "유망주", us: false, price: 20150, r1D: 1.25, r1W: 2.3, r1M: 3.9, r3M: 6.7, r6M: 11.5, r1Y: 17.0, posInRange: 46 },
+      { code: "042660", displayName: "한화오션", sector: "조선/해운/기계", role: "눌림목 반등주", us: false, price: 39100, r1D: 1.95, r1W: 3.4, r1M: 2.6, r3M: 9.0, r6M: 15.8, r1Y: 24.6, posInRange: 38 },
 
-      // 5. 바이오/헬스케어
-      { code: "207940", displayName: "삼성바이오로직스", sector: "바이오/헬스케어", role: "대장주", us: false, price: 985000, r1D: 0.70, r1W: 1.9, r1M: 4.3, r3M: 9.8, r6M: 17.5, r1Y: 28.0, posInRange: 53 },
-      { code: "068270", displayName: "셀트리온", sector: "바이오/헬스케어", role: "힘있는주", us: false, price: 184500, r1D: 1.50, r1W: 3.2, r1M: 5.1, r3M: 8.7, r6M: 14.2, r1Y: 21.5, posInRange: 46 },
-      { code: "196170", displayName: "알테오젠", sector: "바이오/헬스케어", role: "유망주", us: false, price: 342000, r1D: 2.45, r1W: 4.8, r1M: 6.9, r3M: 12.4, r6M: 22.0, r1Y: 35.0, posInRange: 50 },
-      { code: "140410", displayName: "메지온", sector: "바이오/헬스케어", role: "눌림목 반등주", us: false, price: 66800, r1D: 1.65, r1W: 2.8, r1M: -2.4, r3M: -3.5, r6M: 9.2, r1Y: 16.0, posInRange: 32 },
+      { code: "207940", displayName: "삼성바이오로직스", sector: "바이오/헬스케어", role: "대장주", us: false, price: 1002000, r1D: 2.40, r1W: 3.8, r1M: 5.6, r3M: 11.0, r6M: 18.8, r1Y: 29.4, posInRange: 56 },
+      { code: "068270", displayName: "셀트리온", sector: "바이오/헬스케어", role: "힘있는주", us: false, price: 189500, r1D: 3.20, r1W: 5.1, r1M: 6.8, r3M: 10.2, r6M: 15.8, r1Y: 23.0, posInRange: 50 },
+      { code: "196170", displayName: "알테오젠", sector: "바이오/헬스케어", role: "유망주", us: false, price: 358000, r1D: 5.40, r1W: 7.9, r1M: 9.8, r3M: 15.2, r6M: 25.0, r1Y: 38.2, posInRange: 55 },
+      { code: "140410", displayName: "메지온", sector: "바이오/헬스케어", role: "눌림목 반등주", us: false, price: 69400, r1D: 4.85, r1W: 6.1, r1M: 1.2, r3M: -1.2, r6M: 11.8, r1Y: 18.5, posInRange: 37 },
 
-      // 6. 로봇/자동화
-      { code: "454910", displayName: "두산로보틱스", sector: "로봇/자동화", role: "대장주", us: false, price: 78500, r1D: 1.30, r1W: 2.5, r1M: 3.4, r3M: 5.8, r6M: 10.4, r1Y: 15.2, posInRange: 42 },
-      { code: "277810", displayName: "레인보우로보틱스", sector: "로봇/자동화", role: "힘있는주", us: false, price: 218000, r1D: 2.55, r1W: 4.4, r1M: 6.1, r3M: 11.5, r6M: 18.8, r1Y: 29.0, posInRange: 49 },
-      { code: "140670", displayName: "알에스오토메이션", sector: "로봇/자동화", role: "유망주", us: false, price: 24600, r1D: 1.90, r1W: 3.5, r1M: 4.7, r3M: 8.2, r6M: 13.6, r1Y: 20.5, posInRange: 45 },
-      { code: "348350", displayName: "뉴로메카", sector: "로봇/자동화", role: "눌림목 반등주", us: false, price: 28400, r1D: 2.40, r1W: 4.6, r1M: 2.2, r3M: 6.4, r6M: 12.8, r1Y: 19.4, posInRange: 37 },
+      { code: "454910", displayName: "두산로보틱스", sector: "로봇/자동화", role: "대장주", us: false, price: 80400, r1D: 2.80, r1W: 4.2, r1M: 4.9, r3M: 7.2, r6M: 11.9, r1Y: 16.8, posInRange: 45 },
+      { code: "277810", displayName: "레인보우로보틱스", sector: "로봇/자동화", role: "힘있는주", us: false, price: 226500, r1D: 4.60, r1W: 6.8, r1M: 8.4, r3M: 13.8, r6M: 21.0, r1Y: 31.4, posInRange: 53 },
+      { code: "140670", displayName: "알에스오토메이션", sector: "로봇/자동화", role: "유망주", us: false, price: 25400, r1D: 3.50, r1W: 5.2, r1M: 6.3, r3M: 9.8, r6M: 15.1, r1Y: 22.0, posInRange: 48 },
+      { code: "348350", displayName: "뉴로메카", sector: "로봇/자동화", role: "눌림목 반등주", us: false, price: 29550, r1D: 4.45, r1W: 6.9, r1M: 4.1, r3M: 8.2, r6M: 14.5, r1Y: 21.2, posInRange: 41 },
 
-      // 7. 금융/증권/지주
-      { code: "105560", displayName: "KB금융", sector: "금융/증권/지주", role: "대장주", us: false, price: 96400, r1D: 0.85, r1W: 2.2, r1M: 5.7, r3M: 13.2, r6M: 23.5, r1Y: 38.0, posInRange: 62 },
-      { code: "055550", displayName: "신한지주", sector: "금융/증권/지주", role: "힘있는주", us: false, price: 56800, r1D: 1.10, r1W: 2.7, r1M: 6.2, r3M: 12.8, r6M: 21.0, r1Y: 34.0, posInRange: 57 },
-      { code: "003470", displayName: "유안타증권", sector: "금융/증권/지주", role: "유망주", us: false, price: 3420, r1D: 1.45, r1W: 3.1, r1M: 4.9, r3M: 9.1, r6M: 15.0, r1Y: 23.0, posInRange: 48 },
-      { code: "085620", displayName: "미래에셋생명", sector: "금융/증권/지주", role: "눌림목 반등주", us: false, price: 4890, r1D: 1.20, r1W: 2.3, r1M: 1.8, r3M: 5.4, r6M: 10.2, r1Y: 17.5, posInRange: 34 },
+      { code: "105560", displayName: "KB금융", sector: "금융/증권/지주", role: "대장주", us: false, price: 97800, r1D: 1.65, r1W: 3.0, r1M: 6.5, r3M: 14.0, r6M: 24.2, r1Y: 38.8, posInRange: 64 },
+      { code: "055550", displayName: "신한지주", sector: "금융/증권/지주", role: "힘있는주", us: false, price: 57600, r1D: 1.75, r1W: 3.4, r1M: 6.9, r3M: 13.5, r6M: 21.8, r1Y: 34.8, posInRange: 59 },
+      { code: "003470", displayName: "유안타증권", sector: "금융/증권/지주", role: "유망주", us: false, price: 3510, r1D: 2.60, r1W: 4.4, r1M: 6.1, r3M: 10.4, r6M: 16.3, r1Y: 24.5, posInRange: 51 },
+      { code: "085620", displayName: "미래에셋생명", sector: "금융/증권/지주", role: "눌림목 반등주", us: false, price: 4990, r1D: 2.05, r1W: 3.2, r1M: 2.7, r3M: 6.3, r6M: 11.1, r1Y: 18.4, posInRange: 36 },
 
-      // 8. 인터넷/플랫폼/내수
-      { code: "035420", displayName: "NAVER", sector: "인터넷/플랫폼/내수", role: "대장주", us: false, price: 216000, r1D: 1.05, r1W: 2.4, r1M: 4.1, r3M: 7.6, r6M: 13.2, r1Y: 20.0, posInRange: 47 },
-      { code: "035720", displayName: "카카오", sector: "인터넷/플랫폼/내수", role: "힘있는주", us: false, price: 44200, r1D: 1.65, r1W: 3.3, r1M: 3.8, r3M: 6.5, r6M: 11.4, r1Y: 16.8, posInRange: 40 },
-      { code: "041510", displayName: "에스엠", sector: "인터넷/플랫폼/내수", role: "유망주", us: false, price: 89200, r1D: 1.80, r1W: 3.6, r1M: 5.5, r3M: 10.2, r6M: 17.8, r1Y: 26.0, posInRange: 51 },
-      { code: "090430", displayName: "아모레퍼시픽", sector: "인터넷/플랫폼/내수", role: "눌림목 반등주", us: false, price: 134000, r1D: 1.35, r1W: 2.6, r1M: 1.5, r3M: 4.8, r6M: 9.6, r1Y: 15.4, posInRange: 33 },
+      { code: "035420", displayName: "NAVER", sector: "인터넷/플랫폼/내수", role: "대장주", us: false, price: 220500, r1D: 2.25, r1W: 3.7, r1M: 5.3, r3M: 8.8, r6M: 14.5, r1Y: 21.2, posInRange: 49 },
+      { code: "035720", displayName: "카카오", sector: "인터넷/플랫폼/내수", role: "힘있는주", us: false, price: 45300, r1D: 2.85, r1W: 4.6, r1M: 5.0, r3M: 7.8, r6M: 12.6, r1Y: 18.0, posInRange: 43 },
+      { code: "041510", displayName: "에스엠", sector: "인터넷/플랫폼/내수", role: "유망주", us: false, price: 91200, r1D: 2.50, r1W: 4.4, r1M: 6.3, r3M: 11.0, r6M: 18.6, r1Y: 26.8, posInRange: 53 },
+      { code: "090430", displayName: "아모레퍼시픽", sector: "인터넷/플랫폼/내수", role: "눌림목 반등주", us: false, price: 136500, r1D: 1.95, r1W: 3.3, r1M: 2.2, r3M: 5.5, r6M: 10.3, r1Y: 16.2, posInRange: 35 },
 
-      // 미국 섹터 풀 (미국장 ON 시)
+      // 미국 섹터 풀
       { code: "NVDA", displayName: "엔비디아", sector: "AI/반도체(미)", role: "대장주", us: true, price: 149.30, r1D: 1.20, r1W: 2.3, r1M: 3.8, r3M: 14.2, r6M: 26.5, r1Y: 41.0, posInRange: 45 },
       { code: "MSFT", displayName: "마이크로소프트", sector: "AI/반도체(미)", role: "힘있는주", us: true, price: 432.50, r1D: 0.85, r1W: 1.9, r1M: 4.6, r3M: 11.0, r6M: 19.5, r1Y: 31.0, posInRange: 55 },
       { code: "MRVL", displayName: "마벨테크놀로지", sector: "AI/반도체(미)", role: "유망주", us: true, price: 96.40, r1D: 2.10, r1W: 4.1, r1M: 7.2, r3M: 16.5, r6M: 28.0, r1Y: 43.0, posInRange: 58 },
@@ -1329,9 +1511,10 @@
     ];
 
     const state = {
-      marketScope: "TODAY",
+      marketScope: "ALL",
       newsSector: "전체",
       openNewsIdx: new Set([0, 1]),
+      activeGlossaryKey: "sidecar",
       horizon: "WEEK",
       recPeriod: "TODAY",
       activeStep: 0,
@@ -1343,14 +1526,18 @@
       stockName: "메지온",
       currency: "KRW",
       tf: "D",
-      waveBias: "POS", // POS | NEG (큰 대파동 1개만 표시)
+      waveBias: "POS",
+      srDrawMode: null, // null | 'SUPPORT' | 'RESIST'
+      customSRLines: [], // { type: 'SUPPORT'|'RESIST', price: number }
       maChecked: { 5: true, 20: false, 45: false, 60: false, 120: false, 240: false },
       feats: {
+        volProfile: true,
+        elliottWave: true,
+        subWave: true,
         buyLine: true,
         stopLine: true,
         fibRet: false,
         fibExt: false,
-        elliottWave: true,
         pred1W: true,
         pred1M: true
       },
@@ -1382,26 +1569,38 @@
         : d.toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
     }
 
+    function renderGlossaryMargin() {
+      $("glossaryList").innerHTML = GLOSSARY_TERMS.map(g => `
+        <div class="glossary-item ${g.key === state.activeGlossaryKey ? "highlight" : ""}" id="gloss-${g.key}">
+          <div style="font-weight:900; color:#92400e;">• ${g.term}</div>
+          <div style="margin-top:2px; color:#1e293b;">${g.desc}</div>
+        </div>
+      `).join("");
+    }
+
+    window.focusGlossary = key => {
+      state.activeGlossaryKey = key;
+      renderGlossaryMargin();
+      const el = $(`gloss-${key}`);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    };
+
     function syncMarketFilterBadges() {
-      const tag = state.includeUS ? "🇺🇸 미국장 전용 (ON)" : "🇰🇷 국내장 전용 (미국장 OFF)";
+      const tag = state.includeUS ? "🇺🇸 미국장 섹터 전용 (ON)" : "🇰🇷 국내장 섹터 전용 (미국장 OFF)";
       $("sectorFilterBadge").textContent = tag;
       $("recMarketBadge").textContent = tag;
     }
 
-    function buildNewsListEnsuringMin10(newsMap, includeUS) {
+    function buildNewsListEnsuringMin10(newsMap) {
       const basePool = [...TODAY_KEYWORD_NEWS];
       const extraPool = [];
       Object.values(newsMap || {}).forEach(arr => {
         if (Array.isArray(arr)) extraPool.push(...arr);
       });
 
-      const combined = includeUS
-        ? [...basePool.filter(n => n.isUS), ...extraPool.filter(n => n.isUS), ...basePool]
-        : [...basePool, ...extraPool];
-
       const seen = new Set();
       const out = [];
-      for (const item of combined) {
+      for (const item of [...basePool, ...extraPool]) {
         if (!item || !item.title) continue;
         const key = item.title.trim();
         if (seen.has(key)) continue;
@@ -1423,26 +1622,26 @@
       const m = state.marketData || FALLBACK_MARKET;
       updateClock(m.updatedAt);
       $("topStanceBanner").innerHTML = m.stance;
+      renderGlossaryMargin();
 
       let idxs = m.indices || [];
-      if (state.marketScope === "TODAY") {
-        idxs = idxs.filter(x => state.includeUS ? x.us : !x.us);
-      } else if (state.marketScope === "GLOBAL") {
+      if (state.marketScope === "KR") {
+        idxs = idxs.filter(x => !x.us);
+      } else if (state.marketScope === "US") {
         idxs = idxs.filter(x => x.us || x.name.includes("환율"));
       }
 
       $("marketGrid").innerHTML = idxs.map(i => `
         <div class="idx-box">
           <div class="idx-name">${i.name} ${i.us ? '<span class="badge purple">미국</span>' : '<span class="badge">국내</span>'}</div>
-          <div class="idx-val"><span class="big-u">${i.val}</span></div>
+          <div class="idx-val"><span class="num-u big-num">${i.val}</span></div>
           <div class="${i.up ? "up" : "down"}" style="font-size:0.82rem; font-weight:900;">${i.up ? "▲" : "▼"} ${i.chg}</div>
           <div style="font-size:0.75rem; color:#475569; margin-top:4px;">${i.weekChg || ""}</div>
         </div>
       `).join("");
 
-      $("weeklyFlowBox").innerHTML = m.weeklySummary;
-      $("totalOpinionBox").innerHTML = m.totalOpinion;
-      $("analogyOpinionBox").innerHTML = m.analogyOpinion;
+      $("newsSynthesisBox").innerHTML = m.newsSynthesisHtml || FALLBACK_MARKET.newsSynthesisHtml;
+      $("weeklyFlowBox").innerHTML = m.weeklySummary || FALLBACK_MARKET.weeklySummary;
 
       const newsMap = m.newsBySector || FALLBACK_MARKET.newsBySector;
       const secKeys = Object.keys(newsMap);
@@ -1452,13 +1651,9 @@
         <button class="snews-tab ${k === state.newsSector ? "active" : ""}" onclick="selectNewsSector('${k}')">${k}</button>
       `).join("");
 
-      let list = state.newsSector === "전체"
-        ? buildNewsListEnsuringMin10(newsMap, state.includeUS)
-        : (newsMap[state.newsSector] || []).filter(n => state.includeUS ? n.isUS : true);
-
-      if (list.length < 10 && state.newsSector === "전체") {
-        list = buildNewsListEnsuringMin10(newsMap, false);
-      }
+      const list = state.newsSector === "전체"
+        ? buildNewsListEnsuringMin10(newsMap)
+        : (newsMap[state.newsSector] || []);
 
       $("newsCountBadge").textContent = `총 ${list.length}건 표시`;
       $("sectorNewsGrid").innerHTML = list.map((n, idx) => {
@@ -1469,15 +1664,15 @@
         return `
           <div class="m-news-card">
             <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.74rem; color:var(--muted); margin-bottom:4px;">
-              <span><b>#${idx + 1} [${n.sector}]</b> ${n.source} ${n.isUS ? "· 🇺🇸 미국" : "· 🇰🇷 국내"}</span>
+              <span><strong>#${idx + 1} [${n.sector}]</strong> ${n.source} ${n.isUS ? "· 🇺🇸 미국" : "· 🇰🇷 국내"}</span>
               <span>${n.pubDate || "2026-11-27"}</span>
             </div>
-            <div class="m-news-title"><u>${n.title}</u></div>
+            <div class="m-news-title">${n.title}</div>
             <div class="news-btn-row">
               <button type="button" class="btn-summary" onclick="toggleNewsSummary(${idx})">${isOpen ? "요약 닫기 ▲" : "요약 보기 ▼"}</button>
               <a class="btn-link-ext" href="${safeUrl}" target="_blank" rel="noopener noreferrer">📰 기사 원문 보기 ↗</a>
             </div>
-            ${isOpen ? `<div class="summary-box"><b>📌 핵심 요약:</b> ${n.summary}</div>` : ""}
+            ${isOpen ? `<div class="summary-box"><strong>📌 핵심 요약:</strong> ${n.summary}</div>` : ""}
           </div>
         `;
       }).join("");
@@ -1496,12 +1691,12 @@
 
     function getHorizonFieldAndLabel(hz) {
       switch (hz) {
-        case "WEEK": return { field: "r1W", label: "1주", rateName: "주간 등락률", showWeeklyRate: true };
-        case "1M":   return { field: "r1M", label: "1개월", rateName: "오늘 등락률", showWeeklyRate: false };
-        case "3M":   return { field: "r3M", label: "3개월", rateName: "오늘 등락률", showWeeklyRate: false };
-        case "6M":   return { field: "r6M", label: "6개월", rateName: "오늘 등락률", showWeeklyRate: false };
-        case "1Y":   return { field: "r1Y", label: "1년", rateName: "오늘 등락률", showWeeklyRate: false };
-        default:     return { field: "r1W", label: "1주", rateName: "주간 등락률", showWeeklyRate: true };
+        case "WEEK": return { field: "r1W", label: "1주", showWeeklyRate: true };
+        case "1M":   return { field: "r1M", label: "1개월", showWeeklyRate: false };
+        case "3M":   return { field: "r3M", label: "3개월", showWeeklyRate: false };
+        case "6M":   return { field: "r6M", label: "6개월", showWeeklyRate: false };
+        case "1Y":   return { field: "r1Y", label: "1년", showWeeklyRate: false };
+        default:     return { field: "r1W", label: "1주", showWeeklyRate: true };
       }
     }
 
@@ -1604,15 +1799,15 @@
       const leadSec = sectors.filter(s => s.stage === "주도 진행");
       const coolingSec = sectors.filter(s => s.stage === "숨고르기·차익");
 
-      $("horizonArrowSummary").innerHTML = `🔄 <strong>[${hzMeta.label} 기준] 순환매 이동 맥락:</strong> 숨고르기·차익(<u>${coolingSec.map(x => x.sector).slice(0, 2).join(", ") || "없음"}</u>) → 주도 진행(<u>${leadSec.map(x => x.sector).slice(0, 2).join(", ") || "없음"}</u>) → <span class="big-u">유입 초입: ${inflowSec.map(x => x.sector).slice(0, 3).join(", ") || sectors[0].sector}</span> <span style="font-size:0.78rem; color:#581c87;">(섹터 카드를 클릭하면 4종목 상세가 열립니다)</span>`;
+      $("horizonArrowSummary").innerHTML = `🔄 <strong>[${hzMeta.label} 기준] 순환매 이동 맥락:</strong> 숨고르기·차익(${coolingSec.map(x => x.sector).slice(0, 2).join(", ") || "없음"}) → 주도 진행(${leadSec.map(x => x.sector).slice(0, 2).join(", ") || "없음"}) → <strong>유입 초입: ${inflowSec.map(x => x.sector).slice(0, 3).join(", ") || sectors[0].sector}</strong> <span style="font-size:0.78rem; color:#581c87;">(섹터 카드를 클릭하면 4종목 상세가 열립니다)</span>`;
 
       $("horizonFlowGrid").innerHTML = sectors.map((sec, idx) => `
         <div class="flow-step ${sec.boxCls} ${idx === state.activeStep ? "active-step" : ""}" onclick="selectFlowStep(${idx})">
           <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.73rem; font-weight:800; margin-bottom:3px;">
-            <span>#${idx + 1} · ${hzMeta.label} <u>${sec.avgHz >= 0 ? "+" : ""}${sec.avgHz.toFixed(1)}%</u></span>
+            <span>#${idx + 1} · ${hzMeta.label} <span class="num-u">${sec.avgHz >= 0 ? "+" : ""}${sec.avgHz.toFixed(1)}%</span></span>
             <span class="badge ${sec.badgeCls}">${sec.stage}</span>
           </div>
-          <div style="font-weight:900; font-size:0.96rem; margin:2px 0;"><span class="big-u">${sec.sector}</span></div>
+          <div style="font-weight:900; font-size:0.98rem; margin:2px 0;">${sec.sector}</div>
           <div style="font-size:0.75rem; font-weight:800; color:#0f172a;">1주 ${sec.avg1W >= 0 ? "+" : ""}${sec.avg1W.toFixed(1)}% · 1M ${sec.avg1M >= 0 ? "+" : ""}${sec.avg1M.toFixed(1)}% · 1Y ${sec.avg1Y >= 0 ? "+" : ""}${sec.avg1Y.toFixed(1)}%</div>
           <div style="font-size:0.73rem; color:#334155; margin-top:4px;">${sec.desc}</div>
         </div>
@@ -1626,10 +1821,10 @@
         <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px;">
           <div>
             <span class="badge purple">선택 섹터 4종목</span>
-            <span class="big-u" style="margin-left:6px;">${selectedSec.sector}</span>
-            <span style="font-size:0.8rem; font-weight:800; color:#475569; margin-left:6px;">(표시 기준: <u>${rateHeader}</u> · 클릭 시 차트 연동)</span>
+            <strong style="font-size:1.05rem; margin-left:6px;">${selectedSec.sector}</strong>
+            <span style="font-size:0.8rem; font-weight:800; color:#475569; margin-left:6px;">(표시 기준: <strong>${rateHeader}</strong> · 클릭 시 차트 연동)</span>
           </div>
-          <span class="badge ${selectedSec.badgeCls}">${selectedSec.stage} · ${hzMeta.label} 평균 ${selectedSec.avgHz >= 0 ? "+" : ""}${selectedSec.avgHz.toFixed(1)}%</span>
+          <span class="badge ${selectedSec.badgeCls}">${selectedSec.stage} · ${hzMeta.label} 평균 <span class="num-u">${selectedSec.avgHz >= 0 ? "+" : ""}${selectedSec.avgHz.toFixed(1)}%</span></span>
         </div>
         <div class="four-stock-grid">
           ${fourStocks.map(st => {
@@ -1641,10 +1836,10 @@
                   <span class="badge">${st.roleLabel}</span>
                   <span>${st.code}</span>
                 </div>
-                <div style="margin-top:6px;"><span class="big-u">${st.displayName}</span></div>
-                <div style="font-size:0.82rem; font-weight:800; margin-top:3px;">현재가 <b>${fmtPrice(st.price, st.us ? "USD" : "KRW")}</b></div>
+                <div style="margin-top:6px; font-weight:900; font-size:1.02rem;">${st.displayName}</div>
+                <div style="font-size:0.82rem; font-weight:800; margin-top:3px;">현재가 <span class="num-u">${fmtPrice(st.price, st.us ? "USD" : "KRW")}</span></div>
                 <div style="font-size:0.86rem; font-weight:900; color:${rateColor}; margin-top:3px;">
-                  ${rateHeader}: ${dispRate >= 0 ? "+" : ""}${dispRate.toFixed(2)}%
+                  ${rateHeader}: <span class="num-u">${dispRate >= 0 ? "+" : ""}${dispRate.toFixed(2)}%</span>
                 </div>
                 <div style="font-size:0.73rem; color:#475569; margin-top:2px;">
                   ${hzMeta.showWeeklyRate ? `오늘 ${st.r1D >= 0 ? "+" : ""}${st.r1D.toFixed(2)}%` : `1주 ${st.r1W >= 0 ? "+" : ""}${st.r1W.toFixed(2)}% · ${hzMeta.label} ${st[hzMeta.field] >= 0 ? "+" : ""}${st[hzMeta.field].toFixed(1)}%`}
@@ -1657,7 +1852,7 @@
 
       const next1 = inflowSec[0] || sectors[0];
       const next2 = inflowSec[1] || leadSec[0] || sectors[1];
-      $("horizonPredictBox").innerHTML = `🧭 <strong>[${hzMeta.label} 기준] 순환매 유입 주목 섹터:</strong> <span class="big-u">${next1 ? `${next1.sector} (${next1.stage})` : "-"}</span> · <span class="big-u">${next2 ? `${next2.sector} (${next2.stage})` : "-"}</span> — 위 섹터 카드를 클릭해 4종목을 확인해 보세요.`;
+      $("horizonPredictBox").innerHTML = `🧭 <strong>[${hzMeta.label} 기준] 순환매 유입 주목 섹터:</strong> <strong>${next1 ? `${next1.sector} (${next1.stage})` : "-"}</strong> · <strong>${next2 ? `${next2.sector} (${next2.stage})` : "-"}</strong> — 위 섹터 카드를 클릭해 4종목을 확인해 보세요.`;
     }
 
     window.selectFlowStep = idx => {
@@ -1672,17 +1867,17 @@
         TODAY: {
           title: "⚡ 오늘 추천 (일간·주간 반등/탄력)",
           fn: s => (s.r1D ?? 0) * 0.6 + (s.r1W ?? 0) * 0.4,
-          tag: s => `일간 ${s.r1D >= 0 ? "+" : ""}${s.r1D.toFixed(2)}% · 1주 ${s.r1W >= 0 ? "+" : ""}${s.r1W.toFixed(2)}%`
+          tag: s => `일간 <span class="num-u">${s.r1D >= 0 ? "+" : ""}${s.r1D.toFixed(2)}%</span> · 1주 <span class="num-u">${s.r1W >= 0 ? "+" : ""}${s.r1W.toFixed(2)}%</span>`
         },
         WEEK: {
           title: "📅 이번주 추천 (1주 순환 탄력)",
           fn: s => s.r1W ?? 0,
-          tag: s => `1주 ${s.r1W >= 0 ? "+" : ""}${s.r1W.toFixed(2)}% · 1개월 ${s.r1M >= 0 ? "+" : ""}${s.r1M.toFixed(2)}%`
+          tag: s => `1주 <span class="num-u">${s.r1W >= 0 ? "+" : ""}${s.r1W.toFixed(2)}%</span> · 1개월 <span class="num-u">${s.r1M >= 0 ? "+" : ""}${s.r1M.toFixed(2)}%</span>`
         },
         MONTH: {
           title: "🗓️ 이번달 추천 (1개월 중기 추세)",
           fn: s => s.r1M ?? 0,
-          tag: s => `1개월 ${s.r1M >= 0 ? "+" : ""}${s.r1M.toFixed(2)}% · 3개월 ${s.r3M >= 0 ? "+" : ""}${s.r3M.toFixed(2)}%`
+          tag: s => `1개월 <span class="num-u">${s.r1M >= 0 ? "+" : ""}${s.r1M.toFixed(2)}%</span> · 3개월 <span class="num-u">${s.r3M >= 0 ? "+" : ""}${s.r3M.toFixed(2)}%</span>`
         }
       }[state.recPeriod];
 
@@ -1704,12 +1899,12 @@
             <div class="rec-row-item">
               <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; flex-wrap:wrap;">
                 <span>
-                  <span class="big-u">${r.displayName}</span> (${r.code})
+                  <strong style="font-size:1.01rem;">${r.displayName}</strong> (${r.code})
                   <span class="badge ${r.us ? "purple" : ""}">${r.sector}</span>
                 </span>
                 <button style="padding:3px 9px; font-size:0.74rem;" onclick="loadStock('${r.code}', true)">차트·탈출 보기 ↗</button>
               </div>
-              <div style="font-size:0.79rem; font-weight:700; color:#1e3a8a; margin-top:3px;">📌 ${periodMeta.tag(r)} · 현재가 <u>${fmtPrice(r.price, r.us ? "USD" : "KRW")}</u></div>
+              <div style="font-size:0.79rem; font-weight:700; color:#1e3a8a; margin-top:3px;">📌 ${periodMeta.tag(r)} · 현재가 <span class="num-u">${fmtPrice(r.price, r.us ? "USD" : "KRW")}</span></div>
             </div>
           `).join("")}
         </div>
@@ -1755,7 +1950,7 @@
 
       $("customFilterOutput").innerHTML = `
         <div style="font-size:0.82rem; font-weight:800; color:#0f172a; margin-bottom:6px;">
-          <b>[${bundle.title}]</b> 선택 ${state.selectedConds.length}개 조건 기준 검색 <b>${scored.length}종목</b>
+          <strong>[${bundle.title}]</strong> 선택 ${state.selectedConds.length}개 조건 기준 검색 <span class="num-u">${scored.length}종목</span>
         </div>
       ` + (scored.length
         ? `<div class="fit-stock-list">` + scored.slice(0, 8).map(({ st, matchedCount, allMatch }) => `
@@ -1765,14 +1960,14 @@
                 <span class="badge ${allMatch ? "mint" : "amber"}">${allMatch ? "조건 전체충족" : `${matchedCount}/${state.selectedConds.length} 충족`}</span>
               </div>
               <div style="font-size:0.79rem; color:#1e293b; margin-top:6px;">
-                <b>${st.sector}</b> · 1주 <u>${st.r1W >= 0 ? "+" : ""}${st.r1W.toFixed(2)}%</u> · 1개월 <u>${st.r1M >= 0 ? "+" : ""}${st.r1M.toFixed(2)}%</u> · 현재가 <b>${fmtPrice(st.price, st.us ? "USD" : "KRW")}</b>
+                <strong>${st.sector}</strong> · 1주 <span class="num-u">${st.r1W >= 0 ? "+" : ""}${st.r1W.toFixed(2)}%</span> · 1개월 <span class="num-u">${st.r1M >= 0 ? "+" : ""}${st.r1M.toFixed(2)}%</span> · 현재가 <span class="num-u">${fmtPrice(st.price, st.us ? "USD" : "KRW")}</span>
               </div>
             </div>
           `).join("") + `</div>`
         : `<div style="color:#475569;">조건에 맞는 종목이 없습니다. 조건을 줄이거나 [조건 추가]를 눌러보세요.</div>`);
     }
 
-    function buildSampleDailySeries(basePrice = 66800, isUS = false) {
+    function buildSampleDailySeries(basePrice = 69400, isUS = false) {
       const out = [];
       let cur = basePrice * (isUS ? 0.88 : 0.9);
       const start = new Date("2026-05-15T00:00:00Z");
@@ -1843,7 +2038,37 @@
       return arr;
     }
 
-    // 스윙 포인트 추출
+    // 가격대별 매물대 비율(%) 계산 (8개 가격 구간)
+    function computeVolumeProfile(slice, bins = 8) {
+      if (!slice || slice.length < 2) return [];
+      let lo = Infinity, hi = -Infinity;
+      slice.forEach(d => { lo = Math.min(lo, d.low); hi = Math.max(hi, d.high); });
+      if (hi <= lo) return [];
+      const step = (hi - lo) / bins;
+      const buckets = Array.from({ length: bins }, (_, idx) => ({
+        idx,
+        low: lo + idx * step,
+        high: lo + (idx + 1) * step,
+        mid: lo + (idx + 0.5) * step,
+        vol: 0,
+        pct: 0
+      }));
+
+      let totalVol = 0;
+      slice.forEach(d => {
+        const typ = (d.high + d.low + d.close) / 3;
+        const bIdx = Math.max(0, Math.min(bins - 1, Math.floor((typ - lo) / step)));
+        const v = d.volume || 1;
+        buckets[bIdx].vol += v;
+        totalVol += v;
+      });
+
+      if (totalVol > 0) {
+        buckets.forEach(b => { b.pct = (b.vol / totalVol) * 100; });
+      }
+      return buckets;
+    }
+
     function findSwingExtrema(slice, kind, radius = 2) {
       const pts = [];
       for (let i = radius; i < slice.length - radius; i++) {
@@ -1860,14 +2085,57 @@
       return pts;
     }
 
-    // 대파동(큰 파동 1개) 검증 및 미완성 가능성 / 예상 현재 진행파동 계산
-    function computeMajorElliottWave(slice, bias = "POS") {
+    // 대파동 내 소파동(1-2-3-4-5 세분 파동) 추출
+    function computeSubWavesInsideSegment(slice, startIdx, endIdx) {
+      if (endIdx - startIdx < 6) return [];
+      const seg = slice.slice(startIdx, endIdx + 1);
+      const q1 = Math.max(1, Math.floor(seg.length * 0.22));
+      const q2 = Math.max(q1 + 1, Math.floor(seg.length * 0.38));
+      const q3 = Math.max(q2 + 1, Math.floor(seg.length * 0.68));
+      const q4 = Math.max(q3 + 1, Math.floor(seg.length * 0.82));
+
+      const findLocalMax = (a, b) => {
+        let best = { idx: a, val: seg[a].high };
+        for (let i = a; i <= Math.min(b, seg.length - 1); i++) {
+          if (seg[i].high > best.val) best = { idx: i, val: seg[i].high };
+        }
+        return best;
+      };
+      const findLocalMin = (a, b) => {
+        let best = { idx: a, val: seg[a].low };
+        for (let i = a; i <= Math.min(b, seg.length - 1); i++) {
+          if (seg[i].low < best.val) best = { idx: i, val: seg[i].low };
+        }
+        return best;
+      };
+
+      const s0 = { sliceIdx: startIdx, price: seg[0].low, label: "(0)" };
+      const p1 = findLocalMax(1, q1);
+      const p2 = findLocalMin(p1.idx + 1, q2);
+      const p3 = findLocalMax(p2.idx + 1, q3);
+      const p4 = findLocalMin(p3.idx + 1, q4);
+      const s5 = { sliceIdx: endIdx, price: seg[seg.length - 1].high, label: "(5)" };
+
+      const s1 = { sliceIdx: startIdx + p1.idx, price: p1.val, label: "(1)" };
+      const s2 = { sliceIdx: startIdx + p2.idx, price: p2.val, label: "(2)" };
+      const s3 = { sliceIdx: startIdx + p3.idx, price: p3.val, label: "(3)" };
+      const s4 = { sliceIdx: startIdx + p4.idx, price: p4.val, label: "(4)" };
+
+      // 소파동 역시 2파 저점이 시작점 이상이고 3파가 1파보다 높은 경우만 표시
+      if (s2.price >= s0.price * 0.995 && s3.price > s1.price && s4.price > s2.price) {
+        return [s0, s1, s2, s3, s4, s5];
+      }
+      return [];
+    }
+
+    // 기간(봉 수) 균형 + 가격 규칙 검증 기반 엘리어트 대파동 & 소파동 계산
+    function computeMajorAndSubElliottWave(slice, bias = "POS") {
       if (!slice || slice.length < 8) {
         return {
-          mode: "ESTIMATE",
           valid: false,
           points: [],
           projectedPoints: [],
+          subWavePoints: [],
           stageLabel: "예상 초기 파동 탐색 중",
           reason: "캔들 수가 적어 엄격 파동 검증 대신 현재 추세 기반 예상 진행파동을 보여줍니다."
         };
@@ -1879,85 +2147,96 @@
       const highs = findSwingExtrema(slice, "HIGH", 2);
 
       if (bias === "POS") {
-        // 큰 상승 대파동 후보 탐색: (0) 1파 시작 저점 -> (1) 1파 고점 -> (2) 2파 저점 -> (3) 3파 고점 -> (4) 4파 저점
         for (let a = 0; a < lows.length; a++) {
-          const p0 = lows[a]; // 1파 시작점(저점)
+          const p0 = lows[a];
           const h1Candidates = highs.filter(h => h.sliceIdx > p0.sliceIdx + 1 && h.price > p0.price * 1.02);
           for (const p1 of h1Candidates) {
             const w1 = p1.price - p0.price;
-            // 규칙: 2파 저점은 1파 시작점 아래로 내려가면 안 됨 (p2.price >= p0.price * 0.995)
+            const d1 = p1.sliceIdx - p0.sliceIdx;
             const l2Candidates = lows.filter(l => l.sliceIdx > p1.sliceIdx + 1 && l.price >= p0.price * 0.995 && l.price < p1.price);
             for (const p2 of l2Candidates) {
-              // 규칙: 3파 고점은 1파 고점 돌파
+              const d2 = p2.sliceIdx - p1.sliceIdx;
               const h3Candidates = highs.filter(h => h.sliceIdx > p2.sliceIdx + 1 && h.price > p1.price * 1.02);
               for (const p3 of h3Candidates) {
                 const w3 = p3.price - p2.price;
-                // 규칙: 3파 길이는 1파 길이 이상(강한 추진력 확보)
+                const d3 = p3.sliceIdx - p2.sliceIdx;
+                const sum123Bars = Math.max(3, d1 + d2 + d3);
+
+                // 가격 규칙: 3파 길이는 1파 이상
                 if (w3 < w1 * 0.95) continue;
 
-                // 4파 저점이 확인된 경우(1~4파 확정 + 5파 가능성)
-                const l4Candidates = lows.filter(l => l.sliceIdx > p3.sliceIdx + 1 && l.price > p1.price && l.price < p3.price);
+                // 4파 저점 후보 (기간 비율 제한: 4파 기간 d4가 1+2+3파 합계 기간의 0.85배를 넘지 않도록 제한!)
+                const l4Candidates = lows.filter(l => {
+                  const d4 = l.sliceIdx - p3.sliceIdx;
+                  return l.sliceIdx > p3.sliceIdx + 1
+                    && l.price > p1.price
+                    && l.price < p3.price
+                    && d4 <= sum123Bars * 0.85;
+                });
+
+                const subWaves = computeSubWavesInsideSegment(slice, p2.sliceIdx, p3.sliceIdx);
+
                 if (l4Candidates.length > 0) {
                   const p4 = l4Candidates[l4Candidates.length - 1];
+                  const d4 = p4.sliceIdx - p3.sliceIdx;
                   const w5Target = Math.max(lastClose, p4.price + Math.min(w1, w3 * 0.65));
-                  const confirmed = [
-                    { sliceIdx: p0.sliceIdx, price: p0.price, label: "0(1파시작)" },
-                    { sliceIdx: p1.sliceIdx, price: p1.price, label: "1파" },
-                    { sliceIdx: p2.sliceIdx, price: p2.price, label: "2파" },
-                    { sliceIdx: p3.sliceIdx, price: p3.price, label: "3파" },
-                    { sliceIdx: p4.sliceIdx, price: p4.price, label: "4파" }
-                  ];
-                  const projected = [
-                    { sliceIdx: p4.sliceIdx, price: p4.price, label: "4파" },
-                    { sliceIdx: lastIdx, price: lastClose, label: "5파 진행중" },
-                    { sliceIdx: Math.min(lastIdx + 4, slice.length - 1), price: w5Target, label: "5파 목표권" }
-                  ];
                   return {
-                    mode: "VALID",
                     valid: true,
-                    points: confirmed,
-                    projectedPoints: projected,
-                    stageLabel: "규정 부합 대파동 · 5파 진행/가능성 구간",
-                    reason: `2파 저점(${fmtPrice(p2.price)}) ≥ 1파 시작(${fmtPrice(p0.price)}), 3파 추진력 충족, 4파 저점(${fmtPrice(p4.price)}) > 1파 고점(${fmtPrice(p1.price)}) 규정 부합`
+                    points: [
+                      { sliceIdx: p0.sliceIdx, price: p0.price, label: "0(1파시작)" },
+                      { sliceIdx: p1.sliceIdx, price: p1.price, label: "1파" },
+                      { sliceIdx: p2.sliceIdx, price: p2.price, label: "2파" },
+                      { sliceIdx: p3.sliceIdx, price: p3.price, label: "3파" },
+                      { sliceIdx: p4.sliceIdx, price: p4.price, label: "4파" }
+                    ],
+                    projectedPoints: [
+                      { sliceIdx: p4.sliceIdx, price: p4.price, label: "4파" },
+                      { sliceIdx: lastIdx, price: lastClose, label: "5파 진행중" },
+                      { sliceIdx: lastIdx, price: w5Target, label: "5파 목표권" }
+                    ],
+                    subWavePoints: subWaves,
+                    stageLabel: "규정·기간균형 부합 대파동 · 5파 진행/가능성",
+                    reason: `2파 저점(${fmtPrice(p2.price)}) ≥ 1파 시작(${fmtPrice(p0.price)}), 4파 저점(${fmtPrice(p4.price)}) > 1파 고점(${fmtPrice(p1.price)}), 4파 기간(${d4}봉) ≤ 1~3파 합(${sum123Bars}봉) 충족`
                   };
                 }
 
-                // 3파 고점까지 확인되고 현재 4파 눌림 또는 5파 가능성 구간인 경우(미완성 허용)
-                const isPullingBackFrom3 = lastClose < p3.price * 0.985;
-                const est4Price = Math.max(p1.price * 1.01, p3.price - w3 * 0.382);
-                const est5Price = Math.max(p3.price * 1.03, est4Price + w1);
-                const confirmed = [
-                  { sliceIdx: p0.sliceIdx, price: p0.price, label: "0(1파시작)" },
-                  { sliceIdx: p1.sliceIdx, price: p1.price, label: "1파" },
-                  { sliceIdx: p2.sliceIdx, price: p2.price, label: "2파" },
-                  { sliceIdx: p3.sliceIdx, price: p3.price, label: "3파" }
-                ];
-                const projected = isPullingBackFrom3
-                  ? [
-                      { sliceIdx: p3.sliceIdx, price: p3.price, label: "3파" },
-                      { sliceIdx: lastIdx, price: lastClose, label: "4파 눌림중" },
-                      { sliceIdx: lastIdx, price: est5Price, label: "5파 가능성" }
-                    ]
-                  : [
-                      { sliceIdx: p3.sliceIdx, price: p3.price, label: "3파" },
-                      { sliceIdx: lastIdx, price: lastClose, label: "4~5파 진행중" }
-                    ];
-                return {
-                  mode: "VALID",
-                  valid: true,
-                  points: confirmed,
-                  projectedPoints: projected,
-                  stageLabel: isPullingBackFrom3
-                    ? "규정 부합 대파동 · 4파 눌림 후 5파 가능성"
-                    : "규정 부합 대파동 · 3파 돌파 후 4~5파 가능성",
-                  reason: `2파 저점(${fmtPrice(p2.price)}) ≥ 1파 시작(${fmtPrice(p0.price)}) 및 3파 길이 규칙 부합 (5파 미완성 가능성 포함)`
-                };
+                // 3파 고점 이후 현재가까지 기간(d4Now)이 너무 길어졌으면 4파로 보지 않고 예상 진행파동으로 전환
+                const d4Now = lastIdx - p3.sliceIdx;
+                if (d4Now <= sum123Bars * 0.85) {
+                  const isPullingBackFrom3 = lastClose < p3.price * 0.985;
+                  const est4Price = Math.max(p1.price * 1.01, p3.price - w3 * 0.382);
+                  const est5Price = Math.max(p3.price * 1.03, est4Price + w1);
+                  return {
+                    valid: true,
+                    points: [
+                      { sliceIdx: p0.sliceIdx, price: p0.price, label: "0(1파시작)" },
+                      { sliceIdx: p1.sliceIdx, price: p1.price, label: "1파" },
+                      { sliceIdx: p2.sliceIdx, price: p2.price, label: "2파" },
+                      { sliceIdx: p3.sliceIdx, price: p3.price, label: "3파" }
+                    ],
+                    projectedPoints: isPullingBackFrom3
+                      ? [
+                          { sliceIdx: p3.sliceIdx, price: p3.price, label: "3파" },
+                          { sliceIdx: lastIdx, price: lastClose, label: "4파 눌림중" },
+                          { sliceIdx: lastIdx, price: est5Price, label: "5파 가능성" }
+                        ]
+                      : [
+                          { sliceIdx: p3.sliceIdx, price: p3.price, label: "3파" },
+                          { sliceIdx: lastIdx, price: lastClose, label: "4~5파 진행중" }
+                        ],
+                    subWavePoints: subWaves,
+                    stageLabel: isPullingBackFrom3
+                      ? "규정·기간균형 부합 대파동 · 4파 눌림 후 5파 가능성"
+                      : "규정·기간균형 부합 대파동 · 3파 연장/4~5파 가능성",
+                    reason: `가격 규칙 및 기간 균형(조정 ${d4Now}봉 ≤ 1~3파 ${sum123Bars}봉)을 모두 충족하며 3파 내부 소파동까지 반영했습니다.`
+                  };
+                }
               }
             }
           }
         }
 
-        // 규정 부합 파동이 없을 때 -> 예상 현재 진행파동 계산
+        // 규정·기간 균형 불충족 시 -> 예상 현재 진행파동
         const minPt = slice.reduce((best, d, i) => d.low < best.price ? { sliceIdx: i, price: d.low } : best, { sliceIdx: 0, price: slice[0].low });
         const maxPt = slice.slice(minPt.sliceIdx).reduce((best, d, offset) => {
           const idx = minPt.sliceIdx + offset;
@@ -1966,16 +2245,11 @@
 
         const retraced = maxPt.price > minPt.price ? (maxPt.price - lastClose) / (maxPt.price - minPt.price) : 0;
         let estStage = "예상 1파 초입·반등 탐색";
-        if (lastClose >= maxPt.price * 0.99) {
-          estStage = "예상 1~3파 추진 파동 진행 중";
-        } else if (retraced >= 0.25 && retraced <= 0.72) {
-          estStage = "예상 2파(또는 4파) 되돌림·눌림 진행 중";
-        } else if (retraced > 0.72) {
-          estStage = "예상 파동 재정비·바닥 지지 확인 중";
-        }
+        if (lastClose >= maxPt.price * 0.99) estStage = "예상 1~3파 추진 파동 진행 중";
+        else if (retraced >= 0.25 && retraced <= 0.72) estStage = "예상 2파(또는 복합 조정) 되돌림 진행 중";
+        else if (retraced > 0.72) estStage = "예상 파동 재정비·바닥 지지 확인 중";
 
         return {
-          mode: "ESTIMATE",
           valid: false,
           points: [
             { sliceIdx: minPt.sliceIdx, price: minPt.price, label: "저점기점" },
@@ -1983,11 +2257,11 @@
             { sliceIdx: lastIdx, price: lastClose, label: "예상현재" }
           ],
           projectedPoints: [],
+          subWavePoints: [],
           stageLabel: estStage,
-          reason: "엄격한 엘리어트 1~5파 규정을 충족하는 확정 대파동이 아니므로, 현재 고저점 위치 기준 [예상 현재 진행파동]만 표시합니다."
+          reason: "가격 규칙 또는 파동 기간 균형(4파 과도 장기화 등)에 맞지 않아 억지 파동을 제외하고 [예상 현재 진행파동]만 표시합니다."
         };
       } else {
-        // 부정적(조정·하락 A-B-C) 대파동 검증 및 예상 현재 진행파동
         for (let a = 0; a < highs.length; a++) {
           const p0 = highs[a];
           const lA = lows.filter(l => l.sliceIdx > p0.sliceIdx + 1 && l.price < p0.price * 0.97);
@@ -1998,7 +2272,6 @@
               const dropAB = p0.price - pA.price;
               const estC = Math.max(1, pB.price - dropAB);
               return {
-                mode: "VALID",
                 valid: true,
                 points: [
                   { sliceIdx: p0.sliceIdx, price: p0.price, label: "고점" },
@@ -2009,8 +2282,9 @@
                   { sliceIdx: pB.sliceIdx, price: pB.price, label: "B파" },
                   { sliceIdx: lastIdx, price: estC, label: "C파 예상권" }
                 ],
-                stageLabel: "규정 부합 조정 대파동 · C파 진행/가능성 구간",
-                reason: "B파 고점이 기점 고점 아래에서 형성되고 A파 하락 폭이 확인되어 조정 대파동 규정에 부합합니다."
+                subWavePoints: [],
+                stageLabel: "규정 부합 조정 대파동 · C파 진행/가능성",
+                reason: "B파 고점이 기점 고점 아래에서 형성되어 조정 대파동 규정에 부합합니다."
               };
             }
           }
@@ -2018,15 +2292,15 @@
 
         const hiPt = slice.reduce((best, d, i) => d.high > best.price ? { sliceIdx: i, price: d.high } : best, { sliceIdx: 0, price: slice[0].high });
         return {
-          mode: "ESTIMATE",
           valid: false,
           points: [
             { sliceIdx: hiPt.sliceIdx, price: hiPt.price, label: "고점기점" },
             { sliceIdx: lastIdx, price: lastClose, label: "예상조정현재" }
           ],
           projectedPoints: [],
+          subWavePoints: [],
           stageLabel: "예상 A파/조정 파동 진행 중 (규정 미확정)",
-          reason: "확정 조정 대파동 규정이 완성되지 않아 현재 고점 대비 [예상 조정 진행파동]을 보여줍니다."
+          reason: "확정 조정 대파동 규정이 완성되지 않아 [예상 조정 진행파동]을 보여줍니다."
         };
       }
     }
@@ -2035,7 +2309,8 @@
       const badge = $("waveValidityBadge");
       const banner = $("waveStatusBanner");
       if (waveInfo.valid) {
-        badge.textContent = "규정 충족 대파동";
+        const subTxt = waveInfo.subWavePoints && waveInfo.subWavePoints.length ? " + 내부 소파동(1~5) 표시" : "";
+        badge.textContent = `규정·기간균형 충족 대파동${subTxt}`;
         badge.className = "badge mint";
         banner.style.background = "#ecfdf5";
         banner.style.borderColor = "#34d399";
@@ -2093,13 +2368,13 @@
       $("forecastPriceStrip").innerHTML = `
         <div class="fc-card-1w">
           <div style="font-size:0.78rem; font-weight:800;">📈 1주 후 예상 흐름 & 예상 가격대</div>
-          <div style="margin-top:4px;"><span class="big-u">예상가 ${fmtPrice(fc.w1Mid)}</span> (${fc.w1ExpectedPct >= 0 ? "+" : ""}${fc.w1ExpectedPct.toFixed(1)}%)</div>
-          <div style="font-size:0.8rem; margin-top:3px;">예상 범위: <b>${fmtPrice(fc.w1Low)} ~ ${fmtPrice(fc.w1High)}</b></div>
+          <div style="margin-top:4px;">예상가 <span class="num-u big-num">${fmtPrice(fc.w1Mid)}</span> (${fc.w1ExpectedPct >= 0 ? "+" : ""}${fc.w1ExpectedPct.toFixed(1)}%)</div>
+          <div style="font-size:0.8rem; margin-top:3px;">예상 범위: <span class="num-u">${fmtPrice(fc.w1Low)} ~ ${fmtPrice(fc.w1High)}</span></div>
         </div>
         <div class="fc-card-1m">
           <div style="font-size:0.78rem; font-weight:800;">🚀 1달 후 예상 흐름 & 예상 가격대</div>
-          <div style="margin-top:4px;"><span class="big-u">예상가 ${fmtPrice(fc.m1Mid)}</span> (${fc.m1ExpectedPct >= 0 ? "+" : ""}${fc.m1ExpectedPct.toFixed(1)}%)</div>
-          <div style="font-size:0.8rem; margin-top:3px;">예상 범위: <b>${fmtPrice(fc.m1Low)} ~ ${fmtPrice(fc.m1High)}</b></div>
+          <div style="margin-top:4px;">예상가 <span class="num-u big-num">${fmtPrice(fc.m1Mid)}</span> (${fc.m1ExpectedPct >= 0 ? "+" : ""}${fc.m1ExpectedPct.toFixed(1)}%)</div>
+          <div style="font-size:0.8rem; margin-top:3px;">예상 범위: <span class="num-u">${fmtPrice(fc.m1Low)} ~ ${fmtPrice(fc.m1High)}</span></div>
         </div>
       `;
     }
@@ -2117,7 +2392,7 @@
         const last = state.series[state.series.length - 1];
         const prev = state.series[state.series.length - 2];
         const pct = prev.close ? ((last.close - prev.close) / prev.close) * 100 : 0;
-        $("chartPrice").innerHTML = `<span class="big-u">${fmtPrice(last.close, state.currency)}</span>`;
+        $("chartPrice").innerHTML = `<span class="num-u big-num">${fmtPrice(last.close, state.currency)}</span>`;
         $("chartChg").textContent = `${tfName} ${pct >= 0 ? "+" : ""}${pct.toFixed(2)}%`;
         $("chartChg").className = `badge ${pct >= 0 ? "mint" : "pink"}`;
       }
@@ -2139,16 +2414,16 @@
       return state.series.slice(s, e);
     }
 
-    function drawMajorWaveOnCanvas(ctx, slice, xAt, yAt, bias) {
-      const wInfo = computeMajorElliottWave(slice, bias);
-      const lineColor = wInfo.valid ? "#6d28d9" : "#d97706";
-
+    function drawWaveLinesOnCanvas(ctx, slice, xAt, yAt, waveInfo) {
+      const lineColor = waveInfo.valid ? "#6d28d9" : "#d97706";
       ctx.save();
-      if (wInfo.points.length >= 2) {
+
+      // 1) 대파동 실선
+      if (waveInfo.points.length >= 2) {
         ctx.strokeStyle = lineColor;
-        ctx.lineWidth = 2.6;
+        ctx.lineWidth = 2.8;
         ctx.beginPath();
-        wInfo.points.forEach((pt, idx) => {
+        waveInfo.points.forEach((pt, idx) => {
           const x = xAt(pt.sliceIdx);
           const y = yAt(pt.price);
           if (idx === 0) ctx.moveTo(x, y);
@@ -2157,13 +2432,13 @@
         ctx.stroke();
       }
 
-      // 미완성 가능성 구간(예: 5파 또는 C파 예상 연장)은 점선으로 구분
-      if (wInfo.projectedPoints && wInfo.projectedPoints.length >= 2) {
+      // 2) 미완성 연장 점선
+      if (waveInfo.projectedPoints && waveInfo.projectedPoints.length >= 2) {
         ctx.strokeStyle = lineColor;
         ctx.lineWidth = 2.2;
         ctx.setLineDash([6, 4]);
         ctx.beginPath();
-        wInfo.projectedPoints.forEach((pt, idx) => {
+        waveInfo.projectedPoints.forEach((pt, idx) => {
           const x = xAt(pt.sliceIdx);
           const y = yAt(pt.price);
           if (idx === 0) ctx.moveTo(x, y);
@@ -2173,16 +2448,45 @@
         ctx.setLineDash([]);
       }
 
-      const allLabels = [...wInfo.points, ...(wInfo.projectedPoints || []).slice(1)];
+      // 3) 대파동 내 소파동 선 및 라벨
+      if (state.feats.subWave && waveInfo.subWavePoints && waveInfo.subWavePoints.length >= 2) {
+        ctx.strokeStyle = "#0ea5e9";
+        ctx.lineWidth = 1.7;
+        ctx.setLineDash([3, 2]);
+        ctx.beginPath();
+        waveInfo.subWavePoints.forEach((pt, idx) => {
+          const x = xAt(pt.sliceIdx);
+          const y = yAt(pt.price);
+          if (idx === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        waveInfo.subWavePoints.forEach((pt, idx) => {
+          const x = xAt(pt.sliceIdx);
+          const y = yAt(pt.price);
+          ctx.fillStyle = "#0284c7";
+          ctx.beginPath();
+          ctx.arc(x, y, 3, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.font = "bold 10px sans-serif";
+          ctx.textAlign = "center";
+          ctx.fillText(pt.label, x, idx % 2 === 0 ? y + 12 : y - 10);
+        });
+      }
+
+      // 대파동 점 및 라벨
+      const allLabels = [...waveInfo.points, ...(waveInfo.projectedPoints || []).slice(1)];
       allLabels.forEach((pt, idx) => {
         const x = xAt(pt.sliceIdx);
         const y = yAt(pt.price);
         ctx.fillStyle = lineColor;
         ctx.beginPath();
-        ctx.arc(x, y, 4.5, 0, Math.PI * 2);
+        ctx.arc(x, y, 4.8, 0, Math.PI * 2);
         ctx.fill();
 
-        const labelY = idx % 2 === 0 ? y + 16 : y - 15;
+        const labelY = idx % 2 === 0 ? y + 17 : y - 16;
         ctx.font = "bold 11px sans-serif";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
@@ -2194,7 +2498,6 @@
       });
 
       ctx.restore();
-      return wInfo;
     }
 
     function drawMainChart() {
@@ -2203,7 +2506,7 @@
       const rect = box.getBoundingClientRect();
       const dpr = window.devicePixelRatio || 1;
       const W = Math.max(300, rect.width || 800);
-      const H = Math.max(280, rect.height || 440);
+      const H = Math.max(280, rect.height || 460);
       canvas.width = Math.round(W * dpr);
       canvas.height = Math.round(H * dpr);
 
@@ -2216,7 +2519,7 @@
       if (slice.length < 2) return;
 
       const fc = computeForecasts(state.dailySeries);
-      const padL = 84, padR = 112, padT = 32, padB = 34;
+      const padL = 86, padR = 138, padT = 32, padB = 34;
       const pW = W - padL - padR;
       const pH = H - padT - padB;
 
@@ -2232,13 +2535,35 @@
       if (state.feats.stopLine) { minV = Math.min(minV, stopPrice); maxV = Math.max(maxV, stopPrice); }
       if (state.feats.pred1W) { minV = Math.min(minV, fc.w1Low); maxV = Math.max(maxV, fc.w1High); }
       if (state.feats.pred1M) { minV = Math.min(minV, fc.m1Low); maxV = Math.max(maxV, fc.m1High); }
+      state.customSRLines.forEach(ln => { minV = Math.min(minV, ln.price); maxV = Math.max(maxV, ln.price); });
 
       const padV = (maxV - minV) * 0.12 || 1;
       minV -= padV; maxV += padV;
 
       const xAt = i => padL + (i / (slice.length - 1)) * pW;
       const yAt = v => padT + ((maxV - v) / (maxV - minV)) * pH;
+      const priceAtY = y => maxV - ((y - padT) / pH) * (maxV - minV);
 
+      // 매물대 비율(%) 가로 막대 & 퍼센트 표시
+      if (state.feats.volProfile) {
+        const vp = computeVolumeProfile(slice, 8);
+        const maxPct = Math.max(1, ...vp.map(b => b.pct));
+        vp.forEach(b => {
+          const yTop = yAt(b.high);
+          const yBot = yAt(b.low);
+          const barH = Math.max(4, yBot - yTop - 2);
+          const barW = (b.pct / maxPct) * (pW * 0.34);
+          ctx.fillStyle = b.pct >= 18 ? "rgba(245, 158, 11, 0.22)" : "rgba(59, 130, 246, 0.12)";
+          ctx.fillRect(padL, yTop + 1, barW, barH);
+          ctx.fillStyle = b.pct >= 18 ? "#b45309" : "#475569";
+          ctx.font = "bold 10px sans-serif";
+          ctx.textAlign = "left";
+          ctx.textBaseline = "middle";
+          ctx.fillText(`매물 ${b.pct.toFixed(1)}% (${fmtPrice(b.mid)})`, padL + 4, yTop + barH / 2 + 1);
+        });
+      }
+
+      // 가로 그리드
       ctx.font = "11px sans-serif";
       for (let r = 0; r <= 7; r++) {
         const ratio = r / 7;
@@ -2252,6 +2577,7 @@
         ctx.fillText(state.currency === "KRW" ? Math.round(val).toLocaleString("ko-KR") : val.toFixed(2), padL - 8, y);
       }
 
+      // 세로 그리드
       const cols = Math.min(8, slice.length - 1);
       for (let c = 0; c <= cols; c++) {
         const idx = Math.round((c / cols) * (slice.length - 1));
@@ -2291,6 +2617,7 @@
         });
       }
 
+      // 캔들
       const barW = Math.max(2.5, Math.min(14, (pW / slice.length) * 0.62));
       slice.forEach((d, i) => {
         const x = xAt(i);
@@ -2305,6 +2632,7 @@
         ctx.strokeRect(x - barW / 2, topY, barW, bH);
       });
 
+      // 이평선
       const maStyle = { 5: "#10b981", 20: "#f59e0b", 45: "#06b6d4", 60: "#8b5cf6", 120: "#ec4899", 240: "#334155" };
       Object.keys(state.maChecked).forEach(pStr => {
         const p = Number(pStr);
@@ -2323,13 +2651,14 @@
         ctx.stroke();
       });
 
+      // 자동 지지선·손절선
       if (state.feats.buyLine) {
         const yB = yAt(buyPrice);
         ctx.strokeStyle = "#059669"; ctx.lineWidth = 1.5; ctx.setLineDash([6, 3]);
         ctx.beginPath(); ctx.moveTo(padL, yB); ctx.lineTo(padL + pW, yB); ctx.stroke();
         ctx.setLineDash([]);
         ctx.fillStyle = "#059669"; ctx.font = "bold 11px sans-serif"; ctx.textAlign = "left";
-        ctx.fillText(`매수추천선 ${fmtPrice(buyPrice)}`, padL + 6, yB - 6);
+        ctx.fillText(`자동 지지·매수선 ${fmtPrice(buyPrice)}`, padL + 6, yB - 6);
       }
       if (state.feats.stopLine) {
         const yS = yAt(stopPrice);
@@ -2337,21 +2666,39 @@
         ctx.beginPath(); ctx.moveTo(padL, yS); ctx.lineTo(padL + pW, yS); ctx.stroke();
         ctx.setLineDash([]);
         ctx.fillStyle = "#e11d48"; ctx.font = "bold 11px sans-serif"; ctx.textAlign = "left";
-        ctx.fillText(`손절선 ${fmtPrice(stopPrice)}`, padL + 6, yS - 6);
+        ctx.fillText(`자동 손절선 ${fmtPrice(stopPrice)}`, padL + 6, yS - 6);
       }
 
-      const waveInfo = computeMajorElliottWave(slice, state.waveBias);
+      // 사용자 클릭 추가 지지선·저항선 (금액 라벨 포함)
+      state.customSRLines.forEach((ln, idx) => {
+        const yL = yAt(ln.price);
+        const col = ln.type === "SUPPORT" ? "#0d9488" : "#db2777";
+        const tag = ln.type === "SUPPORT" ? `지지선#${idx + 1}` : `저항선#${idx + 1}`;
+        ctx.strokeStyle = col;
+        ctx.lineWidth = 2.1;
+        ctx.setLineDash([7, 3]);
+        ctx.beginPath(); ctx.moveTo(padL, yL); ctx.lineTo(padL + pW, yL); ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = col;
+        ctx.font = "bold 11px sans-serif";
+        ctx.textAlign = "right";
+        ctx.fillText(`${tag}: ${fmtPrice(ln.price)}`, padL + pW - 6, yL - 6);
+      });
+
+      // 엘리어트 대파동 + 소파동
+      const waveInfo = computeMajorAndSubElliottWave(slice, state.waveBias);
       if (state.feats.elliottWave) {
-        drawMajorWaveOnCanvas(ctx, slice, xAt, yAt, state.waveBias);
+        drawWaveLinesOnCanvas(ctx, slice, xAt, yAt, waveInfo);
       }
       renderWaveStatusBanner(waveInfo);
 
+      // 1주·1달 예상 흐름선
       const lastX = xAt(slice.length - 1);
       const lastY = yAt(lastClose);
-      const rightEdge = padL + pW + 96;
+      const rightEdge = padL + pW + 122;
 
       if (state.feats.pred1W) {
-        const w1X = Math.min(rightEdge, lastX + 42);
+        const w1X = Math.min(rightEdge, lastX + 46);
         const w1Y = yAt(fc.w1Mid);
         const midX = (lastX + w1X) / 2;
         const midY = yAt((lastClose + fc.w1Mid) / 2 * 0.994);
@@ -2366,7 +2713,7 @@
       }
 
       if (state.feats.pred1M) {
-        const m1X = Math.min(rightEdge, lastX + 92);
+        const m1X = Math.min(rightEdge, lastX + 108);
         const m1Y = yAt(fc.m1Mid);
         const c1x = lastX + (m1X - lastX) * 0.35;
         const c1y = yAt(lastClose * 1.012);
@@ -2386,8 +2733,8 @@
       ctx.fillText(`구간 최고: ${fmtPrice(periodHigh)} · 구간 최저: ${fmtPrice(periodLow)} · 현재가: ${fmtPrice(lastClose)}`, padL + 6, 6);
 
       const tfName = state.tf === "D" ? "일봉" : state.tf === "W" ? "주봉" : "월봉";
-      $("chartMetaLeft").textContent = `${tfName} ${slice[0].date} ~ ${slice[slice.length - 1].date} · 휠 확대/축소 · 드래그 이동`;
-      $("mainChartCanvas")._meta = { slice, padL, pW, padT, pH };
+      $("chartMetaLeft").textContent = `${tfName} ${slice[0].date} ~ ${slice[slice.length - 1].date} · 사용자 지지/저항선 ${state.customSRLines.length}개`;
+      $("mainChartCanvas")._meta = { slice, padL, pW, padT, pH, priceAtY };
     }
 
     function drawSubChart() {
@@ -2407,7 +2754,7 @@
 
       const slice = getSlice();
       if (slice.length < 2) return;
-      const padL = 84, padR = 112, padT = 14, padB = 18;
+      const padL = 86, padR = 138, padT = 14, padB = 18;
       const pW = W - padL - padR, pH = H - padT - padB;
       const maxV = Math.max(...slice.map(d => d.volume || 1));
       const bw = Math.max(2, (pW / slice.length) * 0.62);
@@ -2426,11 +2773,15 @@
       const hi = Math.max(...state.series.map(x => x.high));
       const lo = Math.min(...state.series.map(x => x.low));
       const tfName = state.tf === "D" ? "일봉" : state.tf === "W" ? "주봉" : "월봉";
+      const srSummary = state.customSRLines.length
+        ? state.customSRLines.map((x, idx) => `${x.type === "SUPPORT" ? "지지선" : "저항선"}#${idx + 1}(<span class="num-u">${fmtPrice(x.price)}</span>)`).join(", ")
+        : "없음 (위 버튼 클릭 후 차트를 누르면 추가됨)";
+
       $("stockIssueBox").innerHTML = `
         <div style="font-weight:900; font-size:0.9rem; margin-bottom:4px;">📊 [${state.stockName} · ${state.symbol}] ${tfName} 요약</div>
         <ul style="margin:4px 0 0 18px; padding:0;">
-          <li>최근 ${tfName}(<strong>${last.date}</strong>): 시가 <strong>${fmtPrice(last.open)}</strong> · 고가 <strong>${fmtPrice(last.high)}</strong> · 저가 <strong>${fmtPrice(last.low)}</strong> · 종가 <span class="big-u">${fmtPrice(last.close)}</span> · 거래량 <strong>${(last.volume || 0).toLocaleString()}</strong></li>
-          <li>선택 구간 고가 <strong>${fmtPrice(hi)}</strong> · 저가 <strong>${fmtPrice(lo)}</strong> 기준</li>
+          <li>최근 ${tfName}(<strong>${last.date}</strong>): 시가 <span class="num-u">${fmtPrice(last.open)}</span> · 고가 <span class="num-u">${fmtPrice(last.high)}</span> · 저가 <span class="num-u">${fmtPrice(last.low)}</span> · 종가 <span class="num-u big-num">${fmtPrice(last.close)}</span> · 거래량 <span class="num-u">${(last.volume || 0).toLocaleString()}</span></li>
+          <li>선택 구간 고가 <span class="num-u">${fmtPrice(hi)}</span> · 저가 <span class="num-u">${fmtPrice(lo)}</span> · 사용자 지지/저항선: ${srSummary}</li>
         </ul>
       `;
     }
@@ -2463,21 +2814,21 @@
           metric: `${rsi.toFixed(1)}`,
           view: rsi < 38 ? "매수" : rsi > 70 ? "매도" : "중립",
           howToRead: "30 이하는 과매도 반등 후보, 70 이상은 과열 차익 경계로 봅니다.",
-          meaning: `현재 ${tfName} RSI가 <u>${rsi.toFixed(1)}</u>이므로 ${rsi < 38 ? "반등 여력이 생긴 저점권" : rsi > 70 ? "단기 과열 주의 구간" : "방향성을 탐색하는 중립 구간"}을 뜻합니다.`
+          meaning: `현재 ${tfName} RSI가 <span class="num-u">${rsi.toFixed(1)}</span>이므로 ${rsi < 38 ? "반등 여력이 생긴 저점권" : rsi > 70 ? "단기 과열 주의 구간" : "방향성을 탐색하는 중립 구간"}을 뜻합니다.`
         },
         {
           name: "2. MACD(5-20 괴리)",
           metric: `${macd >= 0 ? "+" : ""}${macd.toFixed(2)}%`,
           view: macd > 0.15 ? "매수" : macd < -0.3 ? "매도" : "중립",
           howToRead: "단기선이 중기선 위로 올라서며 플러스가 커지면 상승 모멘텀 우위로 봅니다.",
-          meaning: `현재 괴리가 <u>${macd >= 0 ? "+" : ""}${macd.toFixed(2)}%</u>로 ${macd > 0.15 ? "단기 반등 힘이 살아나는 상태" : macd < -0.3 ? "단기 하락 압력이 우세한 상태" : "횡보·수렴 국면"}입니다.`
+          meaning: `현재 괴리가 <span class="num-u">${macd >= 0 ? "+" : ""}${macd.toFixed(2)}%</span>로 ${macd > 0.15 ? "단기 반등 힘이 살아나는 상태" : macd < -0.3 ? "단기 하락 압력이 우세한 상태" : "횡보·수렴 국면"}입니다.`
         },
         {
           name: "3. 이동평균선(5·20)",
           metric: `5선 ${fmtPrice(m5)} / 20선 ${fmtPrice(m20)}`,
           view: last.close >= m5 && m5 >= m20 ? "매수" : last.close < m20 ? "매도" : "중립",
           howToRead: "주가가 20선 위에서 5선을 지지받으면 상승 추세, 20선 아래면 저항 확인 구간입니다.",
-          meaning: `현재가(${fmtPrice(last.close)})가 20선(${fmtPrice(m20)}) ${last.close >= m20 ? "위에서 버티는 중" : "아래에 있어 회복 확인이 필요한 위치"}입니다.`
+          meaning: `현재가(<span class="num-u">${fmtPrice(last.close)}</span>)가 20선(<span class="num-u">${fmtPrice(m20)}</span>) ${last.close >= m20 ? "위에서 버티는 중" : "아래에 있어 회복 확인이 필요한 위치"}입니다.`
         },
         {
           name: "4. 볼린저 중심선(20)",
@@ -2491,49 +2842,75 @@
           metric: `${stochK.toFixed(1)}`,
           view: stochK < 25 ? "매수" : stochK > 80 ? "매도" : "중립",
           howToRead: "최근 14봉 고저 범위 중 현재가가 어디에 있는지 보여주며, 20~25 이하는 하단권입니다.",
-          meaning: `구간 내 위치가 <u>${stochK.toFixed(1)}</u>으로 ${stochK < 25 ? "단기 바닥권 접근" : stochK > 80 ? "고점권 도달" : "중간 위치"}를 나타냅니다.`
+          meaning: `구간 내 위치가 <span class="num-u">${stochK.toFixed(1)}</span>으로 ${stochK < 25 ? "단기 바닥권 접근" : stochK > 80 ? "고점권 도달" : "중간 위치"}를 나타냅니다.`
         },
         {
           name: "6. 추세 강도(ADX)",
           metric: `${adx}`,
           view: Number(adx) >= 25 ? "매수" : "중립",
           howToRead: "방향과 무관하게 추세의 힘 자체를 뜻하며 25 이상이면 추세 흐름이 뚜렷하다고 봅니다.",
-          meaning: `추세 강도가 <u>${adx}</u>로 ${Number(adx) >= 25 ? "방향성 움직임이 강한 편" : "추세 힘이 아직 강하지 않은 박스·탐색 성향"}입니다.`
+          meaning: `추세 강도가 <span class="num-u">${adx}</span>로 ${Number(adx) >= 25 ? "방향성 움직임이 강한 편" : "추세 힘이 아직 강하지 않은 박스·탐색 성향"}입니다.`
         },
         {
           name: "7. 거래량 비율(20봉 평균)",
           metric: `${volRatio.toFixed(2)}배`,
           view: volRatio >= 1.2 && last.close >= last.open ? "매수" : volRatio >= 1.3 && last.close < last.open ? "매도" : "중립",
           howToRead: "평소 거래량보다 크게 늘어난 양봉은 수급 유입, 늘어난 음봉은 매물 출회로 해석합니다.",
-          meaning: `평균 대비 <u>${volRatio.toFixed(2)}배</u> 거래량으로 ${volRatio >= 1.2 ? "시장 참여가 활발한 상태" : "거래가 소강 상태"}입니다.`
+          meaning: `평균 대비 <span class="num-u">${volRatio.toFixed(2)}배</span> 거래량으로 ${volRatio >= 1.2 ? "시장 참여가 활발한 상태" : "거래가 소강 상태"}입니다.`
         },
         {
           name: "8. CCI(20)",
           metric: `${cci}`,
           view: Number(cci) < -100 ? "매수" : Number(cci) > 120 ? "매도" : "중립",
           howToRead: "-100 아래는 침체권, +100 이상은 강세/과열권으로 보고 추세 복귀를 확인합니다.",
-          meaning: `CCI가 <u>${cci}</u>로 ${Number(cci) < -100 ? "침체권에서 반등 신호를 살피는 자리" : Number(cci) > 120 ? "상단 탄력이 강하나 과열 점검 필요" : "보통 범위"}입니다.`
+          meaning: `CCI가 <span class="num-u">${cci}</span>로 ${Number(cci) < -100 ? "침체권에서 반등 신호를 살피는 자리" : Number(cci) > 120 ? "상단 탄력이 강하나 과열 점검 필요" : "보통 범위"}입니다.`
         },
         {
           name: "9. MFI 자금흐름",
           metric: `${mfi}`,
           view: Number(mfi) < 35 ? "매수" : Number(mfi) > 75 ? "매도" : "중립",
           howToRead: "가격과 거래량을 함께 반영한 자금 유입 지표로, 낮으면 매수세 유입 여지를 봅니다.",
-          meaning: `MFI가 <u>${mfi}</u>로 ${Number(mfi) < 35 ? "자금 유입 반등 여지를 보는 구간" : Number(mfi) > 75 ? "자금 유입이 많이 누적된 구간" : "균형권"}입니다.`
+          meaning: `MFI가 <span class="num-u">${mfi}</span>로 ${Number(mfi) < 35 ? "자금 유입 반등 여지를 보는 구간" : Number(mfi) > 75 ? "자금 유입이 많이 누적된 구간" : "균형권"}입니다.`
         },
         {
           name: "10. 구간 내 가격 위치",
           metric: `${posPct}% 위치`,
           view: Number(posPct) <= 30 ? "매수" : Number(posPct) >= 85 ? "매도" : "중립",
           howToRead: "최근 구간 최저가(0%)~최고가(100%) 중 현재 위치가 낮을수록 추격 부담이 적습니다.",
-          meaning: `현재 <u>${posPct}%</u> 위치로 ${Number(posPct) <= 30 ? "하단 지지권에 가까움" : Number(posPct) >= 85 ? "상단 저항권에 근접함" : "중간 구간"}을 의미합니다.`
+          meaning: `현재 <span class="num-u">${posPct}%</span> 위치로 ${Number(posPct) <= 30 ? "하단 지지권에 가까움" : Number(posPct) >= 85 ? "상단 저항권에 근접함" : "중간 구간"}을 의미합니다.`
         }
       ];
 
-      const bCnt = list.filter(x => x.view === "매수").length;
-      const sCnt = list.filter(x => x.view === "매도").length;
-      const nCnt = list.filter(x => x.view === "중립").length;
-      $("ind10VoteBadge").textContent = `매수 ${bCnt} · 중립 ${nCnt} · 매도 ${sCnt}`;
+      const buyItems = list.filter(x => x.view === "매수");
+      const sellItems = list.filter(x => x.view === "매도");
+      const neuItems = list.filter(x => x.view === "중립");
+      $("ind10VoteBadge").textContent = `매수 ${buyItems.length} · 중립 ${neuItems.length} · 매도 ${sellItems.length}`;
+
+      let verdict = "중립·관망 우위 (지지선 확인 후 분할 접근)";
+      let verdictColor = "#b45309";
+      if (buyItems.length >= 4 && buyItems.length > sellItems.length + 1) {
+        verdict = "매수 우위 (단기 반등·추세 탄력 유효)";
+        verdictColor = "#e11d48";
+      } else if (sellItems.length >= 4 && sellItems.length > buyItems.length + 1) {
+        verdict = "매도·경계 우위 (상단 저항·이평선 이탈 주의)";
+        verdictColor = "#2563eb";
+      }
+
+      $("ind10OverallSummary").innerHTML = `
+        <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; margin-bottom:6px;">
+          <strong style="font-size:0.95rem;">🧭 [${state.stockName} · ${tfName}] 10개 보조지표 종합 의견: <span style="color:${verdictColor};">${verdict}</span></strong>
+          <span>
+            <span class="badge mint">매수 <span class="num-u">${buyItems.length}개</span></span>
+            <span class="badge neutral">중립 <span class="num-u">${neuItems.length}개</span></span>
+            <span class="badge pink">매도 <span class="num-u">${sellItems.length}개</span></span>
+          </span>
+        </div>
+        <div style="font-size:0.83rem; color:#1e293b;">
+          • <strong>매수 신호 지표:</strong> ${buyItems.length ? buyItems.map(x => x.name).join(", ") : "없음"}<br/>
+          • <strong>매도·경계 신호 지표:</strong> ${sellItems.length ? sellItems.map(x => x.name).join(", ") : "없음"}<br/>
+          • <strong>실전 해석:</strong> RSI(<span class="num-u">${rsi.toFixed(1)}</span>)와 20봉 거래량 비율(<span class="num-u">${volRatio.toFixed(2)}배</span>), 구간 내 위치(<span class="num-u">${posPct}%</span>)를 함께 볼 때 ${buyItems.length >= sellItems.length ? "하단 지지선 부근 분할 매수가 유리한 구조" : "저항선 돌파 확인 전까지 보수적 대응이 유리한 구조"}입니다.
+        </div>
+      `;
 
       $("ind10Grid").innerHTML = list.map((it, idx) => {
         const badgeCls = it.view === "매수" ? "mint" : it.view === "매도" ? "pink" : "neutral";
@@ -2541,15 +2918,15 @@
         return `
           <div class="ind10-item ${idx === state.selectedInd ? "selected" : ""}" onclick="selectInd(${idx})">
             <div class="ind10-top"><span>${it.name}</span><span class="badge ${badgeCls}">${it.view}</span></div>
-            <div class="${metricCls}">📌 ${it.metric}</div>
-            <div class="ind10-meaning"><b>지금 지표의 의미:</b> ${it.meaning}</div>
-            <div class="ind10-guide-txt"><b>지표 해석법:</b> ${it.howToRead}</div>
+            <div class="${metricCls}">📌 <span class="num-u">${it.metric}</span></div>
+            <div class="ind10-meaning"><strong>지금 지표의 의미:</strong> ${it.meaning}</div>
+            <div class="ind10-guide-txt"><strong>지표 해석법:</strong> ${it.howToRead}</div>
           </div>
         `;
       }).join("");
 
       const cur = list[state.selectedInd] || list[0];
-      $("ind10DetailBox").innerHTML = `<b>[${cur.name} · ${state.stockName} · ${tfName}]</b> ${cur.meaning} <span style="display:block; margin-top:4px; font-size:0.8rem;">해석법: ${cur.howToRead}</span>`;
+      $("ind10DetailBox").innerHTML = `<strong>[${cur.name} · ${state.stockName} · ${tfName}]</strong> ${cur.meaning} <span style="display:block; margin-top:4px; font-size:0.8rem;">해석법: ${cur.howToRead}</span>`;
     }
 
     window.selectInd = idx => { state.selectedInd = idx; renderInd10(); };
@@ -2566,10 +2943,10 @@
       const pos20Pct = m20 ? ((last.close - m20) / m20) * 100 : 0;
 
       $("supplyClueGrid").innerHTML = `
-        <div class="clue-card"><b>⚠️ 거래량 강도(${volRatio.toFixed(2)}배):</b> 평균 대비 <u>${volRatio.toFixed(2)}배</u> 거래량입니다. ${volRatio < 0.8 ? "거래량 감소 시 추격 매수 주의" : "거래량이 실려 지지/돌파 신뢰도 확인 가능"}</div>
-        <div class="clue-card"><b>⚠️ 윗꼬리 매물 압력(${upperWickPct.toFixed(0)}%):</b> 최근 봉 윗꼬리 비율은 <u>${upperWickPct.toFixed(0)}%</u>입니다. ${upperWickPct >= 35 ? "상단 매물 출회 흔적 주의" : "윗꼬리 부담이 크지 않음"}</div>
-        <div class="clue-card"><b>⚠️ 20봉선 이격도(${pos20Pct >= 0 ? "+" : ""}${pos20Pct.toFixed(2)}%):</b> 20봉 이평선 대비 <u>${pos20Pct >= 0 ? "+" : ""}${pos20Pct.toFixed(2)}%</u> 위치입니다.</div>
-        <div class="clue-card"><b>⚠️ 직전 봉 대비 흐름:</b> 직전 종가(${fmtPrice(prev.close)}) → 현재 종가(<u>${fmtPrice(last.close)}</u>) 기준 지지/손절선을 함께 보세요.</div>
+        <div class="clue-card"><strong>⚠️ 거래량 강도(<span class="num-u">${volRatio.toFixed(2)}배</span>):</strong> 평균 대비 <span class="num-u">${volRatio.toFixed(2)}배</span> 거래량입니다. ${volRatio < 0.8 ? "거래량 감소 시 추격 매수 주의" : "거래량이 실려 지지/돌파 신뢰도 확인 가능"}</div>
+        <div class="clue-card"><strong>⚠️ 윗꼬리 매물 압력(<span class="num-u">${upperWickPct.toFixed(0)}%</span>):</strong> 최근 봉 윗꼬리 비율은 <span class="num-u">${upperWickPct.toFixed(0)}%</span>입니다. ${upperWickPct >= 35 ? "상단 매물 출회 흔적 주의" : "윗꼬리 부담이 크지 않음"}</div>
+        <div class="clue-card"><strong>⚠️ 20봉선 이격도(<span class="num-u">${pos20Pct >= 0 ? "+" : ""}${pos20Pct.toFixed(2)}%</span>):</strong> 20봉 이평선 대비 <span class="num-u">${pos20Pct >= 0 ? "+" : ""}${pos20Pct.toFixed(2)}%</span> 위치입니다.</div>
+        <div class="clue-card"><strong>⚠️ 직전 봉 대비 흐름:</strong> 직전 종가(<span class="num-u">${fmtPrice(prev.close)}</span>) → 현재 종가(<span class="num-u">${fmtPrice(last.close)}</span>) 기준 지지/손절선을 함께 보세요.</div>
       `;
     }
 
@@ -2649,9 +3026,9 @@
       $("rescueTfGrid").innerHTML = [dAn, wAn, mAn].map(x => `
         <div class="tf-box">
           <div style="font-weight:900; margin-bottom:4px;">🕯️ ${x.tfLabel} 거래량·가격 분석</div>
-          <div>• 현재 기준가: <b>${fmtPrice(x.lastClose)}</b></div>
-          <div>• 거래량 매물 지지선: <b style="color:var(--mint);">${fmtPrice(x.supPrice)}</b></div>
-          <div>• 상단 저항·반등 목표: <b style="color:var(--primary);">${fmtPrice(x.resPrice)}</b></div>
+          <div>• 현재 기준가: <span class="num-u">${fmtPrice(x.lastClose)}</span></div>
+          <div>• 거래량 매물 지지선: <span class="num-u" style="color:var(--mint);">${fmtPrice(x.supPrice)}</span></div>
+          <div>• 상단 저항·반등 목표: <span class="num-u" style="color:var(--primary);">${fmtPrice(x.resPrice)}</span></div>
           <div style="font-size:0.75rem; color:var(--muted); margin-top:4px;">${x.volNote}</div>
         </div>
       `).join("");
@@ -2673,26 +3050,26 @@
       const etaNoAddAvg = estimateTimeToTarget(dAn.lastClose, avg, state.dailySeries);
 
       $("rescueResultBox").innerHTML = `
-        <div>🛟 <b>[${state.stockName}] 물린 주식 탈출 분석 & 예상 소요 시간</b> (현재 평단 대비 <b>${curLossPct.toFixed(2)}%</b> 구간)</div>
+        <div>🛟 <strong>[${state.stockName}] 물린 주식 탈출 분석 & 예상 소요 시간</strong> (현재 평단 대비 <span class="num-u">${curLossPct.toFixed(2)}%</span> 구간)</div>
         <div style="margin-top:6px;">
-          • <b>권장 추매가:</b> <span class="big-u">${fmtPrice(addP)}</span> / <b>추매 수량:</b> <u>${addQ.toLocaleString()}주</u> (추가 투입금 약 <b>${fmtPrice(addAmount)}</b>)
+          • <strong>권장 추매가:</strong> <span class="num-u big-num">${fmtPrice(addP)}</span> / <strong>추매 수량:</strong> <span class="num-u">${addQ.toLocaleString()}주</span> (추가 투입금 약 <span class="num-u">${fmtPrice(addAmount)}</span>)
         </div>
         <div style="margin-top:4px;">
-          • <b>물타기 후 새 평단가:</b> <span class="big-u">${fmtPrice(newAvg)}</span> (총 ${totQ.toLocaleString()}주) · <b>탈출 목표가:</b> <span class="big-u">${fmtPrice(exitP)}</span> (1차 반등 <b>${fmtPrice(firstP)}</b>)
+          • <strong>물타기 후 새 평단가:</strong> <span class="num-u big-num">${fmtPrice(newAvg)}</span> (총 ${totQ.toLocaleString()}주) · <strong>탈출 목표가:</strong> <span class="num-u big-num">${fmtPrice(exitP)}</span> (1차 반등 <span class="num-u">${fmtPrice(firstP)}</span>)
         </div>
         <div style="margin-top:4px;">
-          • <b>목표 탈출가(${fmtPrice(exitP)}) 도달 예상 시간:</b> <span class="big-u">${etaAddExit.text}</span> (${etaAddExit.detail})
+          • <strong>목표 탈출가(<span class="num-u">${fmtPrice(exitP)}</span>) 도달 예상 시간:</strong> <span class="num-u big-num">${etaAddExit.text}</span> (${etaAddExit.detail})
         </div>
 
         <div class="scenario-pair">
           <div class="sc-card-add">
-            <b>✅ 시나리오 A: 거래량 지지 추매 후 탈출</b><br/>
-            새 평단 <u>${fmtPrice(newAvg)}</u> → 목표가 <u>${fmtPrice(exitP)}</u> 도달 시 평단 대비 <b>${gainFromNewAvgPct >= 0 ? "+" : ""}${gainFromNewAvgPct.toFixed(2)}%</b><br/>
-            예상 소요: <b>${etaAddExit.text}</b>
+            <strong>✅ 시나리오 A: 거래량 지지 추매 후 탈출</strong><br/>
+            새 평단 <span class="num-u">${fmtPrice(newAvg)}</span> → 목표가 <span class="num-u">${fmtPrice(exitP)}</span> 도달 시 평단 대비 <span class="num-u">${gainFromNewAvgPct >= 0 ? "+" : ""}${gainFromNewAvgPct.toFixed(2)}%</span><br/>
+            예상 소요: <strong>${etaAddExit.text}</strong>
           </div>
           <div class="sc-card-hold">
-            <b>⏸️ 시나리오 B: 추가 현금 미투입(보유 유지/반등 축소)</b><br/>
-            기존 평단 <u>${fmtPrice(avg)}</u> 회복까지 예상 소요: <b>${etaNoAddAvg.text}</b><br/>
+            <strong>⏸️ 시나리오 B: 추가 현금 미투입(보유 유지/반등 축소)</strong><br/>
+            기존 평단 <span class="num-u">${fmtPrice(avg)}</span> 회복까지 예상 소요: <strong>${etaNoAddAvg.text}</strong><br/>
             ${etaNoAddAvg.detail}
           </div>
         </div>
@@ -2703,6 +3080,18 @@
       $("candleTfGroup").querySelectorAll("button").forEach(btn => {
         btn.classList.toggle("active", btn.dataset.tf === state.tf);
       });
+    }
+
+    function updateSrModeButtons() {
+      $("addSupportModeBtn").classList.toggle("sr-btn-active", state.srDrawMode === "SUPPORT");
+      $("addResistModeBtn").classList.toggle("sr-btn-active", state.srDrawMode === "RESIST");
+      if (state.srDrawMode === "SUPPORT") {
+        $("srModeHint").textContent = "🟢 지지선 추가 모드 활성: 차트 안에서 원하는 지지 가격 높이를 클릭하세요!";
+      } else if (state.srDrawMode === "RESIST") {
+        $("srModeHint").textContent = "🩷 저항선 추가 모드 활성: 차트 안에서 원하는 저항 가격 높이를 클릭하세요!";
+      } else {
+        $("srModeHint").textContent = "버튼을 누른 뒤 차트에서 원하는 가격 높이를 클릭하세요.";
+      }
     }
 
     async function fetchMarketLive(noCache = false) {
@@ -2721,6 +3110,7 @@
           state.marketData = {
             ...FALLBACK_MARKET,
             ...data,
+            newsSynthesisHtml: FALLBACK_MARKET.newsSynthesisHtml,
             newsBySector: mergedNews
           };
         }
@@ -2797,10 +3187,11 @@
         state.dailySeries = buildSampleDailySeries(baseP, state.currency === "USD");
       }
 
+      state.customSRLines = [];
       $("symbolInput").value = state.stockName;
       $("chartInlineInput").value = state.stockName;
       $("rescueStockInput").value = state.stockName;
-      $("chartStockTitle").innerHTML = `<span class="big-u">${state.stockName}</span> (${state.symbol})`;
+      $("chartStockTitle").innerHTML = `<strong>${state.stockName}</strong> (${state.symbol})`;
 
       const curLast = state.dailySeries[state.dailySeries.length - 1].close;
       $("resAvg").value = state.currency === "KRW" ? Math.round(curLast * 1.15) : (curLast * 1.15).toFixed(2);
@@ -2826,10 +3217,9 @@
 
       $("usToggleBtn").addEventListener("click", () => {
         state.includeUS = !state.includeUS;
-        $("usToggleBtn").textContent = state.includeUS ? "🇺🇸 미국장: ON" : "🇺🇸 미국장: OFF";
+        $("usToggleBtn").textContent = state.includeUS ? "🇺🇸 미국장 섹터: ON" : "🇺🇸 미국장 섹터: OFF";
         $("usToggleBtn").className = state.includeUS ? "us-on" : "us-off";
         state.activeStep = 0;
-        renderMarketSection();
         renderHorizonFlow();
         renderPeriodRecommendations();
         runCustomFilter();
@@ -2872,6 +3262,22 @@
         drawMainChart();
       }));
 
+      $("addSupportModeBtn").addEventListener("click", () => {
+        state.srDrawMode = state.srDrawMode === "SUPPORT" ? null : "SUPPORT";
+        updateSrModeButtons();
+      });
+      $("addResistModeBtn").addEventListener("click", () => {
+        state.srDrawMode = state.srDrawMode === "RESIST" ? null : "RESIST";
+        updateSrModeButtons();
+      });
+      $("clearCustomSrBtn").addEventListener("click", () => {
+        state.customSRLines = [];
+        state.srDrawMode = null;
+        updateSrModeButtons();
+        drawMainChart();
+        renderStockIssue();
+      });
+
       document.querySelectorAll(".preset-btn").forEach(b => b.addEventListener("click", () => applyPreset(b.dataset.preset)));
 
       $("addCustomCondBtn").addEventListener("click", () => {
@@ -2907,6 +3313,21 @@
         drawMainChart();
       }));
 
+      $("mainChartCanvas").addEventListener("click", e => {
+        if (!state.srDrawMode) return;
+        const meta = $("mainChartCanvas")._meta;
+        if (!meta || !meta.priceAtY) return;
+        const rect = $("mainChartCanvas").getBoundingClientRect();
+        const my = e.clientY - rect.top;
+        if (my < meta.padT || my > meta.padT + meta.pH) return;
+        const clickedPrice = meta.priceAtY(my);
+        state.customSRLines.push({ type: state.srDrawMode, price: clickedPrice });
+        state.srDrawMode = null;
+        updateSrModeButtons();
+        drawMainChart();
+        renderStockIssue();
+      });
+
       $("mainChartCanvas").addEventListener("wheel", e => {
         e.preventDefault();
         const total = state.series.length;
@@ -2922,6 +3343,7 @@
       }, { passive: false });
 
       $("mainChartCanvas").addEventListener("mousedown", e => {
+        if (state.srDrawMode) return;
         state.isDragging = true;
         state.dragX = e.clientX - $("mainChartCanvas").getBoundingClientRect().left;
         state.dragView = state.viewStart;
@@ -2952,7 +3374,7 @@
         tt.style.display = "block";
         tt.style.left = `${Math.min(window.innerWidth - 220, e.clientX + 12)}px`;
         tt.style.top = `${Math.max(10, e.clientY - 10)}px`;
-        tt.innerHTML = `<b>${d.date}</b> (${dayPct >= 0 ? "+" : ""}${dayPct.toFixed(2)}%)<br/>시가 ${fmtPrice(d.open)} / 종가 <b>${fmtPrice(d.close)}</b><br/>고가 ${fmtPrice(d.high)} / 저가 ${fmtPrice(d.low)}`;
+        tt.innerHTML = `<strong>${d.date}</strong> (${dayPct >= 0 ? "+" : ""}${dayPct.toFixed(2)}%)<br/>시가 ${fmtPrice(d.open)} / 종가 <strong>${fmtPrice(d.close)}</strong><br/>고가 ${fmtPrice(d.high)} / 저가 ${fmtPrice(d.low)}`;
       });
 
       $("mainChartCanvas").addEventListener("mouseleave", () => { $("tooltip").style.display = "none"; });
